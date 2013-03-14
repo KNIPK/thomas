@@ -1,0 +1,7 @@
+parameters:
+#    kni_thomas.example.class: Kni\ThomasBundle\Example
+
+services:
+#    kni_thomas.example:
+#        class: %kni_thomas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

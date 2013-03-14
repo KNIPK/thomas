@@ -1,0 +1,4 @@
+kni_thomas:
+    resource: "@KniThomasBundle/Resources/config/routing.yml"
+    prefix:   /
+

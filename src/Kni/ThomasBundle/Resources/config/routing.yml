@@ -1,0 +1,3 @@
+kni_thomas_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: KniThomasBundle:Default:index }

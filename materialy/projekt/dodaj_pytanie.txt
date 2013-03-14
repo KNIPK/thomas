@@ -1,0 +1,75 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1159" measuredH="618" mockupW="1159" mockupH="579">
+  <controls>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="39" w="658" h="579" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>LOGO%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::IconLabel" x="0" y="114" w="106" h="-1" measuredW="48" measuredH="63" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::ButtonBar" x="88" y="122" w="339" h="27" measuredW="335" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Dane%20podstawowe%2C%20Dadawanie%20zasob%F3w%2C%20Etapy</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::ButtonBar" x="420" y="122" w="-1" h="-1" measuredW="186" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Zaproszenia%2CFinalizacja</text>
+      </controlProperties>
+    </control>
+    <control controlID="84" controlTypeID="com.balsamiq.mockups::TitleWindow" x="73" y="170" w="512" h="406" measuredW="450" measuredH="400" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Etapy</text>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::MultilineButton" x="121" y="340" w="111" h="90" measuredW="139" measuredH="66" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Etap%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::MultilineButton" x="232" y="340" w="105" h="90" measuredW="139" measuredH="66" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Pytanie%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::MultilineButton" x="337" y="340" w="105" h="90" measuredW="139" measuredH="66" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Etap%20...</text>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::MultilineButton" x="442" y="342" w="104" h="88" measuredW="139" measuredH="66" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Etap%20N</text>
+      </controlProperties>
+    </control>
+    <control controlID="103" controlTypeID="com.balsamiq.mockups::TitleWindow" x="731" y="137" w="428" h="437" measuredW="450" measuredH="400" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Etap%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="104" controlTypeID="com.balsamiq.mockups::TextArea" x="816" y="297" w="200" h="152" measuredW="200" measuredH="140" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tresc%20pytania</text>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::Button" x="751" y="176" w="-1" h="-1" measuredW="104" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Dodaj%20pytanie</text>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::Arrow" x="266" y="286" w="508" h="109" measuredW="150" measuredH="100" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>bottom</direction>
+        <text>Otwiera%20okno</text>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="840" y="213" w="-1" h="-1" measuredW="153" measuredH="61" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29%20wielokrotnego%20wyboru%0A%28%20%29%20pojedynczego%20wyboru%0A%28%20%29%20otwarte</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

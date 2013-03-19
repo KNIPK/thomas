@@ -226,4 +226,101 @@ class User
     {
         return $this->isTemp;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->courses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set language
+     *
+     * @param \Kni\ThomasBundle\Entity\Language $language
+     * @return User
+     */
+    public function setLanguage(\Kni\ThomasBundle\Entity\Language $language = null)
+    {
+        $this->language = $language;
+    
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \Kni\ThomasBundle\Entity\Language 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Add courses
+     *
+     * @param \Kni\ThomasBundle\Entity\Course $courses
+     * @return User
+     */
+    public function addCourse(\Kni\ThomasBundle\Entity\Course $courses)
+    {
+        $this->courses[] = $courses;
+    
+        return $this;
+    }
+
+    /**
+     * Remove courses
+     *
+     * @param \Kni\ThomasBundle\Entity\Course $courses
+     */
+    public function removeCourse(\Kni\ThomasBundle\Entity\Course $courses)
+    {
+        $this->courses->removeElement($courses);
+    }
+
+    /**
+     * Get courses
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourses()
+    {
+        return $this->courses;
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $answers
+     * @return User
+     */
+    public function addAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $answers)
+    {
+        $this->answers[] = $answers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $answers
+     */
+    public function removeAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
 }

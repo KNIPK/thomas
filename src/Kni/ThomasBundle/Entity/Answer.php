@@ -101,4 +101,67 @@ class Answer
     {
         return $this->isCorrect;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->usersAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set question
+     *
+     * @param \Kni\ThomasBundle\Entity\Question $question
+     * @return Answer
+     */
+    public function setQuestion(\Kni\ThomasBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+    
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Kni\ThomasBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Add usersAnswers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers
+     * @return Answer
+     */
+    public function addUsersAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers)
+    {
+        $this->usersAnswers[] = $usersAnswers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usersAnswers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers
+     */
+    public function removeUsersAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers)
+    {
+        $this->usersAnswers->removeElement($usersAnswers);
+    }
+
+    /**
+     * Get usersAnswers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersAnswers()
+    {
+        return $this->usersAnswers;
+    }
 }

@@ -131,4 +131,67 @@ class Step
     {
         return $this->position;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set workshop
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshop
+     * @return Step
+     */
+    public function setWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshop = null)
+    {
+        $this->workshop = $workshop;
+    
+        return $this;
+    }
+
+    /**
+     * Get workshop
+     *
+     * @return \Kni\ThomasBundle\Entity\Workshop 
+     */
+    public function getWorkshop()
+    {
+        return $this->workshop;
+    }
+
+    /**
+     * Add files
+     *
+     * @param \Kni\ThomasBundle\Entity\File $files
+     * @return Step
+     */
+    public function addFile(\Kni\ThomasBundle\Entity\File $files)
+    {
+        $this->files[] = $files;
+    
+        return $this;
+    }
+
+    /**
+     * Remove files
+     *
+     * @param \Kni\ThomasBundle\Entity\File $files
+     */
+    public function removeFile(\Kni\ThomasBundle\Entity\File $files)
+    {
+        $this->files->removeElement($files);
+    }
+
+    /**
+     * Get files
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
 }

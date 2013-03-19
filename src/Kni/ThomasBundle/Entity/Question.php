@@ -130,4 +130,44 @@ class Question
     {
         return $this->position;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->usersAnswers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add usersAnswers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers
+     * @return Question
+     */
+    public function addUsersAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers)
+    {
+        $this->usersAnswers[] = $usersAnswers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usersAnswers
+     *
+     * @param \Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers
+     */
+    public function removeUsersAnswer(\Kni\ThomasBundle\Entity\UsersAnswers $usersAnswers)
+    {
+        $this->usersAnswers->removeElement($usersAnswers);
+    }
+
+    /**
+     * Get usersAnswers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersAnswers()
+    {
+        return $this->usersAnswers;
+    }
 }

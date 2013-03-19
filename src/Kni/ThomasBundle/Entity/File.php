@@ -95,4 +95,27 @@ class File
     {
         return $this->src;
     }
+
+    /**
+     * Set step
+     *
+     * @param \Kni\ThomasBundle\Entity\Step $step
+     * @return File
+     */
+    public function setStep(\Kni\ThomasBundle\Entity\Step $step = null)
+    {
+        $this->step = $step;
+    
+        return $this;
+    }
+
+    /**
+     * Get step
+     *
+     * @return \Kni\ThomasBundle\Entity\Step 
+     */
+    public function getStep()
+    {
+        return $this->step;
+    }
 }

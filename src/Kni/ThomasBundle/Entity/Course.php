@@ -160,4 +160,67 @@ class Course
     {
         return $this->description;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->workshops = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set user
+     *
+     * @param \Kni\ThomasBundle\Entity\User $user
+     * @return Course
+     */
+    public function setUser(\Kni\ThomasBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Kni\ThomasBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add workshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshops
+     * @return Course
+     */
+    public function addWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshops)
+    {
+        $this->workshops[] = $workshops;
+    
+        return $this;
+    }
+
+    /**
+     * Remove workshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshops
+     */
+    public function removeWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshops)
+    {
+        $this->workshops->removeElement($workshops);
+    }
+
+    /**
+     * Get workshops
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkshops()
+    {
+        return $this->workshops;
+    }
 }

@@ -45,4 +45,73 @@ class UsersAnswers
     {
         return $this->id;
     }
+
+    /**
+     * Set user
+     *
+     * @param \Kni\ThomasBundle\Entity\User $user
+     * @return UsersAnswers
+     */
+    public function setUser(\Kni\ThomasBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Kni\ThomasBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \Kni\ThomasBundle\Entity\Question $question
+     * @return UsersAnswers
+     */
+    public function setQuestion(\Kni\ThomasBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+    
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Kni\ThomasBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set answer
+     *
+     * @param \Kni\ThomasBundle\Entity\Answer $answer
+     * @return UsersAnswers
+     */
+    public function setAnswer(\Kni\ThomasBundle\Entity\Answer $answer = null)
+    {
+        $this->answer = $answer;
+    
+        return $this;
+    }
+
+    /**
+     * Get answer
+     *
+     * @return \Kni\ThomasBundle\Entity\Answer 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
 }

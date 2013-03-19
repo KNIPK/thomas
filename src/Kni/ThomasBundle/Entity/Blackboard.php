@@ -66,4 +66,27 @@ class Blackboard
     {
         return $this->content;
     }
+
+    /**
+     * Set workshop
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshop
+     * @return Blackboard
+     */
+    public function setWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshop = null)
+    {
+        $this->workshop = $workshop;
+    
+        return $this;
+    }
+
+    /**
+     * Get workshop
+     *
+     * @return \Kni\ThomasBundle\Entity\Workshop 
+     */
+    public function getWorkshop()
+    {
+        return $this->workshop;
+    }
 }

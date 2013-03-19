@@ -165,4 +165,90 @@ class Workshop
     {
         return $this->description;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->steps = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set course
+     *
+     * @param \Kni\ThomasBundle\Entity\Course $course
+     * @return Workshop
+     */
+    public function setCourse(\Kni\ThomasBundle\Entity\Course $course = null)
+    {
+        $this->course = $course;
+    
+        return $this;
+    }
+
+    /**
+     * Get course
+     *
+     * @return \Kni\ThomasBundle\Entity\Course 
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * Add steps
+     *
+     * @param \Kni\ThomasBundle\Entity\Step $steps
+     * @return Workshop
+     */
+    public function addStep(\Kni\ThomasBundle\Entity\Step $steps)
+    {
+        $this->steps[] = $steps;
+    
+        return $this;
+    }
+
+    /**
+     * Remove steps
+     *
+     * @param \Kni\ThomasBundle\Entity\Step $steps
+     */
+    public function removeStep(\Kni\ThomasBundle\Entity\Step $steps)
+    {
+        $this->steps->removeElement($steps);
+    }
+
+    /**
+     * Get steps
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSteps()
+    {
+        return $this->steps;
+    }
+
+    /**
+     * Set blackboard
+     *
+     * @param \Kni\ThomasBundle\Entity\Blackboard $blackboard
+     * @return Workshop
+     */
+    public function setBlackboard(\Kni\ThomasBundle\Entity\Blackboard $blackboard = null)
+    {
+        $this->blackboard = $blackboard;
+    
+        return $this;
+    }
+
+    /**
+     * Get blackboard
+     *
+     * @return \Kni\ThomasBundle\Entity\Blackboard 
+     */
+    public function getBlackboard()
+    {
+        return $this->blackboard;
+    }
 }

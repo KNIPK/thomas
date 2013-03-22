@@ -1,0 +1,112 @@
+body
+{
+	background-image: url(../img/rebel.png);
+}
+.page
+{
+	margin: 0 auto;
+    width: 850px;
+}
+#logo 
+{
+	margin: 0 auto;
+}
+#title h1
+{
+	margin: -150px 280px;
+	font-size: 44px;
+	font-family: "SketchFlow Print", "Poor Richard";
+	color: #ffffff;
+}
+#film
+{
+	margin: 150px 80px;
+}
+#wrapper
+{
+	width: 60%;
+	right: 0px;
+	min-height: 560px;	
+	margin: 0px auto;	
+	width: 500px;
+	position: relative;	
+}
+#login
+{
+	color: #ffffff;
+	margin: 0 220px;
+	font-size: 30px;
+}
+
+#login ul
+{
+	
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+#login ul li
+{
+	background-position: 0px 5px; 
+	padding-left: 14px; 
+}
+animateForm
+{
+	color: #ffffff;
+}
+
+}
+input:required {
+	border: 1px solid red;
+}
+label {
+	display: block;
+	color: #999;
+}
+.cf:before,
+.cf:after 
+{
+    content: ""; 
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}
+:focus {
+	outline: 0;
+}
+
+.loginform input:not([type=submit]) 
+{
+	font-size: 30px;
+	padding: 5px;
+	margin-right: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+	box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 
+				0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
+}
+.loginform input[type=submit] 
+{
+    font-size: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	background: #64c8ef; /* Old browsers */
+	background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c8ef', endColorstr='#00a2e2',GradientType=0 ); /* IE6-9 */
+	color: #fff;
+	padding: 5px 15px;
+	margin-left: 120px;
+	margin-top: 15px;
+	border-radius: 3px;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+

@@ -20,7 +20,7 @@ body
 }
 #film
 {
-	margin: 150px 80px;
+	margin: 150px 105px;
 }
 #wrapper
 {
@@ -34,8 +34,9 @@ body
 #login
 {
 	color: #ffffff;
-	margin: 0 220px;
+	margin: 0 auto;
 	font-size: 30px;
+	list-style-type: none;
 }
 
 #login ul
@@ -48,7 +49,7 @@ body
 #login ul li
 {
 	background-position: 0px 5px; 
-	padding-left: 14px; 
+	 
 }
 animateForm
 {
@@ -83,8 +84,7 @@ label {
 .loginform input:not([type=submit]) 
 {
 	font-size: 30px;
-	padding: 5px;
-	margin-right: 10px;
+	padding: 15px;
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	border-radius: 3px;
 	box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 
@@ -103,9 +103,8 @@ label {
 	background: linear-gradient(to bottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c8ef', endColorstr='#00a2e2',GradientType=0 ); /* IE6-9 */
 	color: #fff;
-	padding: 5px 15px;
-	margin-left: 120px;
-	margin-top: 15px;
+	padding: 10px 15px;
+	
 	border-radius: 3px;
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
 }

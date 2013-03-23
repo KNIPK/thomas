@@ -1,0 +1,65 @@
+<?
+ob_start(); 
+session_start();
+//inkludujemy plik z hasłami
+
+include("conf.php");
+
+//Laczenie z baza
+mysql_connect ( $dbhost, $dbuser, $dbpass)or die("Nie można się połączyć z bazą: ".mysql_error());
+mysql_select_db($dbname) or die(mysql_error());
+?>
+
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<link rel="stylesheet" type="text/css" href="style/style.css" />
+		 <script type="text/javascript">
+                <!-- //
+                        function regulamin()
+                        {
+							if(document.getElementById('reg').checked == true )
+							{
+									document.getElementById('dalej').disabled=false;
+							}
+							else
+							{
+									document.getElementById('dalej').disabled=true;
+							}
+                        }
+                //  -->
+    </script>
+
+		<title>Rejestracja</title>
+		<meta name="description" content="" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+	</head>
+	<body>
+			<form action="mailto:mail@domena" method="post" enctype="text/plain">
+					<div  style="color: #ffffff;" class="loginform cf">
+								<!-- Podstawowe pole tekstowe -->
+								<p>Podaj swoje imię</p>
+								<input name="Imię" /><br />
+								<p>Podaj swoje nazwisko</p>
+								<input name="Nazwisko" /><br />
+								<p>Podaj swój adres e-mail</p>
+								<input name="email" /><br />
+								<p>Podaj swój login</p>
+								<input name="login" /><br />
+								<p>Podaj swoje hasło</p>
+								<input name="haslo" /><br />
+								<!-- Przycisk WYŚLIJ -->
+								<input type="submit" value="Wyślij formularz" /><br/>
+								<!-- Przycisk WYCZYŚĆ DANE -->
+								<input type="reset" value="Wyczyść dane" />
+				   </div>
+		   </form>
+	</body>
+</html>

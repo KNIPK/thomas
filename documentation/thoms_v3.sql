@@ -206,6 +206,29 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`files` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `mydb`.`workshop_participants`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`workshop_participants` (
+  `workshop_participant_id` INT NOT NULL ,
+  `user_id_wp` INT NULL ,
+  `workshop_id_wp` INT NULL ,
+  PRIMARY KEY (`workshop_participant_id`) ,
+  INDEX `user_id_wp_idx` (`user_id_wp` ASC) ,
+  INDEX `workshop_id_wp_idx` (`workshop_id_wp` ASC) ,
+  CONSTRAINT `user_id_wp`
+    FOREIGN KEY (`user_id_wp` )
+    REFERENCES `mydb`.`users` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `workshop_id_wp`
+    FOREIGN KEY (`workshop_id_wp` )
+    REFERENCES `mydb`.`workshops` (`workshop_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 USE `mydb` ;
 
 

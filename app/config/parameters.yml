@@ -1,0 +1,12 @@
+# app/config/parameters.yml
+parameters:
+    database_driver:    pdo_mysql
+    database_host:      mysql3.hekko.net.pl
+    database_name:      kalny_thomas
+    database_user:      kalny_thomas
+    database_password:  sG19ts1i
+    database_port:      3306
+
+    locale:             pl
+    
+    secret:             ThisTokenIsNotSoSecretChangeIt

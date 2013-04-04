@@ -31,6 +31,11 @@ class Language
      * @ORM\Column(name="name", type="string", length=20)
      */
     private $name;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="language")
+     */
+    protected $users;
 
 
     /**
@@ -64,5 +69,45 @@ class Language
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add users
+     *
+     * @param \Kni\ThomasBundle\Entity\User $users
+     * @return Language
+     */
+    public function addUser(\Kni\ThomasBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+    
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Kni\ThomasBundle\Entity\User $users
+     */
+    public function removeUser(\Kni\ThomasBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

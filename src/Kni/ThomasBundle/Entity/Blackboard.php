@@ -22,7 +22,7 @@ class Blackboard
     private $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="Workshop", mappedBy="blackboard")
+     * @ORM\OneToOne(targetEntity="Workshop", inversedBy="blackboard")
      */
     private $workshop;
 

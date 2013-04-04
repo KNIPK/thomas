@@ -41,6 +41,11 @@ class RegisterController extends Controller
         if ($form->isValid()) {
             $registration = $form->getData();
             $registration->setIsTemp(false);
+            
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($registration);
+            $password = $encoder->encodePassword($registration->getPassword(), $registration->getSalt());
+            $registration->setPassword($password);
 
             $em->persist($registration);
             $em->flush();

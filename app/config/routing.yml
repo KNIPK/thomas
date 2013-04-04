@@ -6,10 +6,6 @@ thomas:
     resource: "@KniThomasBundle/Controller"
     type:     annotation
     
-demo:
-    resource: "@AcmeDemoBundle/Controller"
-    type:     annotation
-    
 login_page:
     resource: "@KniThomasBundle/Controller/SecuredController.php"
     type:     annotation

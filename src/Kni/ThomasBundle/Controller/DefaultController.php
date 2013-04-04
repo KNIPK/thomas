@@ -34,7 +34,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/page", name="page")
+     * @Route("profile/page", name="page")
      * @Template()
      */
     public function pageAction()

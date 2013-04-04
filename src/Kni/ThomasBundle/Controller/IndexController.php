@@ -15,19 +15,11 @@ class IndexController extends Controller
 {
     /**
      * @Route("/index")
-     * @Template("::index.html.twig")
+     * @Template("KniThomasBundle:Default:index.html.twig")
      */
-    
     public function indexAction()
     {
-        $user = new User();
-        
-        $form = $this->createForm(new UserType(), $user);
-        
-       // return array();
-        return $this->render('KniThomasBundle:Default:index.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return array();
     }
 }
 

@@ -3,8 +3,10 @@
 namespace Kni\ThomasBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Kni\ThomasBundle\Form\UserType;
+use Kni\ThomasBundle\Form\Type\UserType;
+use Kni\ThomasBundle\Form\Model\Registration;
 use Kni\ThomasBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,23 +14,43 @@ class RegisterController extends Controller
 {
     /**
      * @Route("/register")
+     * @Template()
      */
     public function indexAction()
     {
-        $user = new User();
+        $form = $this->createForm(
+            new UserType(),
+            new User()
+        );
         
-        $form = $this->createForm(new UserType(), $user);
-        
-        return $this->render('KniThomasBundle:Register:index.html.twig', array(
+        return array(
             'form' => $form->createView(),
-        ));
+        );
     }
     
     /**
      * @Route("/newUser", name="new_user")
+     * @Template()
      */
     public function newAction(Request $request){
         
+        $em = $this->getDoctrine()->getEntityManager();
+        $form = $this->createForm(new UserType(), new User());
+        $form->bind($this->getRequest());
+        
+        if ($form->isValid()) {
+            $registration = $form->getData();
+            $registration->setIsTemp(false);
+
+            $em->persist($registration);
+            $em->flush();
+
+            return $this->redirect('user_created');
+        }
+        
+        return array(
+            'form' => $form->createView(),
+        );
     }
     
 }

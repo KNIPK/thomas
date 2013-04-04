@@ -15,12 +15,9 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users: 
-                    login: { password: pass, roles: 'ROLE_USER' }
         user_db:
             entity: { class: Kni\ThomasBundle\Entity\User, property: username }
+        
         
         
         

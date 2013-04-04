@@ -3,7 +3,9 @@
 namespace Kni\ThomasBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 
 class DefaultController extends Controller
 {
@@ -33,9 +35,11 @@ class DefaultController extends Controller
     
     /**
      * @Route("/page", name="page")
+     * @Template()
      */
     public function pageAction()
     {
-        return $this->render('KniThomasBundle:Default:page.html.twig', array());
+        return array();
+//        return null;
     }
 }

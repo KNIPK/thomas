@@ -7,6 +7,6 @@ parameters:
     database_password:  sG19ts1i
     database_port:      3306
 
-    locale:             pl
+    locale:             en
     
     secret:             ThisTokenIsNotSoSecretChangeIt

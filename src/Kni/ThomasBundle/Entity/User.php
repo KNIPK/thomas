@@ -3,6 +3,7 @@
 namespace Kni\ThomasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -34,14 +35,19 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=20)
+     * @ORM\Column(name="username", type="string", length=20, unique=true)
      */
-    private $login;
+    private $username;
+    
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=32)
+     * @ORM\Column(name="password", type="string", length=40)
      */
     private $password;
 
@@ -77,6 +83,11 @@ class User
      * @ORM\OneToMany(targetEntity="UsersAnswers", mappedBy="user")
      */
     protected $answers;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Workshop", mappedBy="users")
+     */
+    private $workshops;
 
 
     /**
@@ -233,6 +244,8 @@ class User
     {
         $this->courses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        $this->salt = md5(uniqid(null, true));
     }
     
     /**
@@ -322,5 +335,99 @@ class User
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt() {
+        
+    }
+
+    public function getUsername() {
+        
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    
+        return $this;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    
+        return $this;
+    }
+
+    /**
+     * Add workshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshops
+     * @return User
+     */
+    public function addWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshops)
+    {
+        $this->workshops[] = $workshops;
+    
+        return $this;
+    }
+
+    /**
+     * Remove workshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshops
+     */
+    public function removeWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshops)
+    {
+        $this->workshops->removeElement($workshops);
+    }
+
+    /**
+     * Get workshops
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkshops()
+    {
+        return $this->workshops;
+    }
+
+    /**
+    * @see \Serializable::serialize()
+    */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+        ));
+    }
+
+    /**
+    * @see \Serializable::unserialize()
+    */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+        ) = unserialize($serialized);
     }
 }

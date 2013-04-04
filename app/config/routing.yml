@@ -2,3 +2,10 @@ kni_thomas:
     resource: "@KniThomasBundle/Resources/config/routing.yml"
     prefix:   /
 
+thomas:
+    resource: "@KniThomasBundle/Controller"
+    type:     annotation
+    
+login_page:
+    resource: "@KniThomasBundle/Controller/SecuredController.php"
+    type:     annotation

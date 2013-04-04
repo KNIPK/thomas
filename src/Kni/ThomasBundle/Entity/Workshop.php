@@ -63,6 +63,11 @@ class Workshop
      * @ORM\OneToOne(targetEntity="Blackboard", mappedBy="workshop")
      */
     private $blackboard;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="workshops")
+     */
+    private $users;
 
     /**
      * Get id
@@ -250,5 +255,38 @@ class Workshop
     public function getBlackboard()
     {
         return $this->blackboard;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Kni\ThomasBundle\Entity\User $users
+     * @return Workshop
+     */
+    public function addUser(\Kni\ThomasBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+    
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Kni\ThomasBundle\Entity\User $users
+     */
+    public function removeUser(\Kni\ThomasBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

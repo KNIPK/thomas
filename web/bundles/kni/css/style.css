@@ -1,0 +1,15 @@
+/* 
+    Document   : style
+    Created on : 2013-04-04, 14:51:05
+    Author     : Łukasz
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body
+{
+	background-image: url(../images/rebel.png);
+}
+root { 
+    display: block;
+}
+

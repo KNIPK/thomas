@@ -2,6 +2,7 @@
 namespace Kni\ThomasBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kni\ThomasBundle\Form\UserType;
 use Kni\ThomasBundle\Entity\User;
@@ -14,7 +15,7 @@ class IndexController extends Controller
 {
     /**
      * @Route("/index")
-     * @Template("::index.html.twing")
+     * @Template("::index.html.twig")
      */
     
     public function indexAction()
@@ -23,7 +24,10 @@ class IndexController extends Controller
         
         $form = $this->createForm(new UserType(), $user);
         
-        return array();
+       // return array();
+        return $this->render('KniThomasBundle:Default:index.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }
 

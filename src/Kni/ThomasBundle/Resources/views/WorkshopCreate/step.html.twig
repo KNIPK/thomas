@@ -1,2 +1,27 @@
-{# empty Twig template #}
-Tutaj będzie zawartość do tworzenia nowego etapu.
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Draggable - Default functionality</title>
+  <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
+  <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
+ 
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  </style>
+  <script>
+  $(function() {
+    $( "#draggable" ).draggable();
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="draggable" class="ui-widget-content">
+  <p>To będzie ekran dodawania etapu - narazie jest drag'n'drop</p>
+</div>
+ 
+ 
+</body>
+</html>

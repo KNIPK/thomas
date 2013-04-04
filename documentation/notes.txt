@@ -1,1 +1,7 @@
-W tym katalogu bedziemy przechowywać dokumnetacje.
+localhost/web/app_dev.php/
+
+
+
+TO DO:
+
+- na koniec zmienić hasło do mysql (bo te jest na gicie)

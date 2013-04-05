@@ -1,29 +1,43 @@
-<h1 class="title">Login</h1>
-
-<p>
-    Choose between two default users: <em>user/userpass</em> <small>(ROLE_USER)</small> or <em>admin/adminpass</em> <small>(ROLE_ADMIN)</small>
-</p>
-
-{% if error %}
-    <div class="error">{{ error.message }}</div>
-{% endif %}
-
-<form action="{{ path("login_check") }}" method="post" id="login">
-    <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+{% extends "KniThomasBundle::layout.html.twig" %}
+{% block body %}
+ <body>
+         <div class="page">
+             {% block content %}
+                <div id="logo"><img src="{{ asset('bundles/kni/images/tukan4.png') }}" alt=""></div>
+                <div id="title"><h1>Thomas</h1></div>
+                <div id="film">
+                    <video width="640" height="480" controls>
+			<source src="{{ asset('bundles/kni/movie/film.mp4') }}" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
+		    </video>
+                </div>
+              {% endblock %}
+               
+               
+                    <div id="login">
+                        <section class="loginform cf">
+                            <form name="login" action="{{ path("login_check") }}" method="post" id="login">
+                               <center>
+                                   <ul>
+					<li>
+                                            <label for="username">Username</label>
+                                              <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                                        </li>
+				         <li>
+                                                <label for="password">Password</label>
+                                                <input type="password" id="password" name="_password" />
+                                          </li>
+                                          </center>
+                                    <center>
+                                        <li>
+                                            <input type="submit" onClick="{{ path('page') }}"  value="Sign in">
+                                        </li>
+                                   </center>
+                            </form>
+                           </section>
+                      </div>
+               {% if error %}
+                    <div class="error">{{ error.message }}</div>
+                {% endif %}
     </div>
-
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="_password" />
-    </div>
-
-    <button type="submit" class="sf-button">
-        <span class="border-l">
-            <span class="border-r">
-                <span class="btn-bg">Login</span>
-            </span>
-        </span>
-    </button>
-</form>
+    </body>
+{% endblock %}

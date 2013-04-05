@@ -1,8 +1,16 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
 
 {% block body %}
+
      <body>
+         <div class="page">
 prywatna podstrona<br />
 <a href="{{ path("logout") }}">Wyloguj się</a>
+        <div class="page">
+        {% block content %}
+            <div id="logo"><img src="{{ asset('bundles/kni/images/tukan4.png') }}" alt=""></div>
+        {% endblock %}
+    </div>
+</div>
      </body>
 {% endblock %}

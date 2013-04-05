@@ -9,6 +9,144 @@ body
 {
 	background-image: url(../images/rebel.png);
 }
+.page
+{
+	margin: 0 auto;
+    width: 850px;
+}
+#logo 
+{
+	margin: 0 auto;
+}
+#film
+{
+	margin: 150px 105px;
+}
+#login
+{
+	color: #ffffff;
+	margin: 0 auto;
+	font-size: 30px;
+	list-style-type: none;
+}
+
+#title h1
+{
+	margin: -150px 280px;
+	font-size: 44px;
+	font-family: "SketchFlow Print", "Poor Richard";
+	color: #ffffff;
+}
+
+#login ul
+{
+	
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+#login ul li
+{
+	background-position: 0px 5px; 
+	 
+}
+
+input:required {
+	border: 1px solid red;
+}
+label {
+	display: block;
+	color: #999;
+}
+.cf:before,
+.cf:after 
+{
+    content: ""; 
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}
+:focus {
+	outline: 0;
+}
+
+.loginform input:not([type=submit]) 
+{
+	font-size: 30px;
+	padding: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 3px;
+	box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 
+				0px 1px 0px 0px rgba(250, 250, 250, 0.5) ;
+}
+.loginform input[type=submit] 
+{
+    font-size: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	background: #64c8ef; /* Old browsers */
+	background: -moz-linear-gradient(top,  #64c8ef 0%, #00a2e2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#64c8ef), color-stop(100%,#00a2e2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #64c8ef 0%,#00a2e2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #64c8ef 0%,#00a2e2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64c8ef', endColorstr='#00a2e2',GradientType=0 ); /* IE6-9 */
+	color: #fff;
+	padding: 10px 15px;
+	
+	border-radius: 3px;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+button.shiny-blue
+ {
+	  float: right;
+	  background-color: #759ae9;
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #759ae9), color-stop(50%, #376fe0), color-stop(50%, #1a5ad9), color-stop(100%, #2463de));
+	  background-image: -webkit-linear-gradient(top, #759ae9 0%, #376fe0 50%, #1a5ad9 50%, #2463de 100%);
+	  background-image: -moz-linear-gradient(top, #759ae9 0%, #376fe0 50%, #1a5ad9 50%, #2463de 100%);
+	  background-image: -ms-linear-gradient(top, #759ae9 0%, #376fe0 50%, #1a5ad9 50%, #2463de 100%);
+	  background-image: -o-linear-gradient(top, #759ae9 0%, #376fe0 50%, #1a5ad9 50%, #2463de 100%);
+	  background-image: linear-gradient(top, #759ae9 0%, #376fe0 50%, #1a5ad9 50%, #2463de 100%);
+	  border-top: 1px solid #1f58cc;
+	  border-right: 1px solid #1b4db3;
+	  border-bottom: 1px solid #174299;
+	  border-left: 1px solid #1b4db3;
+	  border-radius: 4px;
+	  -webkit-box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+	  box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+	  color: #fff;
+	  font: bold 12px/1 "helvetica neue", helvetica, arial, sans-serif;
+	  padding: 7px 0;
+	  text-shadow: 0 -1px 1px #1a5ad9;
+	  width: 150px; 
+}
+  button.shiny-blue:hover 
+  {
+		background-color: #5d89e8;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5d89e8), color-stop(50%, #2261e0), color-stop(50%, #044bd9), color-stop(100%, #0d53de));
+		background-image: -webkit-linear-gradient(top, #5d89e8 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+		background-image: -moz-linear-gradient(top, #5d89e8 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+		background-image: -ms-linear-gradient(top, #5d89e8 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+		background-image: -o-linear-gradient(top, #5d89e8 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+		background-image: linear-gradient(top, #5d89e8 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+		cursor: pointer; 
+}
+  button.shiny-blue:active 
+  {
+		border-top: 1px solid #1b4db3;
+		border-right: 1px solid #174299;
+		border-bottom: 1px solid #133780;
+		border-left: 1px solid #174299;
+		-webkit-box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee;
+		box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee; 
+}
+
 root { 
     display: block;
 }

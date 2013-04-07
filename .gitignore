@@ -11,3 +11,4 @@
 # Configuration files
 app/config/parameters.ini
 /nbproject/private/
+/src/Kni/ThomasBundle/Resources/public/images/Thumbs.db

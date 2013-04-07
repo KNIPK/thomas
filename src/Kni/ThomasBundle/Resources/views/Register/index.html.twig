@@ -1,7 +1,10 @@
 {# src/Kni/ThomasBundle/Resources/views/Register/index.html.twig #}
-
+{% extends "KniThomasBundle::layout.html.twig" %}
+ 
+{%block content%}
 <form action="{{ path('new_user') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
 
     <input type="submit" />
 </form>
+{%endblock%}

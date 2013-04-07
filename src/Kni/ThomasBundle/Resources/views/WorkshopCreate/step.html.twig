@@ -1,7 +1,6 @@
-<!doctype html>
+{% extends "KniThomasBundle::layout.html.twig" %}
  
-<html lang="en">
-<head>
+{%block content%}
   <meta charset="utf-8" />
   <title>jQuery UI Draggable - Default functionality</title>
   <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
@@ -22,6 +21,4 @@
   <p>To będzie ekran dodawania etapu - narazie jest drag'n'drop</p>
 </div>
  
- 
-</body>
-</html>
+{%endblock%}

@@ -8,9 +8,11 @@
 <link rel="stylesheet" href="{{ asset('js/jquery-ui/themes/base/jquery-ui.css')}}" />
 <link rel="stylesheet" href="" />
 <style>
-        #stepsList { list-style-type: none; margin: 0; padding: 0; width: 90%; }
-        #stepsList li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 100px;  text-align: center; }
+        #stepsList { list-style-type: none;  padding: 0; width: 90%; margin-left: auto; margin-right: auto; text-align: center;}
+        #stepsList li { margin-left: auto; margin-right: auto; padding: 1px; width: 100px; height: 100px; float: left; text-align: center; }
         #stepsList button {vertical-align: central;}
+        #availableDocs, #addedDocs { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; border: 2px;}
+        #availableDocs li, #addedDocs li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
     </style>
     <script>
         $(function() {
@@ -30,8 +32,8 @@
     <body>
 
         <ul id="stepsList">
-            <li class="ui-state-default ui-state-disabled" id="adder"><button id="create-step">+</button>
-                <button id="create-question">?</button></li>
+            <li class="ui-state-default ui-state-disabled" id="adder"><button id="create-step" title="Dodaj etap">+</button>
+                <button id="create-question" title="Dodaj pytanie">?</button></li>
         </ul>
 
         <style>
@@ -54,17 +56,21 @@
                             allFields = $([]).add(name).add(description).add(question);
 
                     $(document).on('dblclick', '.tile', function() {
-                        alert('clicked!');
+                        alert('Tu będzie wyświetlać się okno edycji');
                     });
-                    
+                    $(document).tooltip({show: {effect: "fade"}});
+                    $("#availableDocs, #addedDocs").sortable({
+                        connectWith: ".connectedSortable"
+                    }).disableSelection();
+
                     $("#dialog-form-question").dialog({
                         autoOpen: false,
-                        height: 300,
-                        width: 350,
+                        height: 600,
+                        width: 600,
                         modal: true,
                         buttons: {
                             "Dodaj pytanie": function() {
-                                $("<li class=\"ui-state-default tile question-tile\">Pytanie:</br>" + question.val() + "</li>").insertBefore("#adder");
+                                $("<li class=\"ui-state-default tile question-tile\" title=\"Kliknij dwuktrotnie aby edytować. \">Pytanie:</br>" + question.val() + "</li>").insertBefore("#adder");
                                 $(this).dialog("close");
                             }
                         },
@@ -75,12 +81,12 @@
 
                     $("#dialog-form-step").dialog({
                         autoOpen: false,
-                        height: 300,
-                        width: 350,
+                        height: 600,
+                        width: 600,
                         modal: true,
                         buttons: {
                             "Dodaj etap": function() {
-                                $("<li class=\"ui-state-default tile step-tile\">Etap:</br>" + name.val() + "</br>" +
+                                $("<li class=\"ui-state-default tile step-tile\" title=\"Kliknij dwuktrotnie aby edytować. \">Etap:</br>" + name.val() + "</br>" +
                                         description.val() + "</li>").insertBefore("#adder");
                                 $(this).dialog("close");
                             }
@@ -115,6 +121,18 @@
                         <label for="description">Opis</label>
                         <input type="text" name="description" id="description" class="text ui-widget-content ui-corner-all" />
                     </fieldset>
+                    <ul id="availableDocs" class="connectedSortable">
+                        <li class="ui-state-default">Plan spotkania</li>
+                        <li class="ui-state-default">Kod źródłowy</li>
+                        <li class="ui-state-default">Prezentacja</li>
+                    </ul>
+
+                    <ul id="addedDocs" class="connectedSortable">
+                        <li class="ui-state-highlight">Hasła</li>
+                        <li class="ui-state-highlight">CSS</li>
+                        <li class="ui-state-highlight">Zdjęcia</li>
+                        <li class="ui-state-highlight">Linki</li>
+                    </ul>
                 </form>
             </div>
 
@@ -125,11 +143,19 @@
                 <form>
                     <fieldset>
                         <label for="name">Pytanie</label>
-                        <input type="text" name="name" id="question" class="text ui-widget-content ui-corner-all" />
-
+                        <input type="text" name="name" id="question" class="text ui-widget-content ui-corner-all" style="height: 200px;"/>
                     </fieldset>
+                    Zaznacz poprawne odpowiedzi: 
+                    
+                    <input type="checkbox" name="answer" value="A">Odpowiedź A<br>
+                    <input type="checkbox" name="answer" value="B">Odpowiedź B<br>
+                    <input type="checkbox" name="answer" value="C">Odpowiedź C<br>
+                    <input type="checkbox" name="answer" value="D">Odpowiedź D<br>
+
                 </form>
             </div>
+
+
 
 
 {%endblock%}

@@ -4,8 +4,13 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/kni/css/style.css') }}" />
         {% endblock %}
         {% block title '<title>Thomas Bundle</title>' %}
-    </head>
-    <body>
+            <link rel="stylesheet" href="{{ asset('js/jquery-ui/themes/base/jquery-ui.css')}}" />
+            <meta charset="utf-8" />
+            <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
+            <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
+        </head>
+        <body>
+
     {% block body %}
         {% block header %}    
         {% endblock %}
@@ -14,5 +19,5 @@
         {% block footer %}    
         {% endblock %}
     {% endblock %}
-    </body>
-</html>
+        </body>
+    </html>

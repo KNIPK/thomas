@@ -19,6 +19,17 @@ class WorkshopCreateController extends Controller {
         //add steps and questions
         return array();
     }
+    
+    /**
+     * @Route("/basicInfo")    
+     * @Template()
+     */
+    public function basicInfoAction(){
+        
+        return array();
+    }
+    
+    
 
 }
 

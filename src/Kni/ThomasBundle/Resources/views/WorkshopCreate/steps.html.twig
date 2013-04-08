@@ -9,19 +9,29 @@
 <link rel="stylesheet" href="" />
 <style>
         #stepsList { list-style-type: none; margin: 0; padding: 0; width: 90%; }
-        #stepsList li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px;  text-align: center; }
+        #stepsList li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 100px;  text-align: center; }
+        #stepsList button {vertical-align: central;}
     </style>
     <script>
         $(function() {
+
             $("#stepsList").sortable();
+            $("#stepsList").sortable({
+                items: "li:not(.ui-state-disabled)"
+            });
+            $("#stepsList").sortable({
+                cancel: ".ui-state-disabled"
+            });
             $("#stepsList").disableSelection();
+
         });
         </script>
     </head>
     <body>
 
         <ul id="stepsList">
-            <li class="ui-state-default"><button id="create-user">Dodaj etap</button></li>
+            <li class="ui-state-default ui-state-disabled" id="adder"><button id="create-step">+</button>
+                <button id="create-question">?</button></li>
         </ul>
 
         <style>
@@ -40,54 +50,22 @@
                 $(function() {
                     var name = $("#name"),
                             description = $("#description"),
-                            password = $("#password"),
-                            allFields = $([]).add(name).add(description).add(password),
-                            tips = $(".validateTips");
+                            question = $("#question"),
+                            allFields = $([]).add(name).add(description).add(question);
 
-                    function updateTips(t) {
-                        tips
-                                .text(t)
-                                .addClass("ui-state-highlight");
-                        setTimeout(function() {
-                            tips.removeClass("ui-state-highlight", 1500);
-                        }, 500);
-                    }
-
-                    function checkLength(o, n, min, max) {
-                        if (o.val().length > max || o.val().length < min) {
-                            o.addClass("ui-state-error");
-                            updateTips("Length of " + n + " must be between " +
-                                    min + " and " + max + ".");
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    }
-
-                    function checkRegexp(o, regexp, n) {
-                        if (!(regexp.test(o.val()))) {
-                            o.addClass("ui-state-error");
-                            updateTips(n);
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    }
-
-                    $("#dialog-form").dialog({
+                    $(document).on('dblclick', '.tile', function() {
+                        alert('clicked!');
+                    });
+                    
+                    $("#dialog-form-question").dialog({
                         autoOpen: false,
                         height: 300,
                         width: 350,
                         modal: true,
                         buttons: {
-                            "Dodaj etap": function() {
-                                   
-                                    $("#stepsList").append("<li class=\"ui-state-default\">"+ name.val() + "</br>" +
-                                            description.val() + "</li>");
-                                   
-
-                                    $(this).dialog("close");
-                                
+                            "Dodaj pytanie": function() {
+                                $("<li class=\"ui-state-default tile question-tile\">Pytanie:</br>" + question.val() + "</li>").insertBefore("#adder");
+                                $(this).dialog("close");
                             }
                         },
                         close: function() {
@@ -95,17 +73,39 @@
                         }
                     });
 
-                    $("#create-user")
+                    $("#dialog-form-step").dialog({
+                        autoOpen: false,
+                        height: 300,
+                        width: 350,
+                        modal: true,
+                        buttons: {
+                            "Dodaj etap": function() {
+                                $("<li class=\"ui-state-default tile step-tile\">Etap:</br>" + name.val() + "</br>" +
+                                        description.val() + "</li>").insertBefore("#adder");
+                                $(this).dialog("close");
+                            }
+                        },
+                        close: function() {
+                            allFields.val("").removeClass("ui-state-error");
+                        }
+                    });
+
+                    $("#create-step")
                             .button()
                             .click(function() {
-                        $("#dialog-form").dialog("open");
+                        $("#dialog-form-step").dialog("open");
+                    });
+                    $("#create-question")
+                            .button()
+                            .click(function() {
+                        $("#dialog-form-question").dialog("open");
                     });
                 });
                 </script>
             </head>
         <body>
 
-            <div id="dialog-form" title="Utwórz nowy etap">
+            <div id="dialog-form-step" title="Utwórz nowy etap">
 
 
                 <form>
@@ -118,6 +118,18 @@
                 </form>
             </div>
 
+
+            <div id="dialog-form-question" title="Utwórz pytanie">
+
+
+                <form>
+                    <fieldset>
+                        <label for="name">Pytanie</label>
+                        <input type="text" name="name" id="question" class="text ui-widget-content ui-corner-all" />
+
+                    </fieldset>
+                </form>
+            </div>
 
 
 {%endblock%}

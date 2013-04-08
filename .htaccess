@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteBase /thomasRepo/web/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ app.php [QSA,L]

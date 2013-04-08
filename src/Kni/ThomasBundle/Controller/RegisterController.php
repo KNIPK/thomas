@@ -30,17 +30,19 @@ class RegisterController extends Controller
     
     /**
      * @Route("/newUser", name="new_user")
-     * @Template("::register.twig.html")
+     * @Template("KniThomasBundle:Register:index.html.twig")
      */
     public function newAction(Request $request){
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(new UserType(), new User());
         $form->bind($this->getRequest());
         
         if ($form->isValid()) {
             $registration = $form->getData();
             $registration->setIsTemp(false);
+            
+            $validator = $this->get('validator');
             
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($registration);

@@ -15,7 +15,8 @@ class UserType extends AbstractType
             ->add('password', 'repeated', array(
                 'first_name' => "password",
                 'second_name' => "confirm_password",
-                'type' => "password"
+                'type' => "password",
+                'invalid_message' => 'Wpisane hasła muszą być takie same.'
             ))
             ->add('name')
             ->add('surname')

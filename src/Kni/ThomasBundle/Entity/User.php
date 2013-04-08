@@ -4,7 +4,7 @@ namespace Kni\ThomasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
  *
@@ -36,6 +36,12 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=20, unique=true)
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "20",
+     *      minMessage = "Login musi mieć minimum 3 znaki",
+     *      maxMessage = "Login może mieć maksymalnie 20 znaków"
+     * )
      */
     private $username;
     
@@ -48,6 +54,10 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=40)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Hasło musi mieć minimum 3 znaki"
+     * )
      */
     private $password;
 
@@ -69,6 +79,9 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100)
+     * @Assert\Email(
+     *     message = "Wprowadzony e-mail '{{ value }}' nie jest prawidłowym adresem e-mail."
+     * )
      */
     private $email;
 

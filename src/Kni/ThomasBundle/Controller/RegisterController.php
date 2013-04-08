@@ -30,7 +30,7 @@ class RegisterController extends Controller
     
     /**
      * @Route("/newUser", name="new_user")
-     * @Template()
+     * @Template("::register.twig.html")
      */
     public function newAction(Request $request){
         
@@ -56,6 +56,14 @@ class RegisterController extends Controller
         return array(
             'form' => $form->createView(),
         );
+    }
+    
+    /**
+     * @Route("/user_created", name="user_created")
+     * @Template()
+     */
+    public function userCreatedAction(){
+        return array();
     }
     
 }

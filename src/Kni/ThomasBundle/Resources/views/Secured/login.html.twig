@@ -1,17 +1,11 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
-{% block body %}
- <body>
+{% block content %}
          <div class="page">
-             {% block content %}
-                <div id="logo"><img src="{{ asset('bundles/kni/images/tukan4.png') }}" alt=""></div>
-                <div id="title"><h1>Thomas</h1></div>
                 <div id="film">
                     <video width="640" height="480" controls>
 			<source src="{{ asset('bundles/kni/movie/film.mp4') }}" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
 		    </video>
                 </div>
-              {% endblock %}
-               
                
                     <div id="login">
                         <section class="loginform cf">
@@ -39,5 +33,4 @@
                     <div class="error">{{ error.message }}</div>
                 {% endif %}
     </div>
-    </body>
 {% endblock %}

@@ -7,7 +7,7 @@
 */
 body
 {
-	background-image: url(../images/wavegrid.png);
+	background-image: url('../images/wavegrid.png');
 }
 
 #container{
@@ -17,12 +17,19 @@ body
 
 #header{
     width: 1000px;
-    height: 100px;
+    height: 120px;
     background-color: #fff;
+    background-image: url('../images/bg_header.png');
+    border: 1px #ccc solid;
     -moz-border-radius:10px; /* FF */
     -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
     -khtml-border-radius:10px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
     border-radius:10px; /* pozostałe przeglądarki */
+}
+
+#header a img#logo{
+    margin: 8px 0 0 15px;
+    border: 0;
 }
 
 .page

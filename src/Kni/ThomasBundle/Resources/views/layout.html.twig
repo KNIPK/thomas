@@ -11,10 +11,12 @@
         </head>
         <body>
         {% block body %}
-            <div id=container">
+            <div id="container">
                 {% block header %}    
                     <div id="header">
-                        ds
+                        <a href="{{ path('home') }}">
+                            <img id="logo" src="{{ asset('bundles/kni/images/logo.png')}}" alt="Thomas. Uczy, sprawdza, pomaga">
+                        </a>
                     </div>
                 {% endblock %}
                 

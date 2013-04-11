@@ -32,6 +32,8 @@ security:
             form_login:
                 check_path: login_check
                 login_path: login_page
+                always_use_default_target_path: false
+                default_target_path: /profile/index
             logout:
                 path:   logout
                 target: page

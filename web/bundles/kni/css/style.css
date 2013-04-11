@@ -9,6 +9,22 @@ body
 {
 	background-image: url(../images/wavegrid.png);
 }
+
+#container{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#header{
+    width: 1000px;
+    height: 100px;
+    background-color: #fff;
+    -moz-border-radius:10px; /* FF */
+    -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:10px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:10px; /* pozostałe przeglądarki */
+}
+
 .page
 {
 	margin: 0 auto;

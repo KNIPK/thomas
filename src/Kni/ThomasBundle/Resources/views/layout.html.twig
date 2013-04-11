@@ -10,14 +10,20 @@
             <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
         </head>
         <body>
-
-    {% block body %}
-        {% block header %}    
+        {% block body %}
+            <div id=container">
+                {% block header %}    
+                    <div id="header">
+                        ds
+                    </div>
+                {% endblock %}
+                
+                {% block content %}    
+                {% endblock %}
+                
+                {% block footer %}    
+                {% endblock %}
+            </div>
         {% endblock %}
-        {% block content %}    
-        {% endblock %}
-        {% block footer %}    
-        {% endblock %}
-    {% endblock %}
         </body>
     </html>

@@ -2,6 +2,10 @@ kni_thomas:
     resource: "@KniThomasBundle/Resources/config/routing.yml"
     prefix:   /
 
+home:
+    path: /
+    defaults:  { _controller: KniThomasBundle:Secured:login }
+
 thomas:
     resource: "@KniThomasBundle/Controller"
     type:     annotation

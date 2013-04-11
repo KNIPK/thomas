@@ -25,6 +25,7 @@ body
     -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
     -khtml-border-radius:10px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
     border-radius:10px; /* pozostałe przeglądarki */
+    margin: 10px 0;
 }
 
 #header a img#logo{
@@ -32,18 +33,28 @@ body
     border: 0;
 }
 
+#slider{
+    width: 1000px;
+    height: 250px;
+    margin: 0 0;
+    padding: 0;
+}
+
+#slider li{
+    margin: 0;
+}
+
+#slider li img{
+    -moz-border-radius:10px; /* FF */
+    -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:10px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:10px; /* pozostałe przeglądarki */
+}
+
 .page
 {
 	margin: 0 auto;
     width: 850px;
-}
-#logo 
-{
-	margin: 0 auto;
-}
-#film
-{
-	margin: 150px 105px;
 }
 #login
 {

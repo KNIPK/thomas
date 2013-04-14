@@ -50,6 +50,10 @@ class WorkshopController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            //w pole user dodajemy aktualnie zalogowanego użytkownika
+            $entity->setUser($this->get('security.context')->getToken()->getUser());
+            
             $em->persist($entity);
             $em->flush();
 

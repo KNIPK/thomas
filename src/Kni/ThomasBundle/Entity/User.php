@@ -101,6 +101,11 @@ class User implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="Workshop", mappedBy="users")
      */
     private $workshops;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Workshop", mappedBy="user")
+     */
+    private $myWorkshops;
 
 
     /**
@@ -442,5 +447,38 @@ class User implements UserInterface, \Serializable
         list (
             $this->id,
         ) = unserialize($serialized);
+    }
+
+    /**
+     * Add myWorkshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $myWorkshops
+     * @return User
+     */
+    public function addMyWorkshop(\Kni\ThomasBundle\Entity\Workshop $myWorkshops)
+    {
+        $this->myWorkshops[] = $myWorkshops;
+    
+        return $this;
+    }
+
+    /**
+     * Remove myWorkshops
+     *
+     * @param \Kni\ThomasBundle\Entity\Workshop $myWorkshops
+     */
+    public function removeMyWorkshop(\Kni\ThomasBundle\Entity\Workshop $myWorkshops)
+    {
+        $this->myWorkshops->removeElement($myWorkshops);
+    }
+
+    /**
+     * Get myWorkshops
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMyWorkshops()
+    {
+        return $this->myWorkshops;
     }
 }

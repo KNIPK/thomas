@@ -1,20 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends "KniThomasBundle::layout.html.twig" %}
 
-{% block body -%}
-    <h1>Workshop creation</h1>
+{%block content%}
+    <div class="block">
+        <h1>Utwórz warsztaty - krok 1</h1>
+        <h2>Podstawowe informacje</h2>
 
-    <form action="{{ path('profile_workshop_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
-    </form>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('profile_workshop') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <form action="{{ path('profile_workshop_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <p>
+                <button type="submit">Dalej</button>
+            </p>
+        </form>
+    </div>
 {% endblock %}

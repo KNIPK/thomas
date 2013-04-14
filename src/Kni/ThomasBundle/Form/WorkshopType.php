@@ -16,8 +16,8 @@ class WorkshopType extends AbstractType
             ->add('endDate')
             ->add('description')
             ->add('course')
-            ->add('blackboard')
-            ->add('users')
+//            ->add('blackboard')
+//            ->add('users')
         ;
     }
 

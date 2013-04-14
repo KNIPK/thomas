@@ -27,6 +27,11 @@ class Workshop
      * @ORM\Column(name="name", type="string", length=45)
      */
     private $name;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="myWorkshops")
+     */
+    protected $user;
 
     /**
      * @var \DateTime
@@ -288,5 +293,28 @@ class Workshop
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Kni\ThomasBundle\Entity\User $user
+     * @return Workshop
+     */
+    public function setUser(\Kni\ThomasBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Kni\ThomasBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

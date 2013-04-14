@@ -24,6 +24,12 @@
                     
                     {% block slider '' %}
                     
+                    {% block navigationBar %}
+                        <div id="navigationBar">
+                            {% render url('navigation_bar') %}
+                        </div>
+                    {% endblock %}
+                    
                 {% endblock %}
                 
                 {% block content %}    

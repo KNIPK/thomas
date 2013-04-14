@@ -1,0 +1,5 @@
+{% for link in navigationLinks %}
+    » <a href="{{ asset(link.urlName) }}">
+        {{ link.name }}
+    </a>
+{% endfor %}

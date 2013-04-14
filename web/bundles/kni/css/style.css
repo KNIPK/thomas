@@ -8,6 +8,19 @@
 body
 {
 	background-image: url('../images/wavegrid.png');
+        font-family: Arial;
+        font-size: 14px;
+        color: #000;
+}
+
+a{
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #999;
 }
 
 #container{
@@ -120,4 +133,42 @@ input.submit:hover{
 
 .clear{
     clear: both;
+}
+
+div#navigationBar{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.block h1{
+    margin: 20px 20px;
+}
+
+.block h2{
+    margin: 15px 20px;
+}
+
+a.box{
+    width: 300px;
+    padding: 70px 0;
+    text-align: center;
+    font-size: 20px;
+    float: left;
+    display: inline;
+    -moz-border-radius:5px; /* FF */
+    -webkit-border-radius:5px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:5px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:5px; /* pozostałe przeglądarki */
+    border: 1px #dfdfdf solid;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+a.box:nth-child(3n+2){
+    margin-left: 25px;
+}
+
+a.box:hover{
+    background-color: #eef6ff;
+    color: #031d3d;
 }

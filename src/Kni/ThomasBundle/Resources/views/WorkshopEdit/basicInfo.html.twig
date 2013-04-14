@@ -1,0 +1,12 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{%block content%}
+    <div class="block">
+        {% if bWorkshopCreate %}
+            <h1>Utwórz warsztaty - krok 1</h1>
+        {% else %}
+            <h1>Edycja warsztatów</h1>
+        {% endif %}
+        <h2>Podstawowe informacje</h2>
+    </div>
+{%endblock%}

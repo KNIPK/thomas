@@ -1,0 +1,16 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="block">
+        <h1>Twój profil</h1>
+        
+        <a class="box" href="#">Twoje warsztaty</a>
+        <a class="box" href="#">Profil</a>
+        <a class="box" href="#">Dołącz do warsztatów</a>
+        <a class="box" href="{{ path('create_workshop') }}">Utwórz warsztaty</a>
+        <a class="box" href="#">dsf</a>
+        <a class="box" href="{{ path('logout') }}">Wyloguj</a>
+        
+        <div class="clear"></div>
+    </div>
+{% endblock %}

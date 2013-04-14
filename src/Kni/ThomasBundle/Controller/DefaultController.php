@@ -10,14 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/profile/index")
-     */
-    public function indexAction()
-    {
-        return $this->render('KniThomasBundle:Default:index.html.twig', array());
-    }
-    
-    /**
      * @Route("create")
      */
     public function createAction()

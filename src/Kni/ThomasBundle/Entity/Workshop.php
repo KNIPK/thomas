@@ -73,6 +73,11 @@ class Workshop
      * @ORM\ManyToMany(targetEntity="User", inversedBy="workshops")
      */
     private $users;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="File", mappedBy="workshop")
+     */
+    protected $files;
 
     /**
      * Get id
@@ -316,5 +321,42 @@ class Workshop
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add files
+     *
+     * @param \Kni\ThomasBundle\Entity\File $files
+     * @return Workshop
+     */
+    public function addFile(\Kni\ThomasBundle\Entity\File $files)
+    {
+        $this->files[] = $files;
+    
+        return $this;
+    }
+
+    /**
+     * Remove files
+     *
+     * @param \Kni\ThomasBundle\Entity\File $files
+     */
+    public function removeFile(\Kni\ThomasBundle\Entity\File $files)
+    {
+        $this->files->removeElement($files);
+    }
+
+    /**
+     * Get files
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+    
+    public function __toString(){
+        return $this->name;
     }
 }

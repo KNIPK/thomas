@@ -31,14 +31,14 @@ class File
     /**
      * @var string
      *
-     * @ORM\Column(name="src", type="string", length=145)
+     * @ORM\Column(name="filename", type="string", length=128, unique=true)
      */
-    private $src;
+    private $filename;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Step", inversedBy="files")
+     * @ORM\ManyToOne(targetEntity="Workshop", inversedBy="files")
      */
-    protected $step;
+    protected $workshop;
 
         /**
      * Get id
@@ -74,48 +74,48 @@ class File
     }
 
     /**
-     * Set src
+     * Set filename
      *
-     * @param string $src
+     * @param string $filename
      * @return File
      */
-    public function setSrc($src)
+    public function setFilename($filename)
     {
-        $this->src = $src;
+        $this->filename = $filename;
     
         return $this;
     }
 
     /**
-     * Get src
+     * Get filename
      *
      * @return string 
      */
-    public function getSrc()
+    public function getFilename()
     {
-        return $this->src;
+        return $this->filename;
     }
 
     /**
-     * Set step
+     * Set workshop
      *
-     * @param \Kni\ThomasBundle\Entity\Step $step
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshop
      * @return File
      */
-    public function setStep(\Kni\ThomasBundle\Entity\Step $step = null)
+    public function setWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshop = null)
     {
-        $this->step = $step;
+        $this->workshop = $workshop;
     
         return $this;
     }
 
     /**
-     * Get step
+     * Get workshop
      *
-     * @return \Kni\ThomasBundle\Entity\Step 
+     * @return \Kni\ThomasBundle\Entity\Workshop 
      */
-    public function getStep()
+    public function getWorkshop()
     {
-        return $this->step;
+        return $this->workshop;
     }
 }

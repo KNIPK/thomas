@@ -3,7 +3,13 @@
 {%block content%}
     <div class="block">
         <h1>Utwórz warsztaty - krok 1</h1>
-        <h2>Podstawowe informacje</h2>
+        <ul class="steps">
+            <li class="active last">Podstawowe informacje</li>
+            <li>Dodawanie zasobów</li>
+            <li>Etapy</li>
+            <li>Zaproszenia</li>
+            <li>Podsumowanie</li>
+        </ul>
 
         <form action="{{ path('profile_workshop_create') }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form) }}

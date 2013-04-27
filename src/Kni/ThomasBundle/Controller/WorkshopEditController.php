@@ -21,7 +21,7 @@ class WorkshopEditController extends Controller {
     }
     
     /**
-     * @Route("/basicInfo", defaults={"workshopId" = 0}, name="create_workshop")    
+     * @Route("/basicInfo", defaults={"workshopId" = 0})    
      * @Route("/basicInfo/{workshopId}")
      * @Template()
      */

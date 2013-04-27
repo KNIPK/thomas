@@ -9,15 +9,19 @@ use Kni\ThomasBundle\Form\Type\UserType;
 use Kni\ThomasBundle\Form\Model\Registration;
 use Kni\ThomasBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
+use Kni\ThomasBundle\DependencyInjection\NavigationBar;
 
 class RegisterController extends Controller
 {
     /**
-     * @Route("/register")
+     * @Route("/register", name="register")
      * @Template()
      */
     public function indexAction()
     {
+        
+        NavigationBar::add("Rejestracja", "register");
+        
         $form = $this->createForm(
             new UserType(),
             new User()

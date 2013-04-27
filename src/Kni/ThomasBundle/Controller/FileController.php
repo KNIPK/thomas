@@ -7,20 +7,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Kni\ThomasBundle\Entity\Workshop;
-use Kni\ThomasBundle\Form\WorkshopType;
+use Kni\ThomasBundle\Entity\File;
+use Kni\ThomasBundle\Form\FileType;
 
 /**
- * Workshop controller.
+ * File controller.
  *
- * @Route("/profile/workshop")
+ * @Route("/profile/files/{workshopId}")
  */
-class WorkshopController extends Controller
+class FileController extends Controller
 {
-    /**
-     * Lists all Workshop entities.
+    
+    public function __construct(Route $defaultRoute) {
+        
+    }
+
+        /**
+     * Lists all File entities.
      *
-     * @Route("/", name="profile_workshop")
+     * @Route("/", name="profile_files")
      * @Method("GET")
      * @Template()
      */
@@ -28,7 +33,7 @@ class WorkshopController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+        $entities = $em->getRepository('KniThomasBundle:File')->findAll();
 
         return array(
             'entities' => $entities,
@@ -36,28 +41,24 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Creates a new Workshop entity.
+     * Creates a new File entity.
      *
-     * @Route("/", name="profile_workshop_create")
+     * @Route("/", name="profile_files_create")
      * @Method("POST")
-     * @Template("KniThomasBundle:Workshop:new.html.twig")
+     * @Template("KniThomasBundle:File:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity  = new Workshop();
-        $form = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
+        $entity  = new File();
+        $form = $this->createForm(new FileType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
-            //w pole user dodajemy aktualnie zalogowanego użytkownika
-            $entity->setUser($this->get('security.context')->getToken()->getUser());
-            
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profile_workshop_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('profile_files_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -67,16 +68,16 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Displays a form to create a new Workshop entity.
+     * Displays a form to create a new File entity.
      *
-     * @Route("/new", name="profile_workshop_new")
+     * @Route("/new", name="profile_files_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Workshop();
-        $form   = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
+        $entity = new File();
+        $form   = $this->createForm(new FileType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -85,9 +86,9 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Finds and displays a Workshop entity.
+     * Finds and displays a File entity.
      *
-     * @Route("/{id}", name="profile_workshop_show")
+     * @Route("/{id}", name="profile_files_show")
      * @Method("GET")
      * @Template()
      */
@@ -95,10 +96,10 @@ class WorkshopController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
+        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Workshop entity.');
+            throw $this->createNotFoundException('Unable to find File entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -110,9 +111,9 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Workshop entity.
+     * Displays a form to edit an existing File entity.
      *
-     * @Route("/{id}/edit", name="profile_workshop_edit")
+     * @Route("/{id}/edit", name="profile_files_edit")
      * @Method("GET")
      * @Template()
      */
@@ -120,14 +121,13 @@ class WorkshopController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
+        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Workshop entity.');
+            throw $this->createNotFoundException('Unable to find File entity.');
         }
 
-
-        $editForm = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
+        $editForm = $this->createForm(new FileType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -138,31 +138,31 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Edits an existing Workshop entity.
+     * Edits an existing File entity.
      *
-     * @Route("/{id}", name="profile_workshop_update")
+     * @Route("/{id}", name="profile_files_update")
      * @Method("PUT")
-     * @Template("KniThomasBundle:Workshop:edit.html.twig")
+     * @Template("KniThomasBundle:File:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
+        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Workshop entity.');
+            throw $this->createNotFoundException('Unable to find File entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
+        $editForm = $this->createForm(new FileType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profile_workshop_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('profile_files_edit', array('id' => $id)));
         }
 
         return array(
@@ -173,9 +173,9 @@ class WorkshopController extends Controller
     }
 
     /**
-     * Deletes a Workshop entity.
+     * Deletes a File entity.
      *
-     * @Route("/{id}", name="profile_workshop_delete")
+     * @Route("/{id}", name="profile_files_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -185,21 +185,21 @@ class WorkshopController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
+            $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Workshop entity.');
+                throw $this->createNotFoundException('Unable to find File entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('profile_workshop'));
+        return $this->redirect($this->generateUrl('profile_files'));
     }
 
     /**
-     * Creates a form to delete a Workshop entity by id.
+     * Creates a form to delete a File entity by id.
      *
      * @param mixed $id The entity id
      *

@@ -40,10 +40,7 @@ class Step
      */
     protected $workshop;
     
-    /**
-     * @ORM\OneToMany(targetEntity="File", mappedBy="step")
-     */
-    protected $files;
+    
 
     /**
      * @var integer
@@ -136,9 +133,23 @@ class Step
      */
     public function __construct()
     {
-        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+
+    /**
+     * Add files
+     *
+     * @param \Kni\ThomasBundle\Entity\File $files
+     * @return Step
+     */
+    public function addFile(\Kni\ThomasBundle\Entity\File $files)
+    {
+        $this->files[] = $files;
+    
+        return $this;
+    }
+
+
     /**
      * Set workshop
      *
@@ -160,38 +171,5 @@ class Step
     public function getWorkshop()
     {
         return $this->workshop;
-    }
-
-    /**
-     * Add files
-     *
-     * @param \Kni\ThomasBundle\Entity\File $files
-     * @return Step
-     */
-    public function addFile(\Kni\ThomasBundle\Entity\File $files)
-    {
-        $this->files[] = $files;
-    
-        return $this;
-    }
-
-    /**
-     * Remove files
-     *
-     * @param \Kni\ThomasBundle\Entity\File $files
-     */
-    public function removeFile(\Kni\ThomasBundle\Entity\File $files)
-    {
-        $this->files->removeElement($files);
-    }
-
-    /**
-     * Get files
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFiles()
-    {
-        return $this->files;
     }
 }

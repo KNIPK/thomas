@@ -102,7 +102,7 @@ a:hover{
     text-align: right;
 }
 
-#login ul li input{
+#login ul li input, input{
     margin-left: 10px;
     float: left;
     display: inline;
@@ -117,7 +117,7 @@ a:hover{
 }
 
 input:required {
-    border: 1px solid red;
+    
 }
 
 input.submit:hover{
@@ -171,4 +171,128 @@ a.box:nth-child(3n+2){
 a.box:hover{
     background-color: #eef6ff;
     color: #031d3d;
+}
+
+
+ul.steps{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-top: 2px #9092a2 solid;
+    border-bottom: 2px #9092a2 solid;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+ul.steps li{
+    float: left;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding-top: 15px;
+    padding-right: 65px;
+    width: 150px;
+    height: 35px;
+    background-image: url('../images/pasive.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    font-size: 15px;
+}
+
+ul.steps li:first-child{
+    padding-left: 25px;
+    width: 114px;
+}
+
+ul.steps li.active{
+    color: #fff;
+    font-weight: bold;
+    background-color: #0f5ac0;
+    background-image: url('../images/active.png');
+}
+
+ul.steps li.active.last{
+    background-image: url('../images/active2.png');
+}
+ul.steps li:nth-child(1){
+    width: 170px;
+}
+ul.steps li:nth-child(3){
+    width: 110px;
+}
+ul.steps li:nth-child(4){
+    width:120px;
+}
+
+ul.steps li:last-child{
+    background-image: none;
+    width: 100px;
+    padding-right: 10px;
+}
+form div{
+    clear: both;
+}
+
+form div div div{
+    clear: none;
+}
+
+form div label{
+    width: 30%;
+    padding: 10px 10px 10px 0;
+    text-align: right;
+    float: left;
+    display: inline;
+}
+
+form div input{
+    float: left;
+    display: inline;
+}
+
+textarea{
+    margin-left: 10px;
+    float: left;
+    display: inline;
+    background-color: #fff;
+    border: 1px #ddd solid;
+    padding: 7px 10px;
+    -moz-border-radius:5px; /* FF */
+    -webkit-border-radius:5px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:5px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:5px; /* pozostałe przeglądarki */
+}
+
+select{
+    margin-left: 10px;
+    float: left;
+    display: inline;
+    background-color: #fff;
+    border: 1px #ddd solid;
+    padding: 7px 10px;
+    -moz-border-radius:5px; /* FF */
+    -webkit-border-radius:5px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:5px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:5px; /* pozostałe przeglądarki */
+}
+
+button[type=submit]{
+    -moz-border-radius:5px; /* FF */
+    -webkit-border-radius:5px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
+    -khtml-border-radius:5px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
+    border-radius:5px; /* pozostałe przeglądarki */
+    background-color: #0f5ac0;
+    color: #fff;
+    text-align: center;
+    border: 0;
+    padding: 7px 10px;
+}
+
+form p{
+    clear: both;
+    text-align: center;
+}
+
+.margin{
+    margin: 20px 0 20px 0;
 }

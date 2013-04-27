@@ -57,7 +57,7 @@ class WorkshopController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('profile_workshop_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('profile_files', array('workshopId' => $entity->getId())));
         }
 
         return array(

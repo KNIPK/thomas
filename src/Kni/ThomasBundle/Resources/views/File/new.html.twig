@@ -1,20 +1,22 @@
-{% extends '::base.html.twig' %}
+{% extends "KniThomasBundle::layout.html.twig" %}
 
-{% block body -%}
-    <h1>File creation</h1>
+{% block content -%}
+    <div class="block">
+        <h1>Dodaj zasób</h1>
 
-    <form action="{{ path('profile_files_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <p>
-            <button type="submit">Create</button>
-        </p>
-    </form>
+        <form action="{{ path('profile_files_create', {'workshopId': workshopId }) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <p>
+                <button type="submit">Dodaj</button>
+            </p>
+        </form>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('profile_files') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+            <li>
+                <a href="{{ path('profile_files', {'workshopId': workshopId }) }}">
+                    Wróć do listy zasobów
+                </a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}

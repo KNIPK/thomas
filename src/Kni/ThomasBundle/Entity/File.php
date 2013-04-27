@@ -31,9 +31,9 @@ class File
     /**
      * @var string
      *
-     * @ORM\Column(name="filename", type="string", length=128, unique=true)
+     * @ORM\Column(name="path", type="string", length=128, unique=true)
      */
-    private $filename;
+    private $path;
     
     /**
      * @ORM\ManyToOne(targetEntity="Workshop", inversedBy="files")
@@ -74,29 +74,6 @@ class File
     }
 
     /**
-     * Set filename
-     *
-     * @param string $filename
-     * @return File
-     */
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
-    
-        return $this;
-    }
-
-    /**
-     * Get filename
-     *
-     * @return string 
-     */
-    public function getFilename()
-    {
-        return $this->filename;
-    }
-
-    /**
      * Set workshop
      *
      * @param \Kni\ThomasBundle\Entity\Workshop $workshop
@@ -117,5 +94,56 @@ class File
     public function getWorkshop()
     {
         return $this->workshop;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return File
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+    
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+    
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    public function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/files';
     }
 }

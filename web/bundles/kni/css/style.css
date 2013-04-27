@@ -296,3 +296,35 @@ form p{
 .margin{
     margin: 20px 0 20px 0;
 }
+
+table.records_list{
+    margin: 15px auto;
+    border: 1px #ddd solid;
+    width: 90%;
+    padding: 0;
+}
+
+table.records_list thead{
+    background-color: #ddd;
+    margin: 0;
+    padding: 0;
+}
+
+table.records_list thead tr{
+    margin: 0;
+    padding: 0;
+}
+
+table.records_list thead th{
+    margin: 0;
+    padding: 5px 0;
+}
+
+table.records_list td{
+    padding: 5px 10px;
+    background-color: #efefef;
+}
+
+table.records_list td ul{
+    margin: 0;
+}

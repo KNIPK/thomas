@@ -103,7 +103,7 @@ class User implements UserInterface, \Serializable
     private $workshops;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Workshop", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Workshop", mappedBy="user")
      */
     private $myWorkshops;
 

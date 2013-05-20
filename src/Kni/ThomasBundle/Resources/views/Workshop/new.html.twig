@@ -1,5 +1,9 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
 
+{%block additionalHeaders%}
+    <script src="{{ asset('bundles/kni/js/workshopForm.js')}}"></script>
+{% endblock %}
+
 {%block content%}
     <div class="block">
         <h1>Utwórz warsztaty - krok 1</h1>

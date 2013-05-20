@@ -354,3 +354,19 @@ table.records_list td ul{
 p.center{
     text-align: center;
 }
+
+form#question div.answers input[type=checkbox]{
+    width: 20px;
+    margin: 10px 0 0 130px;
+    clear: both;
+}
+form#question div.answers input{
+    float: left;
+    display: inline;
+}
+
+.right{
+    float: right;
+}
+
+li.question{ background: #eef6ff; }

@@ -59,6 +59,40 @@ class StepsController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $position=1;
+            
+            print "<pre>";
+            $question = json_decode($data['questions'][2]);
+            parse_str($question[1], $answers);
+            print_r($question);
+            print_r($answers);
+            print "</pre>";
+            die();
+            $i=1;
+            $stepPosition=1;
+            while(true){
+                if(isset($data['steps'][$i])){
+                    //mamy etap
+                    $step = new Step();
+                    $step->setName($data['steps'][$i]);
+                    $step->setDescription($data['stepsDescriptions'][$i]);
+                    $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
+                    $step->setPosition($stepPosition);
+                    
+                    $stepPosition++;
+                    $questionPosition=1;
+                }elseif(isset($data['questions'][$i])){
+                    //mamy pytanie
+                    $question = json_decode($data['questions'][$i]);
+                    parse_str($question[1], $answers);
+                    parse_str($question[2], $answersCorrect);
+                    
+                    
+                    $questionPosition++;
+                }else{
+                    break;
+                }
+            }
+            
             foreach($data['steps'] as $key => $name){
                 $description = $data['stepsDescriptions'][$key];
                 

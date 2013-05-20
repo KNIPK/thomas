@@ -24,7 +24,7 @@
         
         <div class="left" id="stepAdd">
             <h2>Dodaj etap</h2>
-            <form>
+            <form id="step">
                 <div>
                     <label>
                         Nazwa etapu:
@@ -37,6 +37,28 @@
                     </label>
                     <textarea name="stepDescription"></textarea>
                 </div>
+                <p>
+                    <button type="submit">Dodaj</button>
+                </p>
+            </form>
+            <h2>Dodaj pytanie kontrolne</h2>
+            <form id="question">
+                <div>
+                    <label>
+                        Pytanie:
+                    </label>
+                    <input type="text" name="question" />
+                </div>
+                <div class="answers" id="answers">
+                    <label>
+                        Odpowiedzi:
+                    </label>
+                    <input type="checkbox" name="corectAnswer[]" value="1" />
+                    <input type="text" name="answer[]" />
+                </div>
+                <p class="right" id="addAnswer">
+                    dodaj
+                </p>
                 <p>
                     <button type="submit">Dodaj</button>
                 </p>

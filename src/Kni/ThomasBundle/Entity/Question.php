@@ -50,6 +50,17 @@ class Question
      * @ORM\OneToMany(targetEntity="UsersAnswers", mappedBy="question")
      */
     protected $usersAnswers;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question")
+     */
+    protected $answers;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Step", inversedBy="questions")
+     */
+    protected $step;
+    
 
 
     /**
@@ -169,5 +180,61 @@ class Question
     public function getUsersAnswers()
     {
         return $this->usersAnswers;
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \Kni\ThomasBundle\Entity\Answer $answers
+     * @return Question
+     */
+    public function addAnswer(\Kni\ThomasBundle\Entity\Answer $answers)
+    {
+        $this->answers[] = $answers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \Kni\ThomasBundle\Entity\Answer $answers
+     */
+    public function removeAnswer(\Kni\ThomasBundle\Entity\Answer $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
+    }
+
+    /**
+     * Set step
+     *
+     * @param \Kni\ThomasBundle\Entity\Step $step
+     * @return Question
+     */
+    public function setStep(\Kni\ThomasBundle\Entity\Step $step = null)
+    {
+        $this->step = $step;
+    
+        return $this;
+    }
+
+    /**
+     * Get step
+     *
+     * @return \Kni\ThomasBundle\Entity\Step 
+     */
+    public function getStep()
+    {
+        return $this->step;
     }
 }

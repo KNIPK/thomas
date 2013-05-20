@@ -212,4 +212,16 @@ class WorkshopController extends Controller
             ->getForm()
         ;
     }
+    
+    /**
+     * Podsumowanie dodawania warsztatów
+     *
+     * @Route("/{workshopId}/added", name="profile_workshop_added")
+     * @Template()
+     */
+    public function addedAction($workshopId){
+        return array(
+            'workshopId' => $workshopId,
+        );
+    }
 }

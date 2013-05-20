@@ -1,0 +1,58 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content -%}
+    <div class="block">
+        
+        <h1>Utwórz warsztaty - krok 3</h1>
+        
+        <ul class="steps">
+            <li class="active">Podstawowe informacje</li>
+            <li class="active">Dodawanie zasobów</li>
+            <li class="active last">Etapy</li>
+            <li>Zaproszenia</li>
+            <li>Podsumowanie</li>
+        </ul>
+
+        <ul id="steps">
+            {% for entity in entities %}
+                <li class='ui-state-default' description='{{ entity.description }}'>
+                    <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+                    {{ entity.name }}
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="left" id="stepAdd">
+            <h2>Dodaj etap</h2>
+            <form>
+                <div>
+                    <label>
+                        Nazwa etapu:
+                    </label>
+                    <input type="text" name="stepName" />
+                </div>
+                <div>
+                    <label>
+                        Opis etapu:
+                    </label>
+                    <textarea name="stepDescription"></textarea>
+                </div>
+                <p>
+                    <button type="submit">Dodaj</button>
+                </p>
+            </form>
+        </div>
+        <div class="clear"></div>
+        
+        <p class="center">
+            <button id="next" type="submit">Dalej</button>
+        </p>
+        
+        <form id='stepsForm' action="{{ path('profile_steps_create', { 'workshopId': workshopId }) }}" method="post"></form>
+    </div>
+{% endblock %}
+
+
+{% block additionalHeaders %}
+    <script src="{{ asset('bundles/kni/js/steps.js')}}"></script>
+{% endblock %}

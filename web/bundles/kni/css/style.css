@@ -226,7 +226,7 @@ ul.steps li:nth-child(4){
 
 ul.steps li:last-child{
     background-image: none;
-    width: 100px;
+    width:153px;
     padding-right: 10px;
 }
 form div{
@@ -276,7 +276,7 @@ select{
     border-radius:5px; /* pozostałe przeglądarki */
 }
 
-button[type=submit]{
+button[type=submit], a.button{
     -moz-border-radius:5px; /* FF */
     -webkit-border-radius:5px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
     -khtml-border-radius:5px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
@@ -327,4 +327,30 @@ table.records_list td{
 
 table.records_list td ul{
     margin: 0;
+}
+
+#steps{
+    float: left;
+    display: inline;
+    width: 350px;
+    list-style: none;
+}
+
+#steps li{
+    margin-bottom: 2px;
+    padding: 5px 0 5px 10px;
+}
+
+#steps li span{
+    float: right;
+}
+
+#stepAdd{
+    float: left;
+    display: inline;
+    width: 400px;
+}
+
+p.center{
+    text-align: center;
 }

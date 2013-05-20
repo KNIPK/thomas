@@ -44,22 +44,23 @@ $(document).ready(function(){
     $("#stepAdd form#question button").click(function(){
 
         var question = $("input[name=question]").val();
-        var answersSerialized = $("#answers input[type=text]").serialize();
-        var answersCorrectSerialized = $("#answers input[type=checkbox]").serialize();
-        
-        var questionSerialized = new Array(question, answersSerialized, answersCorrectSerialized);
-        
-        questionSerialized = JSON.stringify(questionSerialized);
-  
-        $("#answers .added").remove();
-        
-        $("#question input").val('');
-        $("#question input[type=checkbox]").prop('checked', false);
-        
-        //dodajemy jeszcze do listy w jakiś ciekawy sposób
-        
-        $("ul#steps").append("<li class='ui-state-default question' question='1' description='"+questionSerialized+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>"+question+"</li>");
-        
+        if(question.length!=0){
+            var answersSerialized = $("#answers input[type=text]").serialize();
+            var answersCorrectSerialized = $("#answers input[type=checkbox]").serialize();
+
+            var questionSerialized = new Array(question, answersSerialized, answersCorrectSerialized);
+
+            questionSerialized = JSON.stringify(questionSerialized);
+
+            $("#answers .added").remove();
+
+            $("#question input").val('');
+            $("#question input[type=checkbox]").prop('checked', false);
+
+            //dodajemy jeszcze do listy w jakiś ciekawy sposób
+
+            $("ul#steps").append("<li class='ui-state-default question' question='1' description='"+questionSerialized+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>"+question+"</li>");
+        }
         return false;
     });
 });

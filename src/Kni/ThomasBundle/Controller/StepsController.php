@@ -60,13 +60,6 @@ class StepsController extends Controller
             
             $position=1;
             
-            print "<pre>";
-            $question = json_decode($data['questions'][2]);
-            parse_str($question[1], $answers);
-            print_r($question);
-            print_r($answers);
-            print "</pre>";
-            die();
             $i=1;
             $stepPosition=1;
             while(true){
@@ -78,35 +71,67 @@ class StepsController extends Controller
                     $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
                     $step->setPosition($stepPosition);
                     
+                    $em->persist($step);
+                    $em->flush();
+                    
                     $stepPosition++;
                     $questionPosition=1;
                 }elseif(isset($data['questions'][$i])){
                     //mamy pytanie
-                    $question = json_decode($data['questions'][$i]);
-                    parse_str($question[1], $answers);
-                    parse_str($question[2], $answersCorrect);
+                    $questionArray = json_decode($data['questions'][$i]);
+                    parse_str($questionArray[1], $answers);
+                    parse_str($questionArray[2], $answersCorrect);
                     
+                    $question = new \Kni\ThomasBundle\Entity\Question();
+                    
+                    
+                    
+                    $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
+                    $question->setContent($questionArray[0]); //to jest treść pytania
+                    $question->setPosition($questionPosition);
+                    $question->setStep($step);
+
+                    foreach($answers['answer'] as $answerKey => $oneAnswer){
+                        $answer = new \Kni\ThomasBundle\Entity\Answer();
+                        $answer->setContent($oneAnswer);
+                        
+                        if(isset($answersCorrect['correctAnswer'][$answerKey])){
+                            $isCorrect = false;
+                        }else{
+                            $isCorrect = true;
+                        }
+                        $answer->setIsCorrect($isCorrect);
+                        
+                        $em->persist($answer);
+                        $em->flush();
+                        
+                        $answer->setQuestion($question);
+                    }
+                    
+                    $em->persist($question);
+                    $em->flush();
                     
                     $questionPosition++;
                 }else{
                     break;
                 }
+                $i++;
             }
             
-            foreach($data['steps'] as $key => $name){
-                $description = $data['stepsDescriptions'][$key];
-                
-                $step = new Step();
-                $step->setName($name);
-                $step->setDescription($description);
-                $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
-                $step->setPosition($position);
-                
-                $em->persist($step);
-                $em->flush();
-                
-                $position++;
-            }
+//            foreach($data['steps'] as $key => $name){
+//                $description = $data['stepsDescriptions'][$key];
+//                
+//                $step = new Step();
+//                $step->setName($name);
+//                $step->setDescription($description);
+//                $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
+//                $step->setPosition($position);
+//                
+//                $em->persist($step);
+//                $em->flush();
+//                
+//                $position++;
+//            }
             
             print "dodane";
             

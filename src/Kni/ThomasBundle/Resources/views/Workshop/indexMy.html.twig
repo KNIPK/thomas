@@ -1,13 +1,8 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
 
 {% block content %}
-    <h1>Workshop list</h1>
-    <div>
-        <form method="get">
-            <input name="query" type="search">
-            <input type="submit" value="Go">
-        </form>
-    </div>
+    <h1>Twoje warsztaty</h1>
+   
     <table class="records_list">
         <thead>
             <tr>
@@ -16,7 +11,7 @@
                 <th>Startdate</th>
                 <th>Enddate</th>
                 <th>Description</th>
-                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -27,16 +22,6 @@
                 <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.description }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('profile_workshop_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('profile_workshop_edit', { 'id': entity.id }) }}">join</a>
-                    </li>
-                </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

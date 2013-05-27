@@ -102,8 +102,8 @@ class ProfileController extends Controller {
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            $entity->setName('spytacMateusza');
-            $entity->setSurname('spytacMateusza');
+            $entity->setName($editForm["name"]->getData());
+            $entity->setSurname($editForm["surname"]->getData());
             $em->persist($entity);
             $em->flush();
 
@@ -111,7 +111,7 @@ class ProfileController extends Controller {
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
             'pass_form' => $passForm->createView(),
-            'info' => 'Zmiana dokonana poprawnie');
+            'info' => 'Wprowadzono zmiany poprawnie');
         } else{
            return array(
             'entity' => $entity,

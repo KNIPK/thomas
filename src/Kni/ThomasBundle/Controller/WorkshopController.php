@@ -115,6 +115,30 @@ class WorkshopController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+     /**
+     * Finds and displays a Workshop entity.
+     *
+     * @Route("/my", name="profile_my_workshop_index")
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexMyAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        $id = $user->getId();
+
+       $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+
+       if (!$entities) {
+            throw $this->createNotFoundException('Unable to find Workshop entity.');
+       }
+
+        return array(
+            'entity'      => $entities
+        );
+    }
 
     /**
      * Displays a form to edit an existing Workshop entity.

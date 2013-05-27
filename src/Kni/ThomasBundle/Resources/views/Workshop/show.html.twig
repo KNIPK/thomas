@@ -1,6 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends "KniThomasBundle::layout.html.twig" %}
 
-{% block body -%}
+{% block content %}
     <h1>Workshop</h1>
 
     <table class="record_properties">
@@ -34,17 +34,17 @@
             Back to the list
         </a>
     </li>
-    <li>
+    <!--  <li>
         <a href="{{ path('profile_workshop_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
-        <form action="{{ path('profile_workshop_delete', { 'id': entity.id }) }}" method="post">
+      <form action="{{ path('profile_workshop_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
-        </form>
-    </li>
+        </form> 
+    </li>!-->
 </ul>
 {% endblock %}

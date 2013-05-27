@@ -24,11 +24,18 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+        $request->get('query');
+        if ($request->get('query')=="") {
+             $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+        }
+        else
+        {
+            $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('name'=>$request->get('query')));
+        }
 
         return array(
             'entities' => $entities,

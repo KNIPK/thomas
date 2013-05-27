@@ -6,31 +6,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class FileType extends AbstractType
+class TestType extends AbstractType
 {
-    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'Nazwa zasobu'
-            ))
-            ->add('path', 'file', array(
-                'label' => 'Plik'
-            ))
-
+            ->add('imie')
+            ->add('nazwisko')
+            ->add('wiek')
+            ->add('endDate', 'datetime', array(
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'label'=> 'Jakaś data'))
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Kni\ThomasBundle\Entity\File'
+            'data_class' => 'Kni\ThomasBundle\Entity\Test'
         ));
     }
 
     public function getName()
     {
-        return 'kni_thomasbundle_filetype';
+        return 'kni_thomasbundle_testtype';
     }
 }

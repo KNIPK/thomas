@@ -4,7 +4,7 @@ namespace Kni\ThomasBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class FileControllerTest extends WebTestCase
+class TestControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()
@@ -13,13 +13,13 @@ class FileControllerTest extends WebTestCase
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/profile/files/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /profile/files/");
+        $crawler = $client->request('GET', '/test/');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /test/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'kni_thomasbundle_filetype[field_name]'  => 'Test',
+            'kni_thomasbundle_testtype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class FileControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'kni_thomasbundle_filetype[field_name]'  => 'Foo',
+            'kni_thomasbundle_testtype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

@@ -1,8 +1,13 @@
-{% extends '::base.html.twig' %}
+{% extends "KniThomasBundle::layout.html.twig" %}
 
-{% block body -%}
+{% block content %}
     <h1>Workshop list</h1>
-
+    <div>
+        <form method="get">
+            <input name="query" type="search">
+            <input type="submit" value="Go">
+        </form>
+    </div>
     <table class="records_list">
         <thead>
             <tr>
@@ -28,7 +33,7 @@
                         <a href="{{ path('profile_workshop_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('profile_workshop_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('profile_workshop_edit', { 'id': entity.id }) }}">join</a>
                     </li>
                 </ul>
                 </td>

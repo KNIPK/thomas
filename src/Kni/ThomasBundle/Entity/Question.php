@@ -38,7 +38,7 @@ class Question
      * @ORM\Column(name="content", type="string", length=45)
      */
     private $content;
-
+    
     /**
      * @var integer
      *

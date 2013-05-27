@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>File</h1>
+    <h1>Test</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,29 +10,33 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
+                <th>Imie</th>
+                <td>{{ entity.imie }}</td>
             </tr>
             <tr>
-                <th>Filename</th>
-                <td>{{ entity.filename }}</td>
+                <th>Nazwisko</th>
+                <td>{{ entity.nazwisko }}</td>
+            </tr>
+            <tr>
+                <th>Wiek</th>
+                <td>{{ entity.wiek }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('profile_files') }}">
+        <a href="{{ path('test') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('profile_files_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('test_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
     <li>
-        <form action="{{ path('profile_files_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('test_delete', { 'id': entity.id }) }}" method="post">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>

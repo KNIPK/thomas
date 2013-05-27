@@ -149,8 +149,8 @@ class ProfileController extends Controller {
             $encoder  = $this->get('security.encoder_factory')->getEncoder($entity);
             $password = $encoder->encodePassword($plainPassword, $entity->getSalt());
             $entity->setPassword($password);
-            //$em->persist($entity);
-            //$em->flush();
+            $em->persist($entity);
+            $em->flush();
 
                     return array(
             'entity' => $entity,

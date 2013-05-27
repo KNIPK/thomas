@@ -122,7 +122,51 @@ class ProfileController extends Controller {
 
 
     }
-    
+    /**
+     * Edits users name and surname.
+     *
+     * @Route("/changePassword", name="user_pass_update")
+     * @Method("PUT")
+     * @Template("KniThomasBundle:Profile:edit.html.twig")
+     */
+    public function changePasswordAction(Request $request)
+    {
+        $id = $this->get('security.context')->getToken()->getUser()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('KniThomasBundle:User')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Workshop entity.');
+        }
+
+        
+        $passForm = $this->createForm(new UserChangePassType(), $entity);
+        $editForm = $this->createForm(new UserEditType(), $entity);
+        $passForm->bind($request);
+
+        if ($passForm->isValid()) {
+            $plainPassword = $passForm["password"]["password"]->getData();
+            $encoder  = $this->get('security.encoder_factory')->getEncoder($entity);
+            $password = $encoder->encodePassword($plainPassword, $entity->getSalt());
+            $entity->setPassword($password);
+            //$em->persist($entity);
+            //$em->flush();
+
+                    return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'pass_form' => $passForm->createView(),
+            'info' =>'Hasło zostało zmienione.');
+        } else{
+           return array(
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'pass_form' => $passForm->createView(),
+            'info' => 'Nie udało się wprowadzić zmian');
+        }
+
+
+    }
     
 
 }

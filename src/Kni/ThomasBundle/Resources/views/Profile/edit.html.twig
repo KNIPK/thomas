@@ -13,7 +13,7 @@
         </p>
     </form>
     
-    <form action="#" method="post" {{ form_enctype(pass_form) }}>
+    <form action="{{path('user_pass_update')}}" method="post" {{ form_enctype(pass_form) }}>
         <input type="hidden" name="_method" value="PUT" />
         {{ form_widget(pass_form) }}
         <p>

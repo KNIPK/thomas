@@ -1,6 +1,7 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
 
 {% block content %}
+<div class="block">
     <h1>Twoje warsztaty</h1>
    
     <table class="records_list">
@@ -22,6 +23,12 @@
                 <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.description }}</td>
             </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">
+                    Brak warsztatów
+                </td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
@@ -29,8 +36,9 @@
         <ul>
         <li>
             <a href="{{ path('profile_workshop_new') }}">
-                Create a new entry
+                Utwórz nowe warsztaty
             </a>
         </li>
     </ul>
-    {% endblock %}
+</div>
+{% endblock %}

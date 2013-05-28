@@ -128,9 +128,11 @@ class WorkshopController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Workshop entity.');
+        
+        if($entity->getUser()==$this->get('security.context')->getToken()->getUser()){
+            $showEditOptions = true;
+        }else{
+            $showEditOptions = false;
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -138,6 +140,7 @@ class WorkshopController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'show_edit_options' => $showEditOptions,
         );
     }
     

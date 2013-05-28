@@ -20,7 +20,7 @@ class WorkshopController extends Controller
     /**
      * Lists all Workshop entities.
      *
-     * @Route("/my", name="profile_workshop")
+     * @Route("/", name="profile_workshop")
      * @Method("GET")
      * @Template()
      */

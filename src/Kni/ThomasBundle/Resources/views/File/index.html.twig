@@ -6,13 +6,7 @@
         <h1>Utwórz warsztaty - krok 2</h1>
         
         {% if isEditWorkshop %}
-            <ul class="workshopMenu">
-                <li>Podstawowe informacje</li>
-                <li class="active">Dodawanie zasobów</li>
-                <li>Etapy</li>
-                <li>Zaproszenia</li>
-                <li>Podsumowanie</li>
-            </ul>
+            {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'files'} %}
         {% else %}
             <ul class="steps">
                 <li class="active">Podstawowe informacje</li>

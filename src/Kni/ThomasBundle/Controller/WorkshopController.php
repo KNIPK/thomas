@@ -141,6 +141,7 @@ class WorkshopController extends Controller
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
             'show_edit_options' => $showEditOptions,
+            'active' => 'edit',
         );
     }
     

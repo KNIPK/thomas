@@ -4,7 +4,7 @@
 <div class="block">
     <h1>Warsztaty - {{ entity.name }}</h1>
     
-    {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'edit'} %}
+    {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'edit', 'workshopId': entity.id} %}
 
     <form action="{{ path('profile_workshop_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         <input type="hidden" name="_method" value="PUT" />

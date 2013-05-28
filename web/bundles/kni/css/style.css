@@ -260,6 +260,10 @@ ul.workshopMenu li.active{
     font-weight: bold;
     background-color: #0f5ac0;
 }
+
+ul.workshopMenu li a{
+    color: inherit;
+}
 form div{
     clear: both;
 }

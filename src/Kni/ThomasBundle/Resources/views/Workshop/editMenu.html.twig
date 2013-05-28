@@ -1,7 +1,19 @@
 <ul class="workshopMenu">
-    <li {% if active=='edit' %}class="active"{% endif %}>Podstawowe informacje</li>
-    <li {% if active=='files' %}class="active"{% endif %}>Zasoby</li>
+    <li {% if active=='edit' %}class="active"{% endif %}>
+        <a href="{{ path('profile_workshop_edit', {'id': workshopId}) }}">
+            Podstawowe informacje
+        </a>
+    </li>
+    <li {% if active=='files' %}class="active"{% endif %}>
+        <a href="{{ path('profile_files_edit', {'workshopId': workshopId}) }}">
+            Zasoby
+        </a>
+    </li>
     <li {% if active=='steps' %}class="active"{% endif %}>Etapy</li>
     <li {% if active=='users' %}class="active"{% endif %}>Zaproszenia</li>
-    <li {% if active=='info' %}class="active"{% endif %}>Podsumowanie</li>
+    <li {% if active=='info' %}class="active"{% endif %}>
+        <a href="{{ path('profile_workshop_show', {'id': workshopId}) }}">
+            Podsumowanie
+        </a>
+    </li>
 </ul>

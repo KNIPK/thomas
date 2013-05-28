@@ -3,6 +3,8 @@
 {% block content %}
 <div class="block">
     <h1>Warsztaty - {{ entity.name }}</h1>
+    
+    {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'info', 'workshopId': entity.id} %}
 
     <table class="record_properties">
         <tbody>

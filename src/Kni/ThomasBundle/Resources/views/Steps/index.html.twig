@@ -15,9 +15,12 @@
 
         <ul id="steps">
             {% for entity in entities %}
-                <li class='ui-state-default' description='{{ entity.description }}'>
+                <li class='ui-state-default' description='{{ entity.description }}' originalId='{{ entity.id }}'>
                     <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
                     {{ entity.name }}
+                    {% for question in questions %}
+                        fds
+                    {% endfor %}
                 </li>
             {% endfor %}
         </ul>

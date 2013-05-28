@@ -37,7 +37,13 @@ class StepsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('KniThomasBundle:Step')->findBy(array('workshop'=>$workshopId));
-
+        
+        //pobieramy sobie dla kazdego etapu pytania, które do niego należą
+        foreach($entities as $key => $entity){
+            $em->getRepository('KniThomasBundle:Question')->findBy(array('step'=>$entity));
+        }
+        
+        
         return array(
             'entities' => $entities,
             'workshopId' => $workshopId,
@@ -72,7 +78,6 @@ class StepsController extends Controller
                     $step->setPosition($stepPosition);
                     
                     $em->persist($step);
-                    $em->flush();
                     
                     $stepPosition++;
                     $questionPosition=1;
@@ -91,6 +96,8 @@ class StepsController extends Controller
                     $question->setPosition($questionPosition);
                     $question->setStep($step);
 
+                    $em->persist($question);
+                    
                     foreach($answers['answer'] as $answerKey => $oneAnswer){
                         $answer = new \Kni\ThomasBundle\Entity\Answer();
                         $answer->setContent($oneAnswer);
@@ -103,13 +110,12 @@ class StepsController extends Controller
                         $answer->setIsCorrect($isCorrect);
                         
                         $em->persist($answer);
-                        $em->flush();
                         
                         $answer->setQuestion($question);
                     }
                     
-                    $em->persist($question);
-                    $em->flush();
+                    
+                    
                     
                     $questionPosition++;
                 }else{
@@ -117,6 +123,8 @@ class StepsController extends Controller
                 }
                 $i++;
             }
+            
+            $em->flush();
             
 //            foreach($data['steps'] as $key => $name){
 //                $description = $data['stepsDescriptions'][$key];

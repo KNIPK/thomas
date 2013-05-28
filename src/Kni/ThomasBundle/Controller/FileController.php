@@ -37,6 +37,8 @@ class FileController extends Controller
         $routeName = $request->get('_route');
         if($routeName=='profile_files_edit')
             $isEditWorkshop=true;
+        else
+            $isEditWorkshop=false;
         
         $this->workshopId = $workshopId;
         $this->checkAccess();

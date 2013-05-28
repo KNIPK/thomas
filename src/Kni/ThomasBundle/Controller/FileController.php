@@ -26,11 +26,18 @@ class FileController extends Controller
      * Lists all File entities.
      *
      * @Route("/{workshopId}/", name="profile_files")
+     * @Route("/{workshopId}/edit", name="profile_files_edit")
+         * it's used when workshop's editing (in view is other menu)
      * @Method("GET")
      * @Template()
      */
     public function indexAction($workshopId)
     {
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+        if($routeName=='profile_files_edit')
+            $isEditWorkshop=true;
+        
         $this->workshopId = $workshopId;
         $this->checkAccess();
         
@@ -41,6 +48,7 @@ class FileController extends Controller
         return array(
             'entities' => $entities,
             'workshopId' => $workshopId,
+            'isEditWorkshop' => $isEditWorkshop,
         );
     }
 

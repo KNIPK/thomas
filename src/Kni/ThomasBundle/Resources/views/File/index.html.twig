@@ -5,13 +5,23 @@
         
         <h1>Utwórz warsztaty - krok 2</h1>
         
-        <ul class="steps">
-            <li class="active">Podstawowe informacje</li>
-            <li class="active last">Dodawanie zasobów</li>
-            <li>Etapy</li>
-            <li>Zaproszenia</li>
-            <li>Podsumowanie</li>
-        </ul>
+        {% if isEditWorkshop %}
+            <ul class="workshopMenu">
+                <li>Podstawowe informacje</li>
+                <li class="active">Dodawanie zasobów</li>
+                <li>Etapy</li>
+                <li>Zaproszenia</li>
+                <li>Podsumowanie</li>
+            </ul>
+        {% else %}
+            <ul class="steps">
+                <li class="active">Podstawowe informacje</li>
+                <li class="active last">Dodawanie zasobów</li>
+                <li>Etapy</li>
+                <li>Zaproszenia</li>
+                <li>Podsumowanie</li>
+            </ul>
+        {% endif %}
 
         <table class="records_list">
             <thead>
@@ -32,6 +42,12 @@
                         </ul>
                     </td>
                 </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">
+                        Brak zasobów
+                    </td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
@@ -43,8 +59,12 @@
                 </a>
             </li>
         </ul>
-        <p class="center">
-            <a class="button" href="{{ path('profile_steps', { 'workshopId': workshopId }) }}">Dalej</a>
-        </p>
+        {% if isEditWorkshop==false %}
+            <p class="center">
+                <a class="button" href="{{ path('profile_steps', { 'workshopId': workshopId }) }}">
+                    Dalej
+                </a>
+            </p>
+        {% endif %}
     </div>
 {% endblock %}

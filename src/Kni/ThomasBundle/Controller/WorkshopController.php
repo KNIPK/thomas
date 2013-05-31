@@ -9,14 +9,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Kni\ThomasBundle\Entity\Workshop;
 use Kni\ThomasBundle\Form\WorkshopType;
+use Kni\ThomasBundle\DependencyInjection\NavigationBar;
 
 /**
  * Workshop controller.
  *
  * @Route("/profile/workshop")
  */
-class WorkshopController extends Controller
-{
+class WorkshopController extends Controller {
+
     /**
      * Lists all Workshop entities.
      *
@@ -24,17 +25,15 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request)
-    {
+    public function indexAction(Request $request) {
+        NavigationBar::add("Wszystkie warsztaty", "profile_workshop");
         $em = $this->getDoctrine()->getManager();
 
         $request->get('query');
-        if ($request->get('query')=="") {
-             $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
-        }
-        else
-        {
-            $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('name'=>$request->get('query')));
+        if ($request->get('query') == "") {
+            $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+        } else {
+            $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('name' => $request->get('query')));
         }
 
         return array(
@@ -49,18 +48,18 @@ class WorkshopController extends Controller
      * @Method("POST")
      * @Template("KniThomasBundle:Workshop:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
-        $entity  = new Workshop();
+    public function createAction(Request $request) {
+        NavigationBar::add("Tworzenie warsztatu", "profile_workshop_create");
+        $entity = new Workshop();
         $form = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
+
             //w pole user dodajemy aktualnie zalogowanego użytkownika
             $entity->setUser($this->get('security.context')->getToken()->getUser());
-            
+
             $em->persist($entity);
             $em->flush();
 
@@ -69,7 +68,7 @@ class WorkshopController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -80,18 +79,16 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Workshop();
-        $form   = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
+        $form = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
-    
     /**
      * Finds and displays a Workshop entity.
      *
@@ -99,23 +96,23 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexMyAction()
-    {
+    public function indexMyAction() {
+        NavigationBar::add("Twoje warsztaty", "profile_my_workshop_index");
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.context')->getToken()->getUser();
         $id = $user->getId();
 
-       $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('user'=>$id));
+        $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('user' => $id));
 
-       if (!$entities) {
+        if (!$entities) {
             throw $this->createNotFoundException('Unable to find Workshop entity.');
-       }
+        }
 
         return array(
-            'entities'    => $entities
+            'entities' => $entities
         );
     }
-    
+
     /**
      * Finds and displays a Workshop entity.
      *
@@ -123,28 +120,25 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
-        
-        if($entity->getUser()==$this->get('security.context')->getToken()->getUser()){
+
+        if ($entity->getUser() == $this->get('security.context')->getToken()->getUser()) {
             $showEditOptions = true;
-        }else{
+        } else {
             $showEditOptions = false;
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
             'show_edit_options' => $showEditOptions,
         );
     }
-    
-
 
     /**
      * Displays a form to edit an existing Workshop entity.
@@ -153,8 +147,7 @@ class WorkshopController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
@@ -168,8 +161,8 @@ class WorkshopController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -181,8 +174,7 @@ class WorkshopController extends Controller
      * @Method("PUT")
      * @Template("KniThomasBundle:Workshop:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
@@ -203,8 +195,8 @@ class WorkshopController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -215,8 +207,7 @@ class WorkshopController extends Controller
      * @Route("/{id}", name="profile_workshop_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -242,23 +233,23 @@ class WorkshopController extends Controller
      *
      * @return Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
-    
+
     /**
      * Podsumowanie dodawania warsztatów
      *
      * @Route("/{workshopId}/added", name="profile_workshop_added")
      * @Template()
      */
-    public function addedAction($workshopId){
+    public function addedAction($workshopId) {
         return array(
             'workshopId' => $workshopId,
         );
     }
+
 }

@@ -4,7 +4,7 @@ namespace Kni\ThomasBundle\DependencyInjection;
 
 class NavigationBar
 {
-    private static $aNavigationBar = array(array('name'=>"Thomas", 'urlName'=>"home"));
+    private static $aNavigationBar = array(array('name'=>"Thomas", 'urlName'=>"profile"));
     
     public static function get(){
         return self::$aNavigationBar;

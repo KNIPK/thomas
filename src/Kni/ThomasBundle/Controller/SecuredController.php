@@ -19,6 +19,14 @@ class SecuredController extends Controller
      */
     public function loginAction()
     {
+        
+        
+        if(false){//zastapic false sprawdzaniem czy jest zalogowany!!
+            return $this->render('KniThomasBundle:Profile:index.html.twig', array());
+        }
+        else
+        
+        
         if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } else {

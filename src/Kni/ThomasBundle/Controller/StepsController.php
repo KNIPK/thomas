@@ -26,6 +26,7 @@ class StepsController extends Controller
      * Lists all File entities.
      *
      * @Route("/{workshopId}/", name="profile_steps")
+     * @Route("/{workshopId}/edit", name="profile_steps_edit")
      * @Method("GET")
      * @Template()
      */
@@ -34,19 +35,35 @@ class StepsController extends Controller
         $this->workshopId = $workshopId;
         $this->checkAccess();
         
+        
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+        if($routeName=='profile_steps_edit')
+            $isEditWorkshop=true;
+        else
+            $isEditWorkshop=false;
+        
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('KniThomasBundle:Step')->findBy(array('workshop'=>$workshopId));
+        
+        $entities = $em->getRepository('KniThomasBundle:Step')->findBy(
+                array('workshop'=>$workshopId), 
+                array('position' => 'asc')
+            );
         
         //pobieramy sobie dla kazdego etapu pytania, które do niego należą
-        foreach($entities as $key => $entity){
-            $em->getRepository('KniThomasBundle:Question')->findBy(array('step'=>$entity));
+        $questions = array();
+        foreach($entities as $entity){
+            $questions[$entity->getId()] = $em->getRepository('KniThomasBundle:Question')->findBy(array('step'=>$entity), 
+                array('position' => 'asc'));
         }
         
         
         return array(
             'entities' => $entities,
             'workshopId' => $workshopId,
+            'questions' => $questions,
+            'isEditWorkshop' => $isEditWorkshop,
         );
     }
     
@@ -64,10 +81,9 @@ class StepsController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
-            $position=1;
-            
             $i=1;
             $stepPosition=1;
+            
             while(true){
                 if(isset($data['steps'][$i])){
                     //mamy etap
@@ -176,6 +192,100 @@ class StepsController extends Controller
         if(!$workshop){
             throw new AccessDeniedException();
         }
+    }
+    
+    /**
+     * Save changes in workshop steps and questions
+     *
+     * @Route("/{workshopId}", name="profile_steps_save")
+     * @Method("POST")
+     * @Template("KniThomasBundle:Steps:index.html.twig")
+     */
+    public function saveAction(Request $request, $workshopId)
+    {
+        if($request->getMethod()=='POST'){
+            $data = $request->request->all();
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            $i=1;
+            $stepPosition=1;
+            
+            
+            while(true){
+                if(isset($data['steps'][$i])){
+                    //mamy etap
+                    
+                    if($data['original_id'][$i]=='undefined'){
+                        $step = new Step();
+                        $step->setName($data['steps'][$i]);
+                        $step->setDescription($data['stepsDescriptions'][$i]);
+                        $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
+                        $step->setPosition($stepPosition);
+                    }else{
+                        //ten etap juz istnieje, modyfikujemy tylko pozycje
+                        $step = $em->getRepository('KniThomasBundle:Step')->find($data['original_id'][$i]);
+                        $step->setPosition($stepPosition);
+                    }
+                    
+                    $em->persist($step);
+                    
+                    $stepPosition++;
+                    $questionPosition=1;
+                }elseif(isset($data['questions'][$i])){
+                    //mamy pytanie
+                    if($data['original_id'][$i]=='undefined'){
+                        $questionArray = json_decode($data['questions'][$i]);
+                        parse_str($questionArray[1], $answers);
+                        parse_str($questionArray[2], $answersCorrect);
+
+                        $question = new \Kni\ThomasBundle\Entity\Question();
+
+
+
+                        $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
+                        $question->setContent($questionArray[0]); //to jest treść pytania
+                        $question->setPosition($questionPosition);
+                        $question->setStep($step);
+
+                        $em->persist($question);
+
+                        foreach($answers['answer'] as $answerKey => $oneAnswer){
+                            $answer = new \Kni\ThomasBundle\Entity\Answer();
+                            $answer->setContent($oneAnswer);
+
+                            if(isset($answersCorrect['correctAnswer'][$answerKey])){
+                                $isCorrect = false;
+                            }else{
+                                $isCorrect = true;
+                            }
+                            $answer->setIsCorrect($isCorrect);
+
+                            $em->persist($answer);
+
+                            $answer->setQuestion($question);
+                        }
+                    }else{
+                        //to pytanie już istnieje, modyfikujemy tylko pozycje
+                        $question = $em->getRepository('KniThomasBundle:Question')->find($data['original_id'][$i]);
+                        $question->setPosition($questionPosition);
+                        $question->setStep($step);
+                        
+                        $em->persist($question);
+                    }
+                    
+                    $questionPosition++;
+                }else{
+                    break;
+                }
+                $i++;
+            }
+            
+            $em->flush();
+            
+            
+        }
+        return $this->redirect($this->generateUrl('profile_workshop_added', array('workshopId' => $workshopId)));
     }
 
 }

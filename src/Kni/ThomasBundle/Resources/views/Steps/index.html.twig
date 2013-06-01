@@ -15,13 +15,16 @@
 
         <ul id="steps">
             {% for entity in entities %}
-                <li class='ui-state-default' description='{{ entity.description }}' originalId='{{ entity.id }}'>
+                <li class='ui-state-default' original_id='{{ entity.id }}'>
                     <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
                     {{ entity.name }}
-                    {% for question in questions %}
-                        fds
-                    {% endfor %}
                 </li>
+                {% for question in questions[entity.id] %}
+                    <li question="1" class='ui-state-default question' original_id='{{ question.id }}'>
+                        <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+                        {{ question.content }}
+                    </li>
+                {% endfor %}
             {% endfor %}
         </ul>
         
@@ -69,11 +72,18 @@
         </div>
         <div class="clear"></div>
         
-        <p class="center">
-            <button id="next" type="submit">Dalej</button>
-        </p>
+        {% if isEditWorkshop %}
+            <p class="center">
+                <button id="save" type="submit">Zapisz zmiany</button>
+            </p>
+            <form id='stepsForm' action="{{ path('profile_steps_save', { 'workshopId': workshopId }) }}" method="post"></form>
+        {% else %}
+            <p class="center">
+                <button id="next" type="submit">Dalej</button>
+            </p>
+            <form id='stepsForm' action="{{ path('profile_steps_create', { 'workshopId': workshopId }) }}" method="post"></form>
+        {% endif %}
         
-        <form id='stepsForm' action="{{ path('profile_steps_create', { 'workshopId': workshopId }) }}" method="post"></form>
     </div>
 {% endblock %}
 

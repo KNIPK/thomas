@@ -63,4 +63,30 @@ $(document).ready(function(){
         }
         return false;
     });
+    
+    $("button#save").click(function(){
+
+        
+
+        var form = $("form#stepsForm");
+        
+        var i = 1;
+        $("ul#steps li").each(function(){
+            if($(this).attr("question")==1){
+                //pytanie
+                form.append("<input type='hidden' name='original_id["+i+"]' value='"+$(this).attr("original_id")+"'>");
+                form.append("<input type='hidden' name='questions["+i+"]' value='"+$(this).attr("description")+"'>");
+            }else{
+                //etap
+                form.append("<input type='hidden' name='original_id["+i+"]' value='"+$(this).attr("original_id")+"'>");
+                form.append("<input type='hidden' name='steps["+i+"]' value='"+$(this).text()+"'>");
+                form.append("<input type='hidden' name='stepsDescriptions["+i+"]' value='"+$(this).attr("description")+"'>");
+            }
+            i++;
+        });
+        
+        form.submit();
+        
+        return false;
+    });
 });

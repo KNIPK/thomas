@@ -19,8 +19,8 @@ use Kni\ThomasBundle\DependencyInjection\NavigationBar;
  */
 class MeetingController extends Controller {
 
-    
     private $workshop;
+
     /**
      * Lists all Workshop entities.
      *
@@ -29,20 +29,20 @@ class MeetingController extends Controller {
      * @Template()
      */
     public function indexAction($workshopId) {
-        
+
         $repository = $this->getDoctrine()
-            ->getRepository('KniThomasBundle:Workshop');
+                ->getRepository('KniThomasBundle:Workshop');
 
         $query = $repository->createQueryBuilder('w')
-            ->leftjoin('w.user', 'u')
-            ->where('w.id = :workshopId')
-            ->setParameter('workshopId', $workshopId)
-            ->getQuery();
+                ->leftjoin('w.user', 'u')
+                ->where('w.id = :workshopId')
+                ->setParameter('workshopId', $workshopId)
+                ->getQuery();
 
         $workshops = $query->getResult();
-        
+
         $this->workshop = $workshops[0];
-        
+
         return array(
             'workshop' => $this->workshop,
             'adminMode' => $this->checkAdminMode()
@@ -64,7 +64,7 @@ class MeetingController extends Controller {
         $user = $this->get('security.context')->getToken()->getUser();
 
         if (in_array($user, $users->toArray())) {//czy user jest już dałączył do kursu
-            return $this->redirect($this->generateUrl('meeting_index', array('id' => $workshopId)));
+            return $this->redirect($this->generateUrl('meeting_index', array('workshopId' => $workshopId)));
         } else {
             return array(
                 'entity' => $entity,
@@ -78,19 +78,36 @@ class MeetingController extends Controller {
      *
      * @Route("/joined", name="joined_to_workshop")
      * @Method("POST")
-     * @Template()
+     * @Template("KniThomasBundle:Meeting:join.html.twig")
      */
     public function joinedAction(Request $request) {
-         return array(
-                //todo napisac sprawdzanie poprawnosci hasla, ewentualnie redirect do index
-                'error' => 'zle haslo'
+
+        //if(poprwne_haslo){
+        $data = $request->request->all();
+        $pass = $data['pass'];
+        $id = $data['id'];
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('KniThomasBundle:Workshop')->find($id);
+
+        if ($pass == $entity->getPassword()) {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $registeredUsers = $entity->getUsers();
+            $registeredUsers->add($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('meeting_index', array('workshopId' => $id)));
+        } else {
+            return array(
+                'error' => 'Podałeś niepoprawne hasło. Spróbój ponownie.',
+                'entity' => $entity
             );
+        }
     }
-    
+
     /**
      * Metoda zwraca czy strona jest otwarta przez osobe, która zarządza tymi warsztatami
      */
-    private function checkAdminMode(){
+    private function checkAdminMode() {
         return ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser());
     }
 

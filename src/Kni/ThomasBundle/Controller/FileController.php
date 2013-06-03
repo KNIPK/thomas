@@ -18,34 +18,33 @@ use Symfony\Component\Filesystem\Exception\IOException;
  *
  * @Route("/profile/files")
  */
-class FileController extends Controller
-{
-    
+class FileController extends Controller {
+
     private $workshopId;
-        /**
+
+    /**
      * Lists all File entities.
      *
      * @Route("/{workshopId}/", name="profile_files")
      * @Route("/{workshopId}/edit", name="profile_files_edit")
-         * it's used when workshop's editing (in view is other menu)
+     * it's used when workshop's editing (in view is other menu)
      * @Method("GET")
      * @Template()
      */
-    public function indexAction($workshopId)
-    {
+    public function indexAction($workshopId) {
         $request = $this->container->get('request');
         $routeName = $request->get('_route');
-        if($routeName=='profile_files_edit')
-            $isEditWorkshop=true;
+        if ($routeName == 'profile_files_edit')
+            $isEditWorkshop = true;
         else
-            $isEditWorkshop=false;
-        
+            $isEditWorkshop = false;
+
         $this->workshopId = $workshopId;
         $this->checkAccess();
-        
+
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('KniThomasBundle:File')->findBy(array('workshop'=>$workshopId));
+        $entities = $em->getRepository('KniThomasBundle:File')->findBy(array('workshop' => $workshopId));
 
         return array(
             'entities' => $entities,
@@ -61,27 +60,26 @@ class FileController extends Controller
      * @Method("POST")
      * @Template("KniThomasBundle:File:new.html.twig")
      */
-    public function createAction(Request $request, $workshopId)
-    {
+    public function createAction(Request $request, $workshopId) {
         $this->workshopId = $workshopId;
         $this->checkAccess();
-        
-        $entity  = new File();
+
+        $entity = new File();
         $form = $this->createForm(new FileType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
+
             //zapisujemy id warsztatów
             $entity->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
             $file = $form['path']->getData();
-            
+
             //przenosimy plik do odpowiedniej lokalizacji i zapisujemy nazwe
             $randomNumber = rand(1, 99999);
-            $file->move($entity->getUploadRootDir(), $randomNumber."_".$file->getClientOriginalName());
-            $entity->setPath($randomNumber."_".$file->getClientOriginalName());
-            
+            $file->move($entity->getUploadRootDir(), $randomNumber . "_" . $file->getClientOriginalName());
+            $entity->setPath($randomNumber . "_" . $file->getClientOriginalName());
+
             $em->persist($entity);
             $em->flush();
 
@@ -90,7 +88,7 @@ class FileController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
             'workshopId' => $workshopId,
         );
     }
@@ -102,17 +100,16 @@ class FileController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction($workshopId)
-    {
+    public function newAction($workshopId) {
         $this->workshopId = $workshopId;
         $this->checkAccess();
-        
+
         $entity = new File();
-        $form   = $this->createForm(new FileType(), $entity);
+        $form = $this->createForm(new FileType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
             'workshopId' => $workshopId
         );
     }
@@ -124,23 +121,23 @@ class FileController extends Controller
      * @Method("GET")
      * @Template()
      */
-    /*public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    /* public function showAction($id)
+      {
+      $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
+      $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find File entity.');
-        }
+      if (!$entity) {
+      throw $this->createNotFoundException('Unable to find File entity.');
+      }
 
-        $deleteForm = $this->createDeleteForm($id);
+      $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }*/
+      return array(
+      'entity'      => $entity,
+      'delete_form' => $deleteForm->createView(),
+      );
+      } */
 
     /**
      * Displays a form to edit an existing File entity.
@@ -149,25 +146,25 @@ class FileController extends Controller
      * @Method("GET")
      * @Template()
      */
-    /*public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    /* public function editAction($id)
+      {
+      $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
+      $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find File entity.');
-        }
+      if (!$entity) {
+      throw $this->createNotFoundException('Unable to find File entity.');
+      }
 
-        $editForm = $this->createForm(new FileType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+      $editForm = $this->createForm(new FileType(), $entity);
+      $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }*/
+      return array(
+      'entity'      => $entity,
+      'edit_form'   => $editForm->createView(),
+      'delete_form' => $deleteForm->createView(),
+      );
+      } */
 
     /**
      * Edits an existing File entity.
@@ -176,52 +173,51 @@ class FileController extends Controller
      * @Method("PUT")
      * @Template("KniThomasBundle:File:edit.html.twig")
      */
-    /*public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
+    /* public function updateAction(Request $request, $id)
+      {
+      $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('KniThomasBundle:File')->find($id);
+      $entity = $em->getRepository('KniThomasBundle:File')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find File entity.');
-        }
+      if (!$entity) {
+      throw $this->createNotFoundException('Unable to find File entity.');
+      }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new FileType(), $entity);
-        $editForm->bind($request);
+      $deleteForm = $this->createDeleteForm($id);
+      $editForm = $this->createForm(new FileType(), $entity);
+      $editForm->bind($request);
 
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+      if ($editForm->isValid()) {
+      $em->persist($entity);
+      $em->flush();
 
-            return $this->redirect($this->generateUrl('profile_files_edit', array('id' => $id)));
-        }
+      return $this->redirect($this->generateUrl('profile_files_edit', array('id' => $id)));
+      }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }*/
+      return array(
+      'entity'      => $entity,
+      'edit_form'   => $editForm->createView(),
+      'delete_form' => $deleteForm->createView(),
+      );
+      } */
 
     /**
      * Deletes a File entity.
      *
      * @Route("/{workshopId}/{id}/delete", name="profile_files_delete")
      */
-    public function deleteAction(Request $request, $workshopId, $id)
-    {
+    public function deleteAction(Request $request, $workshopId, $id) {
         $this->workshopId = $workshopId;
         $this->checkAccess();
-        
-        
-        
+
+
+
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('KniThomasBundle:File')->findOneBy(array(
-            'id' => $id, 
+            'id' => $id,
             'workshop' => $workshopId
         ));
 
@@ -230,13 +226,13 @@ class FileController extends Controller
         }
 
         $fs = new Filesystem();
-        if($fs->exists($entity->getAbsolutePath()))
+        if ($fs->exists($entity->getAbsolutePath()))
             $fs->remove($entity->getAbsolutePath());
 
         $em->remove($entity);
         $em->flush();
 
-        
+
         return $this->redirect($this->generateUrl('profile_files', array('workshopId' => $workshopId)));
     }
 
@@ -247,22 +243,22 @@ class FileController extends Controller
      *
      * @return Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
-    
-    private function checkAccess(){
+
+    private function checkAccess() {
         $em = $this->getDoctrine()->getManager();
         $workshop = $em->getRepository('KniThomasBundle:Workshop')->findOneBy(array(
             'id' => $this->workshopId,
             'user' => $this->get('security.context')->getToken()->getUser()
         ));
-        if(!$workshop){
+        if (!$workshop) {
             throw new AccessDeniedException();
         }
     }
+
 }

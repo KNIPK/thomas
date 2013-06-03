@@ -2,20 +2,22 @@
 {% extends "KniThomasBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="block">
-        <h1>Warsztat "{{ entity.name }}" </h1>
-        
-        {{error}}
-        
-        <p>Nie jesteś zapisany do tego warsztatu. Żeby dołączyć podaj hasło.</p>
-        
-        <form method="post" action="{{path('joined_to_workshop')}}">
-            <input name="id" type="hidden" value="{{entity.id}}">
-            <input name="pass" type="text">
-            <input type="submit" value="Dołącz">
-        </form>
+<div class="block">
+    <h1>Warsztat "{{ entity.name }}" </h1>
 
-        
-        <div class="clear"></div>
-    </div>
+    <p class="error">{{error}}</p>
+
+
+    <p>Nie jesteś zapisany do tego warsztatu. Żeby dołączyć podaj hasło.</p>
+
+
+    
+    <form method="post" action="{{path('joined_to_workshop')}}">
+        <input name="id" type="hidden" value="{{entity.id}}">
+        <input name="pass" type="text">
+        <input type="submit" value="Dołącz">
+    </form>
+
+    <div class="clear"></div>
+</div>
 {% endblock %}

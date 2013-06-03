@@ -405,3 +405,7 @@ form#question div.answers input{
 }
 
 li.question{ background: #eef6ff; }
+
+.error {
+    color: red;
+}

@@ -27,14 +27,24 @@ class WorkshopController extends Controller {
      */
     public function indexAction(Request $request) {
         NavigationBar::add("Wszystkie warsztaty", "profile_workshop");
-        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository('KniThomasBundle:Workshop');
+        $user = $this->get('security.context')->getToken()->getUser();
 
-        $request->get('query');
+        //$request->get('query');
         if ($request->get('query') == "") {
-            $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
+            $query = $repository->createQueryBuilder('w')
+                ->where('w.user != :userId')
+                ->setParameter('userId', $user)
+                ->getQuery();
         } else {
-            $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('name' => $request->get('query')));
+                $query = $repository->createQueryBuilder('w')
+                ->where('w.user != :userId')->andWhere('w.name LIKE :name')
+                ->setParameter('userId', $user)->setParameter('name', '%'.$request->get('query').'%')
+                ->getQuery();
         }
+
+        $entities = $query->getResult();
+
 
         return array(
             'entities' => $entities,
@@ -106,7 +116,7 @@ class WorkshopController extends Controller {
 
 //        if (!$entities) {
 //            throw $this->createNotFoundException('Unable to find Workshop entity.');
- //       }
+        //       }
 
         return array(
             'entities' => $entities

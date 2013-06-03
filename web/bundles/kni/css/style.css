@@ -32,7 +32,7 @@ a:hover{
     width: 1000px;
     height: 120px;
     background-color: #fff;
-    background-image: url('../images/bg_header.png');
+    /*background-image: url('../images/bg_header.png');*/
     border: 1px #ccc solid;
     -moz-border-radius:10px; /* FF */
     -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */

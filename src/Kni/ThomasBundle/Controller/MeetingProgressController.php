@@ -18,6 +18,7 @@ use Kni\ThomasBundle\DependencyInjection\NavigationBar;
  */
 class MeetingProgressController extends Controller {
     
+    private $workshop;
     
     /**
      *
@@ -73,6 +74,45 @@ class MeetingProgressController extends Controller {
                 array('stepNumber' => $stepNumber)
                 );
         
+    }
+    
+    /**
+     *
+     * @Route("/goToStep/{workshopId}/{position}", name="go_to_step")
+     * @Method("GET")
+     * @Template("KniThomasBundle:MeetingProgress:blank.html.twig")
+     */
+    public function goToStepAction($workshopId, $position){
+        $em = $this->getDoctrine()->getManager();
+        $this->workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
+        
+        if($this->checkAdminMode()){
+            
+            $workshopProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(array(
+                'workshop' => $this->workshop,
+                'user' => null
+            ));
+            
+            if(!$workshopProgress){
+                $workshopProgress = new \Kni\ThomasBundle\Entity\WorkshopProgress;
+                $workshopProgress->setWorkshop($this->workshop);
+            }
+            
+            $workshopProgress->setPosition($position);
+            $workshopProgress->setTime(new \DateTime());
+            
+            $em->persist($workshopProgress);
+            $em->flush();
+        }
+        
+    }
+    
+    
+    /**
+     * Metoda zwraca czy strona jest otwarta przez osobe, która zarządza tymi warsztatami
+     */
+    private function checkAdminMode(){
+        return ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser());
     }
     
 }

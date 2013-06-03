@@ -8,6 +8,59 @@
             <meta charset="utf-8" />
             <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
             <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
+            <script language="javascript">
+                $(document).ready(function(){
+                    loadStep();
+                    
+                    
+                    $("#left").delegate("button#nextStep", "click", function(){
+                        
+                        var position = $(this).attr("nextStep");
+                        
+                        var nextStepUrl = '{{ path('go_to_step', {'workshopId': workshop.id, 'position': 'position' }) }}';
+                        nextStepUrl = nextStepUrl.replace('position', position);
+                            
+                            
+                        $.ajax({
+                            url: nextStepUrl
+                        }).done(function(data){
+                            loadStep();
+                        });
+                        
+                    });
+                });
+                
+                function loadStep(){
+                    $.ajax({
+                        url: '{{ path('meeting_load_step_number', {'workshopId': workshop.id}) }}'
+                    }).done(function(position){
+                        if(position==0){
+                            $("#left").html("<p class='title'>Warsztaty nierozpoczęte</p><p>Poczekaj na rozpoczęcie warsztatów przez prowadzącego</p>");
+                            
+                            if({{adminMode}}){
+                                $("#left").append("<button id='nextStep' nextStep='1'>Rozpocznij warsztaty</button>");
+                            }
+                        }else{
+                            //ładujemy odpowiedni step badz question
+                            
+                            var loadStepUrl = '{{ path('meeting_load_step', {'workshopId': workshop.id, 'position': 'position'}) }}';
+                            loadStepUrl = loadStepUrl.replace('position', position);
+                            
+                            $.ajax({
+                                url: loadStepUrl
+                            }).done(function(stepData){
+                                $("#left").html(stepData);
+                                
+                                if({{adminMode}}){
+                                    nextStep= position*1+1;
+                                    $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
+                                }
+                            });
+                            
+                        }
+                    });
+                }
+            </script>
         {% block additionalHeaders '' %}
     </head>
     <body>
@@ -19,7 +72,6 @@
             <h1>{{ workshop.name }}</h1>
         </div>
         <div id="left">
-            fds
         </div>
     </body>
 </html>

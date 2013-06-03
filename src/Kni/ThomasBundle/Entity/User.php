@@ -106,6 +106,11 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="Workshop", mappedBy="user")
      */
     private $myWorkshops;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="WorkshopProgress", mappedBy="user")
+     */
+    private $workshopsProgress;
 
 
     /**
@@ -480,5 +485,38 @@ class User implements UserInterface, \Serializable
     public function getMyWorkshops()
     {
         return $this->myWorkshops;
+    }
+
+    /**
+     * Add workshopsProgress
+     *
+     * @param \Kni\ThomasBundle\Entity\WorkshopProgress $workshopsProgress
+     * @return User
+     */
+    public function addWorkshopsProgres(\Kni\ThomasBundle\Entity\WorkshopProgress $workshopsProgress)
+    {
+        $this->workshopsProgress[] = $workshopsProgress;
+    
+        return $this;
+    }
+
+    /**
+     * Remove workshopsProgress
+     *
+     * @param \Kni\ThomasBundle\Entity\WorkshopProgress $workshopsProgress
+     */
+    public function removeWorkshopsProgres(\Kni\ThomasBundle\Entity\WorkshopProgress $workshopsProgress)
+    {
+        $this->workshopsProgress->removeElement($workshopsProgress);
+    }
+
+    /**
+     * Get workshopsProgress
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkshopsProgress()
+    {
+        return $this->workshopsProgress;
     }
 }

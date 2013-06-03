@@ -1,12 +1,22 @@
-{% extends "KniThomasBundle::layout.html.twig" %}
-
-{% block content %}
-    <div class="block">
-        <h1>Twój profil</h1>
-        
-        <a class="box" href="{{ path('profile_my_workshop_index') }}">To będzie index meeting view</a>
-
-        
-        <div class="clear"></div>
-    </div>
-{% endblock %}
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/kni/css/meeting.css') }}" />
+        {% endblock %}
+        {% block title '<title>Workshops</title>' %}
+            <link rel="stylesheet" href="{{ asset('js/jquery-ui/themes/base/jquery-ui.css')}}" />
+            <meta charset="utf-8" />
+            <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
+            <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
+        {% block additionalHeaders '' %}
+    </head>
+    <body>
+        <div id="header">
+            <p class="right">
+                data rozpoczęcia<br />
+                prowadzący
+            </p>
+            <h1>Warsztaty - nazwa warsztatów</h1>
+        </div>
+    </body>
+</html>

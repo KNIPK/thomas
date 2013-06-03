@@ -81,6 +81,11 @@ class Workshop
     protected $files;
     
     /**
+     * @ORM\OneToMany(targetEntity="WorkshopProgress", mappedBy="workshop");
+     */
+    protected $usersProgress;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=40)
@@ -191,13 +196,6 @@ class Workshop
     public function getDescription()
     {
         return $this->description;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->steps = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -394,4 +392,48 @@ class Workshop
     {
         return $this->password;
     }
+
+    /**
+     * Add usersProgress
+     *
+     * @param \Kni\ThomasBundle\Entity\WorkshopProgress $usersProgress
+     * @return Workshop
+     */
+    public function addUsersProgres(\Kni\ThomasBundle\Entity\WorkshopProgress $usersProgress)
+    {
+        $this->usersProgress[] = $usersProgress;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usersProgress
+     *
+     * @param \Kni\ThomasBundle\Entity\WorkshopProgress $usersProgress
+     */
+    public function removeUsersProgres(\Kni\ThomasBundle\Entity\WorkshopProgress $usersProgress)
+    {
+        $this->usersProgress->removeElement($usersProgress);
+    }
+
+    /**
+     * Get usersProgress
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersProgress()
+    {
+        return $this->usersProgress;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->steps = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->usersProgress = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
 }

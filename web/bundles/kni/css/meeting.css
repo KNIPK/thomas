@@ -1,0 +1,40 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+#header{
+    height: 35px;
+    width: 100%;
+    background-color: #528CE0;
+    background-image: url('../images/logoSmall.png');
+    background-repeat: no-repeat;
+    background-position: 20px 5px;
+    padding: 5px 0 5px 0;
+    color: #fff;
+}
+
+#header p{
+    margin:0 10px 0 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    
+}
+
+#header h1{
+    font-family: "Arial";
+    font-size: 25px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    margin: 3px 0;
+    padding: 0;
+}
+
+p.right{
+    float: right;
+    display: inline;
+    text-align:right;
+}

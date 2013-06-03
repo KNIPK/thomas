@@ -33,12 +33,14 @@ class WorkshopType extends AbstractType
             ))
             ->add('description', 'textarea', array(
                 'attr' => array('cols' => 46, 'rows' => 5),
-                'label' => "Opis"
+                'label' => "Opis",
+                'required' => false
             ))
             ->add('course', 'entity', array(
                 'class' => 'KniThomasBundle:Course',
                 'property' => 'name',
                 'label' => 'Kurs',
+                'required' => false,
                 'query_builder' => function(EntityRepository $er) use($user){
                     return $er->createQueryBuilder('c')->where('c.user = :user')->setParameter('user', $user);
                 },

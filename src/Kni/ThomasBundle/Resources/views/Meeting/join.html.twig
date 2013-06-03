@@ -3,8 +3,17 @@
 
 {% block content %}
     <div class="block">
-        <h1>Widok join do warszatu {{ workshopId }}</h1>
+        <h1>Warsztat "{{ entity.name }}" </h1>
         
+        {{error}}
+        
+        <p>Nie jesteś zapisany do tego warsztatu. Żeby dołączyć podaj hasło.</p>
+        
+        <form method="post" action="{{path('joined_to_workshop')}}">
+            <input name="id" type="hidden" value="{{entity.id}}">
+            <input name="pass" type="text">
+            <input type="submit" value="Dołącz">
+        </form>
 
         
         <div class="clear"></div>

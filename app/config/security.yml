@@ -28,7 +28,7 @@ security:
             security: false
 
         secured_area:
-            pattern:    ^/profile/
+            pattern:    ^/(meeting|profile)/
             form_login:
                 check_path: login_check
                 login_path: login_page

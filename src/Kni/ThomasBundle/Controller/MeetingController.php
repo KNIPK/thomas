@@ -14,7 +14,7 @@ use Kni\ThomasBundle\DependencyInjection\NavigationBar;
 /**
  * Workshop controller.
  *
- * @Route("/meeting")
+ * @Route("meeting")
  */
 class MeetingController extends Controller {
 
@@ -41,29 +41,43 @@ class MeetingController extends Controller {
         );
     }
 
-
     /**
      * Dołącz do  warsztatów
      *
-     * @Route("join/{workshopId}", name="join_to_workshop")
+     * @Route("/join/{workshopId}", name="join_to_workshop")
      * @Template()
      */
     public function joinAction($workshopId) {
-        return array(
-            'workshopId' => $workshopId,
-        );
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
+
+        $users = $entity->getUsers();
+
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        if (in_array($user, $users->toArray())) {//czy user jest już dałączył do kursu
+            return $this->redirect($this->generateUrl('meeting_index', array('id' => $workshopId)));
+        } else {
+            return array(
+                'entity' => $entity,
+                'error' => ''
+            );
+        }
     }
-    
+
     /**
      * Podsumowanie dołączenia do  warsztatów
      *
-     * @Route("joined/{workshopId}", name="joined_to_workshop")
+     * @Route("/joined", name="joined_to_workshop")
+     * @Method("POST")
      * @Template()
      */
-    public function joinedAction($workshopId) {
-        return array(
-            'workshopId' => $workshopId,
-        );
+    public function joinedAction(Request $request) {
+         return array(
+                //todo napisac sprawdzanie poprawnosci hasla, ewentualnie redirect do index
+                'error' => 'zle haslo'
+            );
     }
 
 }
+

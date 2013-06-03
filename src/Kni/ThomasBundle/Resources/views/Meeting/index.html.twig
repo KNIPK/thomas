@@ -13,10 +13,13 @@
     <body>
         <div id="header">
             <p class="right">
-                data rozpoczęcia<br />
-                prowadzący
+                {{workshop.startDate|date('Y-m-d H:i')}}<br />
+                {{ workshop.user.name }}
             </p>
-            <h1>Warsztaty - nazwa warsztatów</h1>
+            <h1>{{ workshop.name }}</h1>
+        </div>
+        <div id="left">
+            fds
         </div>
     </body>
 </html>

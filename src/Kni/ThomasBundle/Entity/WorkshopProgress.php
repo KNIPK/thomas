@@ -32,6 +32,13 @@ class WorkshopProgress
     protected $workshop;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column()
+     */
+    private $position;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="time", type="datetime")
@@ -116,5 +123,28 @@ class WorkshopProgress
     public function getWorkshop()
     {
         return $this->workshop;
+    }
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     * @return WorkshopProgress
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

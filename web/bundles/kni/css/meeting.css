@@ -38,3 +38,11 @@ p.right{
     display: inline;
     text-align:right;
 }
+
+
+#left{
+    width: 50%;
+    background-color: #D2E0E6;
+    float: left;
+    display: inline;
+}

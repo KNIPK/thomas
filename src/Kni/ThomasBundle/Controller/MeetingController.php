@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Kni\ThomasBundle\Entity\Workshop;
+use Kni\ThomasBundle\Entity\User;
 use Kni\ThomasBundle\Form\WorkshopType;
 use Kni\ThomasBundle\DependencyInjection\NavigationBar;
 
@@ -18,26 +19,33 @@ use Kni\ThomasBundle\DependencyInjection\NavigationBar;
  */
 class MeetingController extends Controller {
 
+    
+    private $workshop;
     /**
      * Lists all Workshop entities.
      *
-     * @Route("/{id}", name="meeting_index")
+     * @Route("/{workshopId}", name="meeting_index")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request) {
-        NavigationBar::add("Wszystkie warsztaty", "profile_workshop");
-        $em = $this->getDoctrine()->getManager();
+    public function indexAction($workshopId) {
+        
+        $repository = $this->getDoctrine()
+            ->getRepository('KniThomasBundle:Workshop');
 
-        $request->get('query');
-        if ($request->get('query') == "") {
-            $entities = $em->getRepository('KniThomasBundle:Workshop')->findAll();
-        } else {
-            $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('name' => $request->get('query')));
-        }
+        $query = $repository->createQueryBuilder('w')
+            ->leftjoin('w.user', 'u')
+            ->where('w.id = :workshopId')
+            ->setParameter('workshopId', $workshopId)
+            ->getQuery();
 
+        $workshops = $query->getResult();
+        
+        $this->workshop = $workshops[0];
+        
         return array(
-            'entities' => $entities,
+            'workshop' => $this->workshop,
+            'adminMode' => $this->checkAdminMode()
         );
     }
 
@@ -77,6 +85,13 @@ class MeetingController extends Controller {
                 //todo napisac sprawdzanie poprawnosci hasla, ewentualnie redirect do index
                 'error' => 'zle haslo'
             );
+    }
+    
+    /**
+     * Metoda zwraca czy strona jest otwarta przez osobe, która zarządza tymi warsztatami
+     */
+    private function checkAdminMode(){
+        return ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser());
     }
 
 }

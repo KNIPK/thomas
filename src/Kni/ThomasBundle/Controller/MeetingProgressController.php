@@ -20,7 +20,6 @@ class MeetingProgressController extends Controller {
     
     
     /**
-     * Lists all Workshop entities.
      *
      * @Route("/step/{workshopId}/{position}", name="meeting_load_step")
      * @Method("GET")
@@ -48,4 +47,32 @@ class MeetingProgressController extends Controller {
         return array(
         );
     }
+    
+    /**
+     * Lists all Workshop entities.
+     *
+     * @Route("/stepNumber/{workshopId}", name="meeting_load_step_number")
+     * @Method("GET")
+     * @Template()
+     */
+    public function loadStepNumberAction($workshopId){
+        $em = $this->getDoctrine()->getManager();
+        $workshopProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(array(
+            'user' => NULL,
+            'workshop' => $workshopId
+        ));
+        
+        if($workshopProgress){
+            $stepNumber = $workshopProgress->getPosition();
+        }
+        else{
+            $stepNumber=0;
+        }
+        
+        return $this->render('KniThomasBundle:MeetingProgress:stepNumber.html.twig', 
+                array('stepNumber' => $stepNumber)
+                );
+        
+    }
+    
 }

@@ -108,7 +108,10 @@ class MeetingController extends Controller {
      * Metoda zwraca czy strona jest otwarta przez osobe, która zarządza tymi warsztatami
      */
     private function checkAdminMode() {
-        return ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser());
+        if ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser())
+            return 1;
+        else
+            return 0;
     }
 
 }

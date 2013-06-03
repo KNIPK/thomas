@@ -1,0 +1,5 @@
+<ul>
+    {% for user in users %}
+        <li progress="{{ progress[user.id] }}">{{ user.name }}</li>
+    {% endfor %}
+</ul>

@@ -9,9 +9,14 @@
             <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
             <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
             <script language="javascript">
+                
+                var workshopPosition = 0;
                 $(document).ready(function(){
                     loadStep();
                     
+                    {% if adminMode %}
+                        loadUsers();
+                    {% endif %}
                     
                     $("#left").delegate("button#nextStep", "click", function(){
                         
@@ -29,6 +34,28 @@
                         
                     });
                 });
+                
+                {% if adminMode %}
+                    function loadUsers(){
+                        $.ajax({
+                            url: '{{ path('meeting_load_users', {'workshopId': workshop.id}) }}'
+                        }).done(function(usersList){
+                            $("#usersList").html(usersList);
+
+                            updateUsersListStyle();
+                        });
+
+                    }
+                {% endif %}
+                
+                function updateUsersListStyle(){
+                    $("#usersList ul li").each(function(){
+                        //alert($(this).attr("position")+"-"+workshopPosition);
+                        if($(this).attr("progress")>=workshopPosition){
+                            $(this).addClass("green");
+                        }
+                    });
+                }
                 
                 function loadStep(){
                     $.ajax({
@@ -58,6 +85,9 @@
                             });
                             
                         }
+                        workshopPosition = position;
+                        
+                        updateUsersListStyle();
                     });
                 }
             </script>
@@ -72,6 +102,13 @@
             <h1>{{ workshop.name }}</h1>
         </div>
         <div id="left">
+        </div>
+            
+        <div id="right">
+            {% if adminMode %}
+                <p class="title">Uczestnicy</p>
+                <div id="usersList"></div>
+            {% endif %}
         </div>
     </body>
 </html>

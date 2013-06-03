@@ -78,6 +78,41 @@ class MeetingProgressController extends Controller {
     
     /**
      *
+     * @Route("/loadUsers/{workshopId}", name="meeting_load_users")
+     * @Method("GET")
+     * @Template()
+     */
+    public function loadUsersAction($workshopId){
+        $repository = $this->getDoctrine()
+                ->getRepository('KniThomasBundle:User');
+        
+        $query = $repository->createQueryBuilder('u')
+                ->join('u.workshops', 'w')
+                ->leftjoin('u.workshopsProgress', 'wp')
+                ->where('w.id = :workshopId')
+                ->setParameter('workshopId', $workshopId)
+                ->getQuery();
+
+        $users = $query->getResult();
+        
+        $progress = array();
+        foreach($users as $user){
+            $wp = $user->getWorkshopsProgress();
+            if(count($wp)){
+                $progress[$user->getId()] = $wp[0]->getPosition();
+            }else{
+                $progress[$user->getId()] = 0;
+            }
+        }
+        
+        return array(
+            'users' => $users,
+            'progress' => $progress
+        );
+    }
+    
+    /**
+     *
      * @Route("/goToStep/{workshopId}/{position}", name="go_to_step")
      * @Method("GET")
      * @Template("KniThomasBundle:MeetingProgress:blank.html.twig")

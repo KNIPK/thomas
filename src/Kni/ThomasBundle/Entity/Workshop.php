@@ -3,6 +3,7 @@
 namespace Kni\ThomasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Workshop
@@ -78,6 +79,17 @@ class Workshop
      * @ORM\OneToMany(targetEntity="File", mappedBy="workshop")
      */
     protected $files;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=40)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Hasło musi mieć minimum 3 znaki"
+     * )
+     */
+    private $password;
 
     /**
      * Get id
@@ -358,5 +370,28 @@ class Workshop
     
     public function __toString(){
         return $this->name;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Workshop
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

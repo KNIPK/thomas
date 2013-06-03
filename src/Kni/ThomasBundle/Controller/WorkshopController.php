@@ -104,9 +104,9 @@ class WorkshopController extends Controller {
 
         $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('user' => $id));
 
-        if (!$entities) {
-            throw $this->createNotFoundException('Unable to find Workshop entity.');
-        }
+//        if (!$entities) {
+//            throw $this->createNotFoundException('Unable to find Workshop entity.');
+ //       }
 
         return array(
             'entities' => $entities

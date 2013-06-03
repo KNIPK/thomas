@@ -21,7 +21,7 @@ class SecuredController extends Controller
     {
         
         
-        if(false){//zastapic false sprawdzaniem czy jest zalogowany!!
+        if(false) { //zastapic false sprawdzaniem czy jest zalogowany!!
             return $this->render('KniThomasBundle:Profile:index.html.twig', array());
         }
         else

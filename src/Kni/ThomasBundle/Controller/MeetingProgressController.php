@@ -41,7 +41,34 @@ class MeetingProgressController extends Controller {
             ));
         }else{
             //nie ma etapu, czyli jest pytanie
-            print "question";
+            $question = $em->getRepository('KniThomasBundle:Question')->findOneBy(array(
+                'position' => $position,
+                'workshop' => $workshopId
+            ));
+            
+            //pobieramy odpowiedzi dla tego pytania
+            $answers = $em->getRepository('KniThomasBundle:Answer')->findBy(array(
+                'question' => $question
+            ), array(
+                'id' => 'asc'
+            ));
+            
+            if($this->checkAdminMode()){
+                //pobieramy jeszcze informacje o tym jacy uzytkownicy odpowiedzieli na pytanie
+                //oraz sprawdzamy czy ich odpowiedz jest prawidlowa
+                
+                return $this->render('KniThomasBundle:MeetingProgress:question.html.twig', array(
+                    'question' => $question,
+                    'answers' => $answers
+                ));
+            }else{
+                //pobranie pytania dla uzytkownika
+                
+                return $this->render('KniThomasBundle:MeetingProgress:questionForUser.html.twig', array(
+                    'question' => $question,
+                    'answers' => $answers
+                ));
+            }
         }
         
 

@@ -82,7 +82,7 @@ class StepsController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $i=1;
-            $stepPosition=1;
+            $position=1;
             
             while(true){
                 if(isset($data['steps'][$i])){
@@ -91,12 +91,10 @@ class StepsController extends Controller
                     $step->setName($data['steps'][$i]);
                     $step->setDescription($data['stepsDescriptions'][$i]);
                     $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
-                    $step->setPosition($stepPosition);
+                    $step->setPosition($position);
                     
                     $em->persist($step);
                     
-                    $stepPosition++;
-                    $questionPosition=1;
                 }elseif(isset($data['questions'][$i])){
                     //mamy pytanie
                     $questionArray = json_decode($data['questions'][$i]);
@@ -109,7 +107,7 @@ class StepsController extends Controller
                     
                     $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
                     $question->setContent($questionArray[0]); //to jest treść pytania
-                    $question->setPosition($questionPosition);
+                    $question->setPosition($position);
                     $question->setStep($step);
 
                     $em->persist($question);
@@ -133,53 +131,17 @@ class StepsController extends Controller
                     
                     
                     
-                    $questionPosition++;
                 }else{
                     break;
                 }
+                $position++;
                 $i++;
             }
             
             $em->flush();
             
-//            foreach($data['steps'] as $key => $name){
-//                $description = $data['stepsDescriptions'][$key];
-//                
-//                $step = new Step();
-//                $step->setName($name);
-//                $step->setDescription($description);
-//                $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
-//                $step->setPosition($position);
-//                
-//                $em->persist($step);
-//                $em->flush();
-//                
-//                $position++;
-//            }
-            
-            print "dodane";
             
         }
-//        $entity  = new Workshop();
-//        $form = $this->createForm(new WorkshopType($this->get('security.context')->getToken()->getUser()), $entity);
-//        $form->bind($request);
-//
-//        if ($form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            
-//            //w pole user dodajemy aktualnie zalogowanego użytkownika
-//            $entity->setUser($this->get('security.context')->getToken()->getUser());
-//            
-//            $em->persist($entity);
-//            $em->flush();
-//
-//            return $this->redirect($this->generateUrl('profile_files', array('workshopId' => $entity->getId())));
-//        }
-
-//        return array(
-//            'entity' => $entity,
-//            'form'   => $form->createView(),
-//        );
         return $this->redirect($this->generateUrl('profile_workshop_added', array('workshopId' => $workshopId)));
     }
     
@@ -209,7 +171,7 @@ class StepsController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $i=1;
-            $stepPosition=1;
+            $position=1;
             
             
             while(true){
@@ -221,17 +183,15 @@ class StepsController extends Controller
                         $step->setName($data['steps'][$i]);
                         $step->setDescription($data['stepsDescriptions'][$i]);
                         $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
-                        $step->setPosition($stepPosition);
+                        $step->setPosition($position);
                     }else{
                         //ten etap juz istnieje, modyfikujemy tylko pozycje
                         $step = $em->getRepository('KniThomasBundle:Step')->find($data['original_id'][$i]);
-                        $step->setPosition($stepPosition);
+                        $step->setPosition($position);
                     }
                     
                     $em->persist($step);
                     
-                    $stepPosition++;
-                    $questionPosition=1;
                 }elseif(isset($data['questions'][$i])){
                     //mamy pytanie
                     if($data['original_id'][$i]=='undefined'){
@@ -245,7 +205,7 @@ class StepsController extends Controller
 
                         $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
                         $question->setContent($questionArray[0]); //to jest treść pytania
-                        $question->setPosition($questionPosition);
+                        $question->setPosition($position);
                         $question->setStep($step);
 
                         $em->persist($question);
@@ -268,17 +228,17 @@ class StepsController extends Controller
                     }else{
                         //to pytanie już istnieje, modyfikujemy tylko pozycje
                         $question = $em->getRepository('KniThomasBundle:Question')->find($data['original_id'][$i]);
-                        $question->setPosition($questionPosition);
+                        $question->setPosition($position);
                         $question->setStep($step);
                         
                         $em->persist($question);
                     }
                     
-                    $questionPosition++;
                 }else{
                     break;
                 }
                 $i++;
+                $position++;
             }
             
             $em->flush();

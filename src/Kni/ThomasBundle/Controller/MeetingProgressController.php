@@ -29,6 +29,8 @@ class MeetingProgressController extends Controller {
     public function loadStepAction($workshopId, $position) {
         
         $em = $this->getDoctrine()->getManager();
+        $this->workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
+        
         $step = $em->getRepository('KniThomasBundle:Step')->findOneBy(array(
             'position' => $position,
             'workshop' => $workshopId
@@ -174,6 +176,7 @@ class MeetingProgressController extends Controller {
      * Metoda zwraca czy strona jest otwarta przez osobe, która zarządza tymi warsztatami
      */
     private function checkAdminMode(){
+        
         return ($this->get('security.context')->getToken()->getUser() == $this->workshop->getUser());
     }
     

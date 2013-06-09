@@ -41,7 +41,6 @@ class Step
     protected $workshop;
     
     
-
     /**
      * @var integer
      *
@@ -50,11 +49,6 @@ class Step
     private $position;
 
     
-    /**
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="step")
-     */
-    protected $questions;
-
     /**
      * Get id
      *
@@ -177,37 +171,9 @@ class Step
     {
         return $this->workshop;
     }
-
-    /**
-     * Add questions
-     *
-     * @param \Kni\ThomasBundle\Entity\Question $questions
-     * @return Step
-     */
-    public function addQuestion(\Kni\ThomasBundle\Entity\Question $questions)
-    {
-        $this->questions[] = $questions;
     
-        return $this;
+    public function getType(){
+        return 0;
     }
 
-    /**
-     * Remove questions
-     *
-     * @param \Kni\ThomasBundle\Entity\Question $questions
-     */
-    public function removeQuestion(\Kni\ThomasBundle\Entity\Question $questions)
-    {
-        $this->questions->removeElement($questions);
-    }
-
-    /**
-     * Get questions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
-    }
 }

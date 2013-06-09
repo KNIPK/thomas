@@ -51,18 +51,35 @@ class StepsController extends Controller
                 array('position' => 'asc')
             );
         
-        //pobieramy sobie dla kazdego etapu pytania, które do niego należą
-        $questions = array();
+        $stepsCount = 0;
+        $steps = array();
         foreach($entities as $entity){
-            $questions[$entity->getId()] = $em->getRepository('KniThomasBundle:Question')->findBy(array('step'=>$entity), 
-                array('position' => 'asc'));
+            $steps[$entity->getPosition()] = $entity;
+            $stepsCount++;
+        }
+        
+        //pobieramy sobie dla kazdego etapu pytania, które do niego należą
+        $questions = $em->getRepository('KniThomasBundle:Question')->findBy(
+                array('workshop'=>$workshopId),
+                array('position' => 'asc')
+            );
+        
+        foreach($questions as $question){
+            $steps[$question->getPosition()] = $question;
+            $stepsCount++;
         }
         
         
+        //prowizoryczne sortowanie tablicy
+        $steps2 = array();
+        for($i=1; $i<=$stepsCount; $i++){
+            $steps2[] = $steps[$i];
+        }
+        
         return array(
-            'entities' => $entities,
+            'steps' => $steps2,
             'workshopId' => $workshopId,
-            'questions' => $questions,
+            'stepsCount' =>$stepsCount,
             'isEditWorkshop' => $isEditWorkshop,
         );
     }
@@ -84,13 +101,15 @@ class StepsController extends Controller
             $i=1;
             $position=1;
             
+            $workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
+            
             while(true){
                 if(isset($data['steps'][$i])){
                     //mamy etap
                     $step = new Step();
                     $step->setName($data['steps'][$i]);
                     $step->setDescription($data['stepsDescriptions'][$i]);
-                    $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
+                    $step->setWorkshop($workshop);
                     $step->setPosition($position);
                     
                     $em->persist($step);
@@ -103,12 +122,10 @@ class StepsController extends Controller
                     
                     $question = new \Kni\ThomasBundle\Entity\Question();
                     
-                    
-                    
                     $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
                     $question->setContent($questionArray[0]); //to jest treść pytania
                     $question->setPosition($position);
-                    $question->setStep($step);
+                    $question->setWorkshop($workshop);
 
                     $em->persist($question);
                     
@@ -173,6 +190,7 @@ class StepsController extends Controller
             $i=1;
             $position=1;
             
+            $workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
             
             while(true){
                 if(isset($data['steps'][$i])){
@@ -182,7 +200,7 @@ class StepsController extends Controller
                         $step = new Step();
                         $step->setName($data['steps'][$i]);
                         $step->setDescription($data['stepsDescriptions'][$i]);
-                        $step->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
+                        $step->setWorkshop($workshop);
                         $step->setPosition($position);
                     }else{
                         //ten etap juz istnieje, modyfikujemy tylko pozycje
@@ -206,7 +224,7 @@ class StepsController extends Controller
                         $question->setType(1); //co to miał być ten typ? trzeba to poprawić D:
                         $question->setContent($questionArray[0]); //to jest treść pytania
                         $question->setPosition($position);
-                        $question->setStep($step);
+                        $step->setWorkshop($workshop);
 
                         $em->persist($question);
 
@@ -229,7 +247,6 @@ class StepsController extends Controller
                         //to pytanie już istnieje, modyfikujemy tylko pozycje
                         $question = $em->getRepository('KniThomasBundle:Question')->find($data['original_id'][$i]);
                         $question->setPosition($position);
-                        $question->setStep($step);
                         
                         $em->persist($question);
                     }

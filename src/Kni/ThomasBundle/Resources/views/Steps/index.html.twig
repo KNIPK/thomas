@@ -14,17 +14,18 @@
         </ul>
 
         <ul id="steps">
-            {% for entity in entities %}
-                <li class='ui-state-default' original_id='{{ entity.id }}'>
-                    <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
-                    {{ entity.name }}
-                </li>
-                {% for question in questions[entity.id] %}
-                    <li question="1" class='ui-state-default question' original_id='{{ question.id }}'>
+            {% for entity in steps %}
+                {% if entity.type==0 %}
+                    <li class='ui-state-default' original_id='{{ entity.id }}'>
                         <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
-                        {{ question.content }}
+                        {{ entity.name }}
                     </li>
-                {% endfor %}
+                {% else %}
+                    <li question="1" class='ui-state-default question' original_id='{{ entity.id }}'>
+                        <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+                        {{ entity.content }}
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
         

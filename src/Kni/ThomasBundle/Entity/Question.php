@@ -57,9 +57,9 @@ class Question
     protected $answers;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Step", inversedBy="questions")
+     * @ORM\ManyToOne(targetEntity="Workshop", inversedBy="questions")
      */
-    protected $step;
+    protected $workshop;
     
 
 
@@ -215,26 +215,27 @@ class Question
         return $this->answers;
     }
 
+
     /**
-     * Set step
+     * Set workshop
      *
-     * @param \Kni\ThomasBundle\Entity\Step $step
+     * @param \Kni\ThomasBundle\Entity\Workshop $workshop
      * @return Question
      */
-    public function setStep(\Kni\ThomasBundle\Entity\Step $step = null)
+    public function setWorkshop(\Kni\ThomasBundle\Entity\Workshop $workshop = null)
     {
-        $this->step = $step;
+        $this->workshop = $workshop;
     
         return $this;
     }
 
     /**
-     * Get step
+     * Get workshop
      *
-     * @return \Kni\ThomasBundle\Entity\Step 
+     * @return \Kni\ThomasBundle\Entity\Workshop 
      */
-    public function getStep()
+    public function getWorkshop()
     {
-        return $this->step;
+        return $this->workshop;
     }
 }

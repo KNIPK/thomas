@@ -66,6 +66,11 @@ class Workshop
     protected $steps;
     
     /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="workshop");
+     */
+    protected $questions;
+    
+    /**
      * @ORM\OneToOne(targetEntity="Blackboard", mappedBy="workshop")
      */
     private $blackboard;
@@ -436,4 +441,37 @@ class Workshop
         $this->usersProgress = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+
+    /**
+     * Add questions
+     *
+     * @param \Kni\ThomasBundle\Entity\Question $questions
+     * @return Workshop
+     */
+    public function addQuestion(\Kni\ThomasBundle\Entity\Question $questions)
+    {
+        $this->questions[] = $questions;
+    
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \Kni\ThomasBundle\Entity\Question $questions
+     */
+    public function removeQuestion(\Kni\ThomasBundle\Entity\Question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }

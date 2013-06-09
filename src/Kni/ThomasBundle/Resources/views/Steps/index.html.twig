@@ -18,11 +18,13 @@
                 {% if entity.type==0 %}
                     <li class='ui-state-default' original_id='{{ entity.id }}'>
                         <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+                        <span class='delete'></span>
                         {{ entity.name }}
                     </li>
                 {% else %}
                     <li question="1" class='ui-state-default question' original_id='{{ entity.id }}'>
                         <span class='ui-icon ui-icon-arrowthick-2-n-s'></span>
+                        <span class='delete'></span>
                         {{ entity.content }}
                     </li>
                 {% endif %}

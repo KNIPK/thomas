@@ -192,6 +192,19 @@ class StepsController extends Controller
             
             $workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
             
+            //na poczatek usuniemy elementy, ktore uzytkownik chce usunac
+            if(isset($_POST['delete_questions']))
+                foreach($_POST['delete_questions'] as $deleteQuestion){
+                    $question = $em->getRepository('KniThomasBundle:Question')->find($deleteQuestion);
+                    $em->remove($question);
+                }
+            
+            if(isset($_POST['delete_steps']))
+                foreach($_POST['delete_steps'] as $deleteStep){
+                    $step = $em->getRepository('KniThomasBundle:Step')->find($deleteStep);
+                    $em->remove($step);
+                }
+            
             while(true){
                 if(isset($data['steps'][$i])){
                     //mamy etap

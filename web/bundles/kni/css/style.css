@@ -415,6 +415,16 @@ li.question{
     margin-left: 20px;
 }
 
+ul#steps li span.delete{
+    width: 15px;
+    height: 15px;
+    float: right;
+    background-image: url('../images/delete.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
 .error {
     color:#cc0000;
 

@@ -7,7 +7,7 @@ $(document).ready(function(){
         var description = $("#stepAdd textarea[name=stepDescription]").val();
         
         if(name!=''){
-            $("ul#steps").append("<li class='ui-state-default' description='"+description+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>"+name+"</li>");
+            $("ul#steps").append("<li class='ui-state-default' description='"+description+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span><span class='delete'></span>"+name+"</li>");
 
             $("#stepAdd input[name=stepName]").val('');
             $("#stepAdd textarea[name=stepDescription]").val('');
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
             //dodajemy jeszcze do listy w jakiś ciekawy sposób
 
-            $("ul#steps").append("<li class='ui-state-default question' question='1' description='"+questionSerialized+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span>"+question+"</li>");
+            $("ul#steps").append("<li class='ui-state-default question' question='1' description='"+questionSerialized+"'><span class='ui-icon ui-icon-arrowthick-2-n-s'></span><span class='delete'></span>"+question+"</li>");
         }
         return false;
     });
@@ -88,5 +88,23 @@ $(document).ready(function(){
         form.submit();
         
         return false;
+    });
+    
+    $("ul#steps").delegate("span.delete", "click", function(){
+        var id = $(this).parent().attr("original_id");
+        
+        if(id){
+            var isQuestion = $(this).parent().attr("question");
+        
+            var form = $("form#stepsForm");
+            if(isQuestion){
+                form.append("<input type='hidden' name='delete_questions[]' value='"+id+"' />");
+            }else{
+                form.append("<input type='hidden' name='delete_steps[]' value='"+id+"' />");
+            }
+        }
+        
+        $(this).parent().remove();
+        
     });
 });

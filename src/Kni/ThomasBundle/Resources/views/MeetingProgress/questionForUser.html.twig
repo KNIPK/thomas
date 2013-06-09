@@ -1,8 +1,12 @@
-<p class="title">{{ question.content }}</p>
-<input type="hidden" name="questionId" value="{{ question.id }}" />
-<ul>
-    {% for answer in answers %}
-        <li><input type="checkbox" name="answer[{{ answer.id }}]" value="1" />{{ answer.content }}</li>
-    {% endfor %}
-    <button id="saveAnswer">Zapisz odpowiedź</button>
-</ul>
+{% if userProgress>=question.position %}
+    <p class="title">Odpowiedź została zapisana</p>
+{% else %}
+    <p class="title">{{ question.content }}</p>
+    <input type="hidden" name="questionId" value="{{ question.id }}" />
+    <ul id="answers">
+        {% for answer in answers %}
+            <li><input type="checkbox" name="{{ answer.id }}" value="1" />{{ answer.content }}</li>
+        {% endfor %}
+        <button id="saveAnswer">Zapisz odpowiedź</button>
+    </ul>
+{% endif %}

@@ -93,11 +93,7 @@ class Workshop
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=40)
-     * @Assert\Length(
-     *      min = "3",
-     *      minMessage = "Hasło musi mieć minimum 3 znaki"
-     * )
+     * @ORM\Column(name="password", type="string", length=40, nullable=true)
      */
     private $password;
 

@@ -47,7 +47,8 @@ class WorkshopType extends AbstractType
                 'empty_value' => 'Wybierz kurs'
                 )
             )
-            ->add('password', 'text', array("label" => "Hasło dostępu"))
+            ->add('password', 'text', array("label" => "Hasło dostępu",
+                 'required'=> false))
         ;
     }
 

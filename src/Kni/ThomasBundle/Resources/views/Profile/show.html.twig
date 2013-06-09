@@ -27,8 +27,14 @@
         </tr>
     </table>
 
-    <a class="box" href="{{path('profile_edit')}}">Edytuj dane</a>
-
+    
+     <form action="{{path('profile_edit')}}" method="get" }}>
+            <p>
+                <button type="submit">Edytuj profil</button>
+            </p>
+        </form>
+    
+    
     <div class="clear"></div>
 </div>
 {% endblock %}

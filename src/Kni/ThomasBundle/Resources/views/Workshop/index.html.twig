@@ -31,9 +31,6 @@
                     <td>
                         <ul>
                             <li>
-                                <a href="{{ path('profile_workshop_show', { 'id': entity.id }) }}">show</a>
-                            </li>
-                            <li>
                                 <a href="{{ path('join_to_workshop', { 'workshopId': entity.id }) }}">join</a>
                             </li>
                         </ul>
@@ -49,12 +46,6 @@
             </tbody>
         </table>
 
-        <ul>
-            <li>
-                <a href="{{ path('profile_workshop_new') }}">
-                    Create a new entry
-                </a>
-            </li>
-        </ul>
+
     </div>
     {% endblock %}

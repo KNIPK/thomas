@@ -36,6 +36,7 @@ class SecuredController extends Controller
         return array(
             'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
+            'message' => ''
         );
     }
 

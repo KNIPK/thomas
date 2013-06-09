@@ -58,6 +58,10 @@ class MeetingController extends Controller {
     public function joinAction($workshopId) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
+        
+        if($entity->getPassword() == ''){
+            print 'dodać obsługe warsztatów bez hasel';
+        }
 
         $users = $entity->getUsers();
 

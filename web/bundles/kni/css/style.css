@@ -5,12 +5,18 @@
     Description:
         Purpose of the stylesheet follows.
 */
+@font-face
+{
+    font-family: weblysleekuil;
+    src: url('weblysleekuil.ttf');
+}
+
 body
 {
-	background-image: url('../images/wavegrid.png');
-        font-family: Arial;
-        font-size: 14px;
-        color: #000;
+    background-image: url('../images/wavegrid.png');
+    font-family: weblysleekuil, sans-serif;
+    font-size: 14px;
+    color: #000;
 }
 
 a{
@@ -117,7 +123,7 @@ a:hover{
 }
 
 input:required {
-    
+
 }
 
 input.submit:hover{
@@ -407,5 +413,12 @@ form#question div.answers input{
 li.question{ background: #eef6ff; }
 
 .error {
-    color: red;
+    color:#cc0000;
+
+}
+
+#kni_thomasbundle_usertype li{
+    list-style-type:none;
+    font-weight: bold;
+    color:#cc0000;
 }

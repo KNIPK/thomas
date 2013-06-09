@@ -4,3 +4,17 @@
         <li>{{ answer.content }}</li>
     {% endfor %}
 </ul>
+
+<p class="title">Użytkownicy, którzy odpowiedzieli:</p>
+
+<ul>
+    {% for userAnswer in usersAnswers %}
+        <li>{{ userAnswer.name }}
+            {% if userAnswer.correct %}
+                - odpowiedź poprawna
+            {% else %}
+                - odpowiedź niepoprawna
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

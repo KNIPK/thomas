@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Kni\ThomasBundle\Entity\Workshop;
+use Kni\ThomasBundle\Entity\User;
 use Kni\ThomasBundle\Form\WorkshopType;
 use Kni\ThomasBundle\DependencyInjection\NavigationBar;
 
@@ -58,10 +59,63 @@ class MeetingProgressController extends Controller {
             if($this->checkAdminMode()){
                 //pobieramy jeszcze informacje o tym jacy uzytkownicy odpowiedzieli na pytanie
                 //oraz sprawdzamy czy ich odpowiedz jest prawidlowa
+                $wpRepo = $em->getRepository('KniThomasBundle:WorkshopProgress');
+                $usersProgressQuery = $wpRepo->createQueryBuilder('wp')
+                        ->leftjoin('wp.user', 'u')
+                        ->where('wp.position >= :position')
+                        ->andWhere('wp.user != :user')
+                        ->setParameter('position', $question->getPosition())
+                        ->setParameter('user', 'null');
+                
+                $usersProgress = $usersProgressQuery->getQuery()->getResult();
+                
+                
+                $usersAnswers = array();
+                foreach($usersProgress as $userProgress){
+                    $user = $userProgress->getUser();
+                    
+                    $userAnswers = array();
+                    $userAnswers['name'] = $user;
+                    //sprawdzamy czy user poprawnie odpowiedział
+                    
+                    $userAnswer = $em->getRepository('KniThomasBundle:UsersAnswers')->findBy(array(
+                        'user' => $user,
+                        'question' => $question
+                    ));
+                    
+                    $correct = true;
+                    foreach($answers as $answer){
+                        if($answer->getIsCorrect()){
+                            //jesli odpowiedź poprawna to sprawdzamy czy uzytkownik ja zaznaczyl
+                            
+                            $correctTmp = false;
+                            foreach($userAnswer as $oneAnswer){
+                                if($oneAnswer->getAnswer()==$answer) $correctTmp=true;
+                            }
+                            
+                            if(!$correctTmp) $correct=false;
+                            
+                        }else{
+                            //jeśli niepoprawna to sprawdzamy czy przypadkiem jej nie zaznaczył
+                            $correctTmp = true;
+                            foreach($userAnswer as $oneAnswer){
+                                if($oneAnswer->getAnswer()==$answer) $correctTmp=false;
+                            }
+                            
+                            if(!$correctTmp) $correct = false;
+                        }
+                    }
+                    
+                    $userAnswers['correct'] = $correct;
+                    
+                    $usersAnswers[] = $userAnswers;
+                }
+                
                 
                 return $this->render('KniThomasBundle:MeetingProgress:question.html.twig', array(
                     'question' => $question,
-                    'answers' => $answers
+                    'answers' => $answers,
+                    'usersAnswers' => $usersAnswers
                 ));
             }else{
                 //pobranie pytania dla uzytkownika

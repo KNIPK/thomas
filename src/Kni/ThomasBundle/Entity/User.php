@@ -519,4 +519,8 @@ class User implements UserInterface, \Serializable
     {
         return $this->workshopsProgress;
     }
+    
+    public function __toString(){
+        return $this->name;
+    }
 }

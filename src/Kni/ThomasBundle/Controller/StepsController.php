@@ -159,7 +159,7 @@ class StepsController extends Controller
             
             
         }
-        return $this->redirect($this->generateUrl('profile_workshop_added', array('workshopId' => $workshopId)));
+        return $this->redirect($this->generateUrl('profile_steps_edit', array('workshopId' => $workshopId)));
     }
     
     private function checkAccess(){

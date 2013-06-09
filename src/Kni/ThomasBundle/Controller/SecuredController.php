@@ -21,8 +21,8 @@ class SecuredController extends Controller
     {
         
         
-        if(false) { //zastapic false sprawdzaniem czy jest zalogowany!!
-            return $this->render('KniThomasBundle:Profile:index.html.twig', array());
+        if($this->get('security.context')->getToken()) { 
+            return $this->redirect($this->generateUrl('profile'));
         }
         else
         

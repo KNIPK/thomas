@@ -133,18 +133,18 @@ class StepsController extends Controller
                         $answer = new \Kni\ThomasBundle\Entity\Answer();
                         $answer->setContent($oneAnswer);
                         
-                        if(isset($answersCorrect['correctAnswer'][$answerKey])){
-                            $isCorrect = false;
-                        }else{
+                        if(isset($answersCorrect['corectAnswer'][$answerKey])){
                             $isCorrect = true;
+                        }else{
+                            $isCorrect = false;
                         }
+                        
                         $answer->setIsCorrect($isCorrect);
                         
                         $em->persist($answer);
                         
                         $answer->setQuestion($question);
                     }
-                    
                     
                     
                     
@@ -232,10 +232,10 @@ class StepsController extends Controller
                             $answer = new \Kni\ThomasBundle\Entity\Answer();
                             $answer->setContent($oneAnswer);
 
-                            if(isset($answersCorrect['correctAnswer'][$answerKey])){
-                                $isCorrect = false;
-                            }else{
+                            if(isset($answersCorrect['corectAnswer'][$answerKey])){
                                 $isCorrect = true;
+                            }else{
+                                $isCorrect = false;
                             }
                             $answer->setIsCorrect($isCorrect);
 

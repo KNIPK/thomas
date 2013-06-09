@@ -58,10 +58,8 @@ class MeetingController extends Controller {
     public function joinAction($workshopId) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
-        
-        if($entity->getPassword() == ''){
-            print 'dodać obsługe warsztatów bez hasel';
-        }
+
+
 
         $users = $entity->getUsers();
 
@@ -70,10 +68,18 @@ class MeetingController extends Controller {
         if (in_array($user, $users->toArray())) {//czy user jest już dałączył do kursu
             return $this->redirect($this->generateUrl('meeting_index', array('workshopId' => $workshopId)));
         } else {
-            return array(
-                'entity' => $entity,
-                'error' => ''
-            );
+
+            if ($entity->getPassword() == '') { // jesli nie ma hasla na warsztacie i user nie jest zapisany => zapisz i przekieruj
+                print 'dodać obsługe warsztatów bez hasel';
+                $users->add($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('meeting_index', array('workshopId' => $workshopId)));
+            }
+            else
+                return array(
+                    'entity' => $entity,
+                    'error' => ''
+                );
         }
     }
 

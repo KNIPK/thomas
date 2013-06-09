@@ -66,9 +66,25 @@ class MeetingProgressController extends Controller {
             }else{
                 //pobranie pytania dla uzytkownika
                 
+                //pobieramy jeszcze progress użytkownika, zeby wiedziec czy juz odpowiedział
+                $userProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(
+                        array(
+                            'user' => $this->get('security.context')->getToken()->getUser()
+                        ));
+                
+                if($userProgress)
+                    $userProgress=$userProgress->getPosition();
+                else{
+                    $userProgress=0;
+                }
+                
+//                print $userProgress->getPosition();
+//                die();
+                
                 return $this->render('KniThomasBundle:MeetingProgress:questionForUser.html.twig', array(
                     'question' => $question,
-                    'answers' => $answers
+                    'answers' => $answers,
+                    'userProgress' => $userProgress
                 ));
             }
         }
@@ -169,6 +185,45 @@ class MeetingProgressController extends Controller {
             $em->flush();
         }
         
+    }
+    
+    
+    /**
+     *
+     * @Route("/saveAnswer/{questionId}/{answers}", name="save_answer")
+     * @Method("GET")
+     * @Template("KniThomasBundle:MeetingProgress:blank.html.twig")
+     */
+    public function saveAnswer($questionId, $answers){
+        parse_str($answers, $answers);
+        
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('KniThomasBundle:Question')->find($questionId);
+        
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        foreach ($answers as $id => $correct){
+            $answer = new \Kni\ThomasBundle\Entity\UsersAnswers();
+            $answer->setQuestion($question);
+            $answer->setUser($user);
+            $answer->setAnswer($em->getRepository('KniThomasBundle:Answer')->find($id));
+            
+            $em->persist($answer);
+        }
+        
+        //zapisujemy progress usera
+        $workshopProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(array(
+            'user' => $user
+        ));
+        if(!$workshopProgress) $workshopProgress = new \Kni\ThomasBundle\Entity\WorkshopProgress();
+        $workshopProgress->setPosition($question->getPosition());
+        $workshopProgress->setUser($user);
+        $workshopProgress->setTime(new \DateTime('now'));
+        $workshopProgress->setWorkshop($question->getWorkshop());
+        $em->persist($workshopProgress);
+        
+        $em->flush();
     }
     
     

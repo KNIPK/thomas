@@ -33,6 +33,30 @@
                         });
                         
                     });
+                    
+                    $("#left").delegate("button#saveAnswer", "click", function(){
+                        //uzytkownik odpowiada na pytanie
+                        var questionId = $("input[name=questionId]").val();
+                        
+                        $("ul#answers li").each(function(){
+                            if(!$(this).find("input[type=checkbox]").is(":checked")){
+                                $(this).find("input[type=hidden]").remove();
+                            }
+                        });
+                        
+                        var answers = $("ul#answers input").serialize();
+                        
+                        var saveAnswerUrl = '{{ path('save_answer', {'questionId': 'qID', 'answers': 'ANS'}) }}';
+                        saveAnswerUrl = saveAnswerUrl.replace('qID', questionId);
+                        saveAnswerUrl = saveAnswerUrl.replace('ANS', answers);
+                        
+                        $.ajax({
+                            url: saveAnswerUrl
+                        }).done(function(){
+                        });
+                        
+                        $("#left").html('<p class="title">Odpowiedź została zapisana</p>');
+                    });
                 });
                 
                 {% if adminMode %}

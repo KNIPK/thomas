@@ -410,7 +410,10 @@ form#question div.answers input{
     float: right;
 }
 
-li.question{ background: #eef6ff; }
+li.question{ 
+    background: #eef6ff;
+    margin-left: 20px;
+}
 
 .error {
     color:#cc0000;

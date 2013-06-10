@@ -40,12 +40,22 @@ class InvitationController extends Controller {
      * Creates a new Workshop entity.
      *
      * @Route("/{workshopId}/", name="workshop_invitation")
+     * @Route("/{workshopId}/edit", name="workshop_invitation_edit")
      * @Template()
      */
     public function formAction($workshopId) {
+        
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+        if($routeName=='workshop_invitation_edit')
+            $isEditWorkshop=true;
+        else
+            $isEditWorkshop=false;
+        
         $em = $this->getDoctrine()->getManager();
         $workshop = $em->getRepository('KniThomasBundle:Workshop')->find($workshopId);
-        return array('workshop' => $workshop);
+        return array('workshop' => $workshop,
+            'isEditWorkshop' => $isEditWorkshop);
     }
 
 }

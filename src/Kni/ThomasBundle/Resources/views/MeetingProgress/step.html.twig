@@ -1,2 +1,6 @@
 <p class="title">{{ step.name }}</p>
 <p>{{ step.description }}</p>
+
+{% if adminMode == false and workshopPosition>userPosition %}
+    <button id="setPosition">Potwierdź ukończenie etapu</button>
+{% endif %}

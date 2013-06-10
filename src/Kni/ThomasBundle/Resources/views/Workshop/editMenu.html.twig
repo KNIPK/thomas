@@ -14,7 +14,11 @@
             Etapy
         </a>
     </li>
-    <li {% if active=='users' %}class="active"{% endif %}>Zaproszenia</li>
+    <li {% if active=='invites' %}class="active"{% endif %}>
+        <a href="{{ path('workshop_invitation_edit', {'workshopId': workshopId}) }}">
+            Zaproszenia
+        </a>
+    </li>
     <li {% if active=='info' %}class="active"{% endif %}>
         <a href="{{ path('profile_workshop_show', {'id': workshopId}) }}">
             Podsumowanie

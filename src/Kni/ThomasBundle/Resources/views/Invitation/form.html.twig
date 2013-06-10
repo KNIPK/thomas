@@ -3,16 +3,21 @@
 {% block content -%}
 <div class="block">
 
-    <h1>Utwórz warsztaty - krok 3</h1>
+    {% if isEditWorkshop %}
+        <h1>Warsztaty - zaproś uczestników</h1>
+        
+        {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'invites', 'workshopId': workshop.id} %}
+    {% else %}
+        <h1>Utwórz warsztaty - krok 3</h1>
 
-    <ul class="steps">
-        <li class="active">Podstawowe informacje</li>
-        <li class="active">Dodawanie zasobów</li>
-        <li class="active">Etapy</li>
-        <li class="active last">Zaproszenia</li>
-        <li>Podsumowanie</li>
-    </ul>
-
+        <ul class="steps">
+            <li class="active">Podstawowe informacje</li>
+            <li class="active">Dodawanie zasobów</li>
+            <li class="active">Etapy</li>
+            <li class="active last">Zaproszenia</li>
+            <li>Podsumowanie</li>
+        </ul>
+    {% endif %}
 
 
     <form action="{{ path('send_invitations')}}" method="POST" id="inv_form">

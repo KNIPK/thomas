@@ -30,17 +30,18 @@ class WorkshopController extends Controller {
         $repository = $this->getDoctrine()->getRepository('KniThomasBundle:Workshop');
         $user = $this->get('security.context')->getToken()->getUser();
 
-        //$request->get('query');
         if ($request->get('query') == "") {
             $query = $repository->createQueryBuilder('w')
-                ->where('w.user != :userId')
-                ->setParameter('userId', $user)
-                ->getQuery();
+                    ->leftjoin('w.user', 'u')
+                    ->where('w.user != :userId')
+                    ->setParameter('userId', $user)
+                    ->getQuery();
         } else {
-                $query = $repository->createQueryBuilder('w')
-                ->where('w.user != :userId')->andWhere('w.name LIKE :name')
-                ->setParameter('userId', $user)->setParameter('name', '%'.$request->get('query').'%')
-                ->getQuery();
+            $query = $repository->createQueryBuilder('w')
+                    ->leftjoin('w.user', 'u')
+                    ->where('w.user != :userId')->andWhere('w.name LIKE :name')
+                    ->setParameter('userId', $user)->setParameter('name', '%' . $request->get('query') . '%')
+                    ->getQuery();
         }
 
         $entities = $query->getResult();

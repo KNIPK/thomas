@@ -435,3 +435,8 @@ ul#steps li span.delete{
     font-weight: bold;
     color:#cc0000;
 }
+
+td.workshop_description {
+    text-align: justify;    
+    max-width: 400px;
+}

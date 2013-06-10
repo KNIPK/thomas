@@ -21,27 +21,28 @@
         {% for entity in entities %}
                 <tr>
                     <td><a href="{{ path('profile_workshop_show', { 'id': entity.id }) }}">{{ entity.name }} </a></td>
-                    <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ entity.description }}</td>
-                    <td><a href="{{ path('meeting_index', { 'workshopId': entity.id }) }}"><button type="submit">Rozpocznij warsztat</button></a></td>
-                </tr>
+                    <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i') }}{% endif %}</td>
+                    <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i') }}{% endif %}</td>
+                    <td class="workshop_description">{{ entity.description|slice(0,250) }}{% if  entity.description|length > 250 %}...{% endif %}
+                        </td>
+                        <td ><a href="{{ path('meeting_index', { 'workshopId': entity.id }) }}"><button type="submit">Rozpocznij warsztat</button></a></td>
+                    </tr>
         {% else %}
-                <tr>
-                    <td colspan="4">
-                        Brak warsztatów
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="4">
+                            Brak warsztatów
+                        </td>
+                    </tr>
         {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <ul>
-            <li>
-                <a href="{{ path('profile_workshop_new') }}">
-                    Utwórz nowe warsztaty
-                </a>
-            </li>
-        </ul>
-    </div>
+            <ul>
+                <li>
+                    <a href="{{ path('profile_workshop_new') }}">
+                        Utwórz nowe warsztaty
+                    </a>
+                </li>
+            </ul>
+        </div>
 {% endblock %}

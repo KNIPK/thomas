@@ -1,0 +1,32 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content -%}
+<div class="block">
+
+    <h1>Utwórz warsztaty - krok 3</h1>
+
+    <ul class="steps">
+        <li class="active">Podstawowe informacje</li>
+        <li class="active">Dodawanie zasobów</li>
+        <li class="active">Etapy</li>
+        <li class="active last">Zaproszenia</li>
+        <li>Podsumowanie</li>
+    </ul>
+
+
+        {{workshop.name}}
+            <form action="" method="POST" >
+                <label for="inv_form_mails">Lista maili</label>>
+                <input type="hidden" name="id" value="{{workshop.id}}" >
+                <input type="text" name="mails" id="inv_form_mails">
+                <input type="text" name="inviatiation text" value="blabla">
+            </form>
+
+{% endblock %}
+
+
+
+
+{% block additionalHeaders %}
+    <script src="{{ asset('bundles/kni/js/steps.js')}}"></script>
+{% endblock %}

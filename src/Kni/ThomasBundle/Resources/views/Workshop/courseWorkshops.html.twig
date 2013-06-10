@@ -1,0 +1,44 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content %}
+<div class="block">
+    <h1>{{ course.name }} - Dostępne warsztaty</h1>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Początek</th>
+                <th>Prowadzący</th>
+                <th>Opis</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.name }}</td>
+                    <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i') }}{% endif %}</td>
+                    <td>{{ entity.user.name }} {{ entity.user.surname }}</td>
+                    <td class="workshop_description">{{ entity.description|slice(0,250) }}
+                            {% if  entity.description|length > 250 %}...
+                            {% endif %}
+                    </td>
+                    <td>
+
+                                <a href="{{ path('join_to_workshop', { 'workshopId': entity.id }) }}">dołącz</a>
+ 
+                    </td>
+                </tr>
+         {% else %}
+                <tr>
+                    <td colspan="6">
+                        Brak warsztatów spełniających kryteria.
+                    </td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+    {% endblock %}

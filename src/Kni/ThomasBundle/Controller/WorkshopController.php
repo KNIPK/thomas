@@ -123,6 +123,25 @@ class WorkshopController extends Controller {
             'entities' => $entities
         );
     }
+    
+    /**
+     * Finds and displays a Workshop entity.
+     *
+     * @Route("/course/{courseId}", name="profile_course_workshops_index")
+     * @Method("GET")
+     * @Template()
+     */
+    public function courseWorkshopsAction($courseId) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $course = $em->getRepository('KniThomasBundle:Course')->find($courseId);
+        $entities = $em->getRepository('KniThomasBundle:Workshop')->findBy(array('course' => $courseId));
+
+        return array(
+            'entities' => $entities,
+            'course' => $course
+        );
+    }
 
     /**
      * Finds and displays a Workshop entity.

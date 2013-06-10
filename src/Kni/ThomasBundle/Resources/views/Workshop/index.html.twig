@@ -29,11 +29,9 @@
                     <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{{ entity.description }}</td>
                     <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('join_to_workshop', { 'workshopId': entity.id }) }}">join</a>
-                            </li>
-                        </ul>
+
+                                <a href="{{ path('join_to_workshop', { 'workshopId': entity.id }) }}">dołącz</a>
+ 
                     </td>
                 </tr>
          {% else %}

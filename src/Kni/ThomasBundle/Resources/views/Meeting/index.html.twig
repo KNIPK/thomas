@@ -40,6 +40,22 @@
                         window.clearTimeout(autoRefresh);
                     });
                     
+                    $("#left").delegate("button#setPosition", "click", function(){
+                        window.clearTimeout(autoRefresh);
+                        
+                        var setPositionUrl = '{{ path('set_position', {'workshopId': workshop.id, 'position': 'wposit'}) }}';
+                        setPositionUrl = setPositionUrl.replace("wposit", workshopPosition);
+                        
+                        $(this).remove();
+                        
+                        $.ajax({
+                            url: setPositionUrl
+                        }).done(function(){
+                            setRefresh();
+                        });
+                        
+                    })
+                    
                     $("#left").delegate("button#saveAnswer", "click", function(){
                         window.clearTimeout(autoRefresh);
                     

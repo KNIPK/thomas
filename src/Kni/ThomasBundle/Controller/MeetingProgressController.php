@@ -39,8 +39,22 @@ class MeetingProgressController extends Controller {
         
         if($step){
             //przetwarzamy etap
+            $userProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(array(
+                'user' => $this->get('security.context')->getToken()->getUser(),
+                'workshop' => $this->workshop
+            ));
+            
+            if($userProgress){
+                $userPosition = $userProgress->getPosition();
+            }else{
+                $userPosition = 0;
+            }
+            
             return $this->render('KniThomasBundle:MeetingProgress:step.html.twig', array(
-                'step' => $step
+                'step' => $step,
+                'adminMode' => $this->checkAdminMode(),
+                'userPosition' => $userPosition,
+                'workshopPosition' => $position
             ));
         }else{
             //nie ma etapu, czyli jest pytanie
@@ -149,6 +163,36 @@ class MeetingProgressController extends Controller {
 
         return array(
         );
+    }
+    
+    /**
+     * Lists all Workshop entities.
+     *
+     * @Route("/setPosition/{workshopId}/{position}", name="set_position")
+     * @Method("GET")
+     * @Template("KniThomasBundle:MeetingProgress:blank.html.twig")
+     */
+    public function setPosition($workshopId, $position){
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $userProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(array(
+            'user' => $user,
+            'workshop' => $workshopId
+        ));
+        
+        if(!$userProgress){
+            $userProgress = new \Kni\ThomasBundle\Entity\WorkshopProgress();
+            $userProgress->setUser($user);
+            $userProgress->setWorkshop($workshopId);
+        }
+        
+        $userProgress->setTime(new \DateTime());
+        $userProgress->setPosition($position);
+        
+        $em->persist($userProgress);
+        
+        $em->flush();
     }
     
     /**

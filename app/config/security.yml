@@ -37,9 +37,10 @@ security:
             logout:
                 path:   logout
                 target: page
-            #anonymous: ~
+            anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/meeting, roles: ROLE_USER }

@@ -1,0 +1,30 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content -%}
+    <div class="block">
+        <h1>Edytuj kurs</h1>
+
+        <form action="{{ path('profile_course_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            <input type="hidden" name="_method" value="PUT" />
+            {{ form_widget(edit_form) }}
+            <p>
+                <button type="submit">Zapisz zmiany</button>
+            </p>
+        </form>
+
+            <ul class="record_actions">
+        <li>
+            <a href="{{ path('profile_course') }}">
+                Wróć do listy
+            </a>
+        </li>
+        <li>
+            <form action="{{ path('profile_course_delete', { 'id': entity.id }) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE" />
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+</div>        
+{% endblock %}

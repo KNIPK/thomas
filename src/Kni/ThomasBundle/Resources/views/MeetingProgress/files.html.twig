@@ -1,0 +1,6 @@
+<p class="title">Zasoby</p>
+<ul>
+    {% for file in files %}
+        <li><a target="_blank" href="{{ filesPath }}{{ file.path }}">{{ file.name }}</a></li>
+    {% endfor %}
+</ul>

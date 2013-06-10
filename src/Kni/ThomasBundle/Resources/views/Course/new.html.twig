@@ -1,0 +1,22 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content -%}
+    <div class="block">
+        <h1>Utwórz kurs</h1>
+
+        <form action="{{ path('profile_course_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <p>
+                <button type="submit">Zapisz</button>
+            </p>
+        </form>
+
+            <ul class="record_actions">
+        <li>
+            <a href="{{ path('profile_course') }}">
+                Wróć do listy
+            </a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

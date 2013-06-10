@@ -66,6 +66,13 @@ p.right{
     margin: 7px 20px;
 }
 
+#center{
+    width: 35%;
+    float: left;
+    display: inline;
+    background-color: #ffd;
+}
+
 #right{
     width: 15%;
     float: right;

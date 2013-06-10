@@ -1,0 +1,51 @@
+{% extends "KniThomasBundle::layout.html.twig" %}
+
+{% block content -%}
+    <div class="block">
+        <h1>Twoje kursy</h1>
+
+        <table class="records_list">
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Data rozpoczęcia</th>
+                    <th>Opis</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.name }}</td>
+                    <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.description }}</td>
+                    <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('profile_course_show', { 'id': entity.id }) }}">Pokaż</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('profile_course_edit', { 'id': entity.id }) }}">Edytuj</a>
+                        </li>
+                    </ul>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        Brak kursów
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+            <ul>
+            <li>
+                <a href="{{ path('profile_course_new') }}">
+                    Nowy kurs
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

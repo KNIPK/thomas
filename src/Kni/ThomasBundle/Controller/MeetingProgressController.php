@@ -64,8 +64,10 @@ class MeetingProgressController extends Controller {
                         ->leftjoin('wp.user', 'u')
                         ->where('wp.position >= :position')
                         ->andWhere('wp.user != :user')
+                        ->andWhere('wp.workshop = :workshop')
                         ->setParameter('position', $question->getPosition())
-                        ->setParameter('user', 'null');
+                        ->setParameter('user', 'null')
+                        ->setParameter('workshop', $workshopId);
                 
                 $usersProgress = $usersProgressQuery->getQuery()->getResult();
                 
@@ -123,7 +125,8 @@ class MeetingProgressController extends Controller {
                 //pobieramy jeszcze progress użytkownika, zeby wiedziec czy juz odpowiedział
                 $userProgress = $em->getRepository('KniThomasBundle:WorkshopProgress')->findOneBy(
                         array(
-                            'user' => $this->get('security.context')->getToken()->getUser()
+                            'user' => $this->get('security.context')->getToken()->getUser(),
+                            'workshop' => $workshopId
                         ));
                 
                 if($userProgress)

@@ -42,11 +42,41 @@ class MeetingController extends Controller {
         $workshops = $query->getResult();
 
         $this->workshop = $workshops[0];
+        
 
         return array(
             'workshop' => $this->workshop,
-            'adminMode' => $this->checkAdminMode()
+            'adminMode' => $this->checkAdminMode(),
+            'maxPosition' => $this->getMaxWorkshopPosition($this->workshop)
         );
+    }
+    
+    private function getMaxWorkshopPosition($workshop){
+        $em = $this->getDoctrine()->getManager();
+        
+        $maxStep = 0;
+        
+        $questions = $em->getRepository('KniThomasBundle:Question')->findBy(array(
+            'workshop' => $workshop
+        ), array(
+            'position' => 'desc'
+        ), 1);
+        
+        $steps = $em->getRepository('KniThomasBundle:Step')->findBy(array(
+            'workshop' => $workshop
+        ), array(
+            'position' => 'desc'
+        ), 1);
+        
+        if($questions){
+            $maxStep = $questions[0]->getPosition();
+        }
+        
+        if($steps && $steps[0]->getPosition()>$maxStep){
+            $maxStep = $steps[0]->getPosition();
+        }
+        
+        return $maxStep;
     }
 
     /**

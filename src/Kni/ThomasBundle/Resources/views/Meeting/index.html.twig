@@ -143,20 +143,28 @@
                         }else{
                             //ładujemy odpowiedni step badz question
                             
-                            var loadStepUrl = '{{ path('meeting_load_step', {'workshopId': workshop.id, 'position': 'position'}) }}';
-                            loadStepUrl = loadStepUrl.replace('position', position);
-                            
-                            $.ajax({
-                                url: loadStepUrl
-                            }).done(function(stepData){
-                                $("#left").html(stepData);
-                                
-                                if({{adminMode}}){
-                                    nextStep= position*1+1;
-                                    $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
-                                }
-                            });
-                            
+                            if(position>{{ maxPosition }}){
+                                $("#left").html("<p class='title'>Warsztaty zakończone</p>");
+                            }else{
+                                var loadStepUrl = '{{ path('meeting_load_step', {'workshopId': workshop.id, 'position': 'position'}) }}';
+                                loadStepUrl = loadStepUrl.replace('position', position);
+
+                                $.ajax({
+                                    url: loadStepUrl
+                                }).done(function(stepData){
+                                    $("#left").html(stepData);
+
+                                    if({{adminMode}}){
+                                        nextStep= position*1+1;
+
+                                        if(nextStep>{{ maxPosition }}){
+                                            $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Zakończ warsztaty</button>");
+                                        }else{
+                                            $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
+                                        }
+                                    }
+                                });
+                            }
                         }
                         workshopPosition = position;
                         updateUsersListStyle();

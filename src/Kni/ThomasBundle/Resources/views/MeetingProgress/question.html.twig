@@ -7,14 +7,15 @@
 
 <p class="title">Użytkownicy, którzy odpowiedzieli:</p>
 
-<ul>
+<ul id="usersAnswers">
     {% for userAnswer in usersAnswers %}
-        <li>{{ userAnswer.name }}
+        <li>
             {% if userAnswer.correct %}
-                - <img src="{{ asset('bundles/kni/images/ok.png')}}" alt="odpowiedź poprawna" />
+                <img src="{{ asset('bundles/kni/images/ok.png')}}" alt="odpowiedź poprawna" />
             {% else %}
-                - - <img src="{{ asset('bundles/kni/images/wrong.png')}}" alt="odpowiedź niepoprawna" />
+                <img src="{{ asset('bundles/kni/images/wrong.png')}}" alt="odpowiedź niepoprawna" />
             {% endif %}
+            {{ userAnswer.name }}
         </li>
     {% endfor %}
 </ul>

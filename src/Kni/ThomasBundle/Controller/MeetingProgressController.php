@@ -184,7 +184,7 @@ class MeetingProgressController extends Controller {
         if(!$userProgress){
             $userProgress = new \Kni\ThomasBundle\Entity\WorkshopProgress();
             $userProgress->setUser($user);
-            $userProgress->setWorkshop($workshopId);
+            $userProgress->setWorkshop($em->getRepository('KniThomasBundle:Workshop')->find($workshopId));
         }
         
         $userProgress->setTime(new \DateTime());

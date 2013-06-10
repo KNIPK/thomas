@@ -1,0 +1,29 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/tukan.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+@font-face
+{
+    font-family: weblysleekuil;
+    src: url('weblysleekuil.ttf');
+}
+
+p.code{
+    position: absolute;
+    bottom: 8%;
+    right: 30%;
+    font-family: weblysleekuil, sans-serif;
+    font-size: 150px;
+}
+
+p.text{
+    font-size: 30px;
+    position: absolute;
+    bottom: 20%;
+    right: 25%;
+    font-family: weblysleekuil, sans-serif;
+}

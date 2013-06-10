@@ -30,6 +30,22 @@ class MeetingController extends Controller {
      */
     public function indexAction($workshopId) {
 
+        //sprawdzimy czy user może tutaj przebywać
+//        $repoUser = $this->getDoctrine()
+//                ->getRepository('KniThomasBundle:Workshop');
+//        
+//        $queryUser = $repoUser->createQueryBuilder('u')
+//                ->join('u.workshops', 'wu')
+////                ->where('wu.workshop = :workshopId')
+////                ->setParameter('workshopId', $workshopId)
+//                ->getQuery();
+//        
+//        
+//        $users = $queryUser->getResult();
+//        
+//        if(!$users[0]) return $this->redirect($this->generateUrl('join_to_workshop', array('workshopId' => $workshopId)));
+  
+        //user moze tutaj przebywać
         $repository = $this->getDoctrine()
                 ->getRepository('KniThomasBundle:Workshop');
 
@@ -42,11 +58,41 @@ class MeetingController extends Controller {
         $workshops = $query->getResult();
 
         $this->workshop = $workshops[0];
+        
 
         return array(
             'workshop' => $this->workshop,
-            'adminMode' => $this->checkAdminMode()
+            'adminMode' => $this->checkAdminMode(),
+            'maxPosition' => $this->getMaxWorkshopPosition($this->workshop)
         );
+    }
+    
+    private function getMaxWorkshopPosition($workshop){
+        $em = $this->getDoctrine()->getManager();
+        
+        $maxStep = 0;
+        
+        $questions = $em->getRepository('KniThomasBundle:Question')->findBy(array(
+            'workshop' => $workshop
+        ), array(
+            'position' => 'desc'
+        ), 1);
+        
+        $steps = $em->getRepository('KniThomasBundle:Step')->findBy(array(
+            'workshop' => $workshop
+        ), array(
+            'position' => 'desc'
+        ), 1);
+        
+        if($questions){
+            $maxStep = $questions[0]->getPosition();
+        }
+        
+        if($steps && $steps[0]->getPosition()>$maxStep){
+            $maxStep = $steps[0]->getPosition();
+        }
+        
+        return $maxStep;
     }
 
     /**

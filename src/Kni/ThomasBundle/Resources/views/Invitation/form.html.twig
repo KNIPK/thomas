@@ -14,22 +14,39 @@
     </ul>
 
 
-        {{workshop.name}}
-    <form action="" method="POST" >
+
+    <form action="{{ path('send_invitations')}}" method="POST" id="inv_form">
         <div>
-            <label for="inv_form_mails">Lista maili</label>
-            <input type="text" name="mails" id="inv_form_mails"> <br>
+            <label>Lista maili (odzielonych przecinkami)</label>
+            <textarea name="mails" rows="5" cols="50">przykladowy@mail.pl, innymail@domena.pl</textarea>
         </div>
         <div>
-            <label for="inv_form_text">Lista maili</label>
-            <input type="text" name="inviatiation text" value="blabla" id="inv_from_text"><br>
+            <label>Treść wiadomości</label>
+            <textarea name="text" rows="10" cols="50">Witam, 
+
+zaprszam Cię do kursu o nazwie: {{workshop.name}}
+Aby do niego dołączyć odwiedź adres: 
+{{app.request.getHost() }}{{ path('join_to_workshop', {'workshopId': workshop.id})}}
+
+{% if workshop.password %}Hasło do warsztatu to: {{workshop.password}}{%else%}Zapis nie wymaga hasła.
+{% endif %}
+
+Rejestracja i wykorzysanie serwisu Thomas jest w 100% darmowe.
+
+            </textarea>
+
         </div>
-        <div>
-            <button type="submit" >Zaproś</button>
+        <div >
+
+            <button type="submit" class="center" >Zaproś</button>
         </div>
-            <input type="hidden" name="id" value="{{workshop.id}}" >
+        <input type="hidden" name="id" value="{{workshop.id}}" >
+        <input type="hidden" name="name" value="{{workshop.name}}" >
+
 
     </form>
+
+    <a href="{{ path('profile_workshop_added', {'workshopId': workshop.id})}}"><button class="center" type="submit" >Pomiń</button></a>
 
 {% endblock %}
 

@@ -445,9 +445,9 @@ div.searching_form {
     margin-left: 40px;
 }
 
-div.with_left_margin{
+.with_left_margin{
     margin-left: 40px;
-    margin-bottom: 40px;
+    padding-bottom: 40px;
 }
 
 
@@ -455,3 +455,11 @@ p#addAnswer{
     cursor: pointer;
 }
 
+
+#inv_from button{
+    width:  1000px;
+}
+
+button.center{
+    margin-left: 50%;
+}

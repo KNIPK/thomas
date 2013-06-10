@@ -8,16 +8,16 @@
     <p class="error">{{error}}</p>
 
 
-    <p>Nie jesteś zapisany do tego warsztatu. Żeby dołączyć podaj hasło.</p>
+    <p class="with_left_margin">Nie jesteś zapisany do tego warsztatu. Żeby dołączyć podaj hasło.</p>
 
 
     
-    <form method="post" action="{{path('joined_to_workshop')}}">
+    <form method="post" action="{{path('joined_to_workshop')}}" class="with_left_margin">
         <input name="id" type="hidden" value="{{entity.id}}">
         <input name="pass" type="text">
         <input type="submit" value="Dołącz">
     </form>
-
+    <br>
     <div class="clear"></div>
 </div>
 {% endblock %}

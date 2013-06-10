@@ -4,199 +4,169 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/kni/css/meeting.css') }}" />
         {% endblock %}
         {% block title '<title>Workshops</title>' %}
-            <link rel="stylesheet" href="{{ asset('js/jquery-ui/themes/base/jquery-ui.css')}}" />
-            <meta charset="utf-8" />
-            <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
-            <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
-            <script language="javascript">
-                
-                var workshopPosition = 0;
-                var autoRefresh;
-                $(document).ready(function(){
-                    refresh();
-                    
-                    setRefresh();
-                    
-                    $("#left").delegate("button.nextStep", "click", function(){
-                        
-                        window.clearTimeout(autoRefresh);
-                        
-                        var position = $(this).attr("nextStep");
-                        
-                        var nextStepUrl = '{{ path('go_to_step', {'workshopId': workshop.id, 'position': 'position' }) }}';
-                        nextStepUrl = nextStepUrl.replace('position', position);
-                            
-                            
-                        $.ajax({
-                            url: nextStepUrl
-                        }).done(function(data){
-                            loadStep();
-                            
-                            $("#usersList ul li").removeClass("green");
-                            
-                            setRefresh();
-                        });
-                        
-                    });
-                    
-                    $("#left ul#answers").delegate("input", "click", function(){
-                        window.clearTimeout(autoRefresh);
-                    });
-                    
-                    $("#left").delegate("button#setPosition", "click", function(){
-                        window.clearTimeout(autoRefresh);
-                        
-                        var setPositionUrl = '{{ path('set_position', {'workshopId': workshop.id, 'position': 'wposit'}) }}';
-                        setPositionUrl = setPositionUrl.replace("wposit", workshopPosition);
-                        
-                        $(this).remove();
-                        
-                        $.ajax({
-                            url: setPositionUrl
-                        }).done(function(){
-                            setRefresh();
-                        });
-                        
-                    })
-                    
-                    $("#left").delegate("button#saveAnswer", "click", function(){
-                        window.clearTimeout(autoRefresh);
-                    
-                        //uzytkownik odpowiada na pytanie
-                        var questionId = $("input[name=questionId]").val();
-                        
-                        $("ul#answers li").each(function(){
-                            if(!$(this).find("input[type=checkbox]").is(":checked")){
-                                $(this).find("input[type=hidden]").remove();
-                            }
-                        });
-                        
-                        var answers = $("ul#answers input").serialize();
-                        
-                        var saveAnswerUrl = '{{ path('save_answer', {'questionId': 'qID', 'answers': 'ANS'}) }}';
-                        saveAnswerUrl = saveAnswerUrl.replace('qID', questionId);
-                        saveAnswerUrl = saveAnswerUrl.replace('ANS', answers);
-                        
-                        $.ajax({
-                            url: saveAnswerUrl
-                        }).done(function(){
-                            setRefresh();
-                        });
-                        
-                        $("#left").html('<p class="title">Odpowiedź została zapisana</p>');
-                    });
-                });
-                
-                function setRefresh(){
-                    autoRefresh = setInterval(function(){refresh()},5000);
-                }
-                
-                function refresh(){
-                    loadStep();
-                    loadFiles();
-                    
-                    {% if adminMode %}
-                        loadUsers();
-                    {% endif %}
-                }
-                
-                {% if adminMode %}
-                    function loadUsers(){
-                        $.ajax({
-                            url: '{{ path('meeting_load_users', {'workshopId': workshop.id}) }}'
-                        }).done(function(usersList){
-                            $("#usersList").html(usersList);
+             <link rel="stylesheet" href="{{ asset('js/jquery-ui/themes/base/jquery-ui.css')}}" />
+             <meta charset="utf-8" />
+             <script src="{{ asset('js/jquery-ui/jquery-1.9.1.js')}}"></script>
+             <script src="{{ asset('js/jquery-ui/ui/jquery-ui.js')}}"></script>
+             <script language="javascript">
 
-                            updateUsersListStyle();
-                        });
+                         var workshopPosition = 0;
+                         var autoRefresh;
+                         $(document).ready(function(){
+                 refresh();
+                         setRefresh();
+                         $("#left").delegate("button.nextStep", "click", function(){
 
-                    }
-                {% endif %}
-                
-                function updateUsersListStyle(){
-                    $("#usersList ul li").each(function(){
-                        if(parseInt($(this).attr("progress")) >= parseInt(workshopPosition)){
-                            $(this).addClass("green");
-                        }
-                    });
-                }
-                
-                function loadFiles(){
-                    
-                    $.ajax({
-                        url: '{{ path('meeting_load_files', {'workshopId': workshop.id}) }}'
-                    }).done(function(files){
-                        $("#center").html(files);
-                    });
-                }
-                
-                function loadStep(){
-                    $.ajax({
-                        url: '{{ path('meeting_load_step_number', {'workshopId': workshop.id}) }}'
-                    }).done(function(position){
-                        if(position==0){
-                            $("#left").html("<p class='title'>Warsztaty nierozpoczęte</p><p>Poczekaj na rozpoczęcie warsztatów przez prowadzącego</p>");
-                            
-                            if({{adminMode}}){
-                                $("#left").append("<button class='nextStep' nextStep='1'>Rozpocznij warsztaty</button>");
-                            }
-                        }else{
-                            //ładujemy odpowiedni step badz question
-                            
-                            if(position>{{ maxPosition }}){
-                                $("#left").html("<p class='title'>Warsztaty zakończone</p>");
-                            }else{
-                                var loadStepUrl = '{{ path('meeting_load_step', {'workshopId': workshop.id, 'position': 'position'}) }}';
-                                loadStepUrl = loadStepUrl.replace('position', position);
+                 window.clearTimeout(autoRefresh);
+                         var position = $(this).attr("nextStep");
+                         var nextStepUrl = '{{ path('go_to_step', {'workshopId': workshop.id, 'position': 'position' }) }}';
+                         nextStepUrl = nextStepUrl.replace('position', position);
+                         $.ajax({
+                 url: nextStepUrl
+                 }).done(function(data){
+                 loadStep();
+                         $("#usersList ul li").removeClass("green");
+                         setRefresh();
+                 });
+                 });
+                         $("#left ul#answers").delegate("input", "click", function(){
+                 window.clearTimeout(autoRefresh);
+                 });
+                         $("#left").delegate("button#setPosition", "click", function(){
+                 window.clearTimeout(autoRefresh);
+                         var setPositionUrl = '{{ path('set_position', {'workshopId': workshop.id, 'position': 'wposit'}) }}';
+                         setPositionUrl = setPositionUrl.replace("wposit", workshopPosition);
+                         $(this).remove();
+                         $.ajax({
+                 url: setPositionUrl
+                 }).done(function(){
+                 setRefresh();
+                 });
+                 })
 
-                                $.ajax({
-                                    url: loadStepUrl
-                                }).done(function(stepData){
-                                    $("#left").html(stepData);
+                         $("#left").delegate("button#saveAnswer", "click", function(){
+                 window.clearTimeout(autoRefresh);
+                         //uzytkownik odpowiada na pytanie
+                         var questionId = $("input[name=questionId]").val();
+                         $("ul#answers li").each(function(){
+                 if (!$(this).find("input[type=checkbox]").is(":checked")){
+                 $(this).find("input[type=hidden]").remove();
+                 }
+                 });
+                         var answers = $("ul#answers input").serialize();
+                         var saveAnswerUrl = '{{ path('save_answer', {'questionId': 'qID', 'answers': 'ANS'}) }}';
+                         saveAnswerUrl = saveAnswerUrl.replace('qID', questionId);
+                         saveAnswerUrl = saveAnswerUrl.replace('ANS', answers);
+                         $.ajax({
+                 url: saveAnswerUrl
+                 }).done(function(){
+                 setRefresh();
+                 });
+                         $("#left").html('<p class="title">Odpowiedź została zapisana</p>');
+                 });
+                 });
+                         function setRefresh(){
+                         autoRefresh = setInterval(function(){refresh()}, 5000);
+                         }
 
-                                    if({{adminMode}}){
-                                        nextStep= position*1+1;
-                                        var prevStep = position*1-1;
-                                        
-                                        if(prevStep>0){
-                                            $("#left").append("<button class='nextStep' nextStep='"+prevStep+"'>Poprzedni etap</button>");
-                                        }
+                 function refresh(){
+                 loadStep();
+                         loadFiles();{% if adminMode %}
+                         loadUsers();{% endif %}
+                 }
 
-                                        if(nextStep>{{ maxPosition }}){
-                                            $("#left").append("<button class='nextStep' nextStep='"+nextStep+"'>Zakończ warsztaty</button>");
-                                        }else{
-                                            $("#left").append("<button class='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                        workshopPosition = position;
-                        updateUsersListStyle();
-                    });
-                }
-            </script>
+                 {% if adminMode %}
+                     function loadUsers(){
+                     $.ajax({
+                     url: '{{ path('meeting_load_users', {'workshopId': workshop.id}) }}'
+                     }).done(function(usersList){
+                     $("#usersList").html(usersList);
+                             updateUsersListStyle();
+                     });
+                     }
+                 {% endif %}
+
+                     function updateUsersListStyle(){
+                     $("#usersList ul li").each(function(){
+                     if (parseInt($(this).attr("progress")) >= parseInt(workshopPosition)){
+                     $(this).addClass("green");
+                     }
+                     });
+                     }
+
+                     function loadFiles(){
+
+                     $.ajax({
+                     url: '{{ path('meeting_load_files', {'workshopId': workshop.id}) }}'
+                     }).done(function(files){
+                     $("#center").html(files);
+                     });
+                     }
+
+                     function loadStep(){
+                     $.ajax({
+                     url: '{{ path('meeting_load_step_number', {'workshopId': workshop.id}) }}'
+                     }).done(function(position){
+                     if (position == 0){
+                     $("#left").html("<p class='title'>Warsztaty nierozpoczęte</p><p>Poczekaj na rozpoczęcie warsztatów przez prowadzącego</p>");
+                             if ({{adminMode}}){
+                     $("#left").append("<button class='nextStep' nextStep='1'>Rozpocznij warsztaty</button>");
+                     }
+                     } else{
+                     //ładujemy odpowiedni step badz question
+
+                     if (position >{{ maxPosition }} ){
+                     $("#left").html("<p class='title'>Warsztaty zakończone</p>");
+                     } else{
+                     var loadStepUrl = '{{ path('meeting_load_step', {'workshopId': workshop.id, 'position': 'position'}) }}';
+                             loadStepUrl = loadStepUrl.replace('position', position);
+                             $.ajax({
+                     url: loadStepUrl
+                     }).done(function(stepData){
+                     $("#left").html(stepData);
+                             if ({{adminMode}}){
+                     nextStep = position * 1 + 1;
+                             var prevStep = position * 1 - 1;
+                             if (prevStep > 0){
+                     $("#left").append("<button class='nextStep' nextStep='" + prevStep + "'>Poprzedni etap</button>");
+                     }
+
+                     if (nextStep >{{ maxPosition }} ){
+                     $("#left").append("<button class='nextStep' nextStep='" + nextStep + "'>Zakończ warsztaty</button>");
+                     } else{
+                     $("#left").append("<button class='nextStep' nextStep='" + nextStep + "'>Przejdź dalej</button>");
+                     }
+                     }
+                     });
+                     }
+                     }
+                     workshopPosition = position;
+                             updateUsersListStyle();
+                     });
+                     }
+                 </script>
         {% block additionalHeaders '' %}
-    </head>
-    <body>
-        <div id="header">
-            <p class="right">
+             </head>
+             <body>
+                 <div id="header">
+                     <a href="{{path('profile')}}"><img  class="logo" src="{{asset('bundles/kni/images/logoSmall.png')}}"/></a>
+                     <p class="right">
                 {{workshop.startDate|date('Y-m-d H:i')}}<br />
                 {{ workshop.user.name }}
-            </p>
-            <h1>{{ workshop.name }}</h1>
-        </div>
-        <div id="left">
-        </div>
-            
-        <div id="center">
-        </div>
-            
-        <div id="right">
+                         </p>
+                         <h1>{{ workshop.name }}</h1>
+                     </div>
+                     <div id="left">
+                     </div>
+
+                     <div id="center">
+                     </div>
+
+                     <div id="right">
             {% if adminMode %}
-                <p class="title">Uczestnicy</p>
-                <div id="usersList"></div>
+                             <p class="title">Uczestnicy</p>
+                             <div id="usersList"></div>
             {% endif %}
-        </div>
-    </body>
-</html>
+                         </div>
+                     </body>
+                 </html>

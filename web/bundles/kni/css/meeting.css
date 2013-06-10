@@ -16,7 +16,6 @@ html, body{
     width: 100%;
     
     background-color: #528CE0;
-    background-image: url('../images/logoSmall.png');
     background-repeat: no-repeat;
     background-position: 20px 5px;
     padding: 5px 0 5px 0;
@@ -99,4 +98,10 @@ p.right{
 
 ul#usersAnswers{
     list-style: none;
+}
+
+div#header img.logo{
+    float: left;
+    display: inline;
+    border: 0;
 }

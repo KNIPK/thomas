@@ -1,12 +1,20 @@
+@font-face
+{
+    font-family: weblysleekuil;
+    src: url('weblysleekuil.ttf');
+}
+
 html, body{
     margin: 0;
     padding: 0;
-    font-family: Arial;
+    font-family: weblysleekuil, sans-serif;
+    font-size: 19px;
 }
 
 #header{
     height: 35px;
     width: 100%;
+    
     background-color: #528CE0;
     background-image: url('../images/logoSmall.png');
     background-repeat: no-repeat;
@@ -24,9 +32,9 @@ html, body{
 }
 
 #header h1{
-    font-family: "Arial";
+    
     font-size: 25px;
-    font-weight: normal;
+    
     color: #fff;
     text-align: center;
     margin: 3px 0;
@@ -34,6 +42,7 @@ html, body{
 }
 
 p.right{
+    
     float: right;
     display: inline;
     text-align:right;
@@ -42,6 +51,7 @@ p.right{
 
 #left{
     width: 50%;
+    
     background-color: #D2E0E6;
     float: left;
     display: inline;

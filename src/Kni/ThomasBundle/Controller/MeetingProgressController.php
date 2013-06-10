@@ -223,6 +223,27 @@ class MeetingProgressController extends Controller {
     }
     
     /**
+     * Lists all Workshop entities.
+     *
+     * @Route("/files/{workshopId}", name="meeting_load_files")
+     * @Method("GET")
+     * @Template()
+     */
+    public function filesAction($workshopId){
+        $em = $this->getDoctrine()->getManager();
+        $files = $em->getRepository('KniThomasBundle:File')->findBy(array(
+            'workshop' =>$workshopId
+        ));
+        
+        $filesPath = $this->getRequest()->getBasePath()."/uploads/files/";
+        
+        return array(
+            'files' => $files,
+            'filesPath' => $filesPath
+        );
+    }
+    
+    /**
      *
      * @Route("/loadUsers/{workshopId}", name="meeting_load_users")
      * @Method("GET")

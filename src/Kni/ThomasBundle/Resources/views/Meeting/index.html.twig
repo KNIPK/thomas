@@ -17,7 +17,7 @@
                     
                     setRefresh();
                     
-                    $("#left").delegate("button#nextStep", "click", function(){
+                    $("#left").delegate("button.nextStep", "click", function(){
                         
                         window.clearTimeout(autoRefresh);
                         
@@ -138,7 +138,7 @@
                             $("#left").html("<p class='title'>Warsztaty nierozpoczęte</p><p>Poczekaj na rozpoczęcie warsztatów przez prowadzącego</p>");
                             
                             if({{adminMode}}){
-                                $("#left").append("<button id='nextStep' nextStep='1'>Rozpocznij warsztaty</button>");
+                                $("#left").append("<button class='nextStep' nextStep='1'>Rozpocznij warsztaty</button>");
                             }
                         }else{
                             //ładujemy odpowiedni step badz question
@@ -156,11 +156,16 @@
 
                                     if({{adminMode}}){
                                         nextStep= position*1+1;
+                                        var prevStep = position*1-1;
+                                        
+                                        if(prevStep>0){
+                                            $("#left").append("<button class='nextStep' nextStep='"+prevStep+"'>Poprzedni etap</button>");
+                                        }
 
                                         if(nextStep>{{ maxPosition }}){
-                                            $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Zakończ warsztaty</button>");
+                                            $("#left").append("<button class='nextStep' nextStep='"+nextStep+"'>Zakończ warsztaty</button>");
                                         }else{
-                                            $("#left").append("<button id='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
+                                            $("#left").append("<button class='nextStep' nextStep='"+nextStep+"'>Przejdź dalej</button>");
                                         }
                                     }
                                 });

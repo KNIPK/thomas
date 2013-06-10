@@ -15,7 +15,7 @@
                 $(document).ready(function(){
                     refresh();
                     
-                    autoRefresh = setInterval(function(){refresh()},10000);
+                    setRefresh();
                     
                     $("#left").delegate("button#nextStep", "click", function(){
                         
@@ -31,6 +31,7 @@
                             url: nextStepUrl
                         }).done(function(data){
                             loadStep();
+                            setRefresh();
                         });
                         
                     });
@@ -56,11 +57,16 @@
                         $.ajax({
                             url: saveAnswerUrl
                         }).done(function(){
+                            setRefresh();
                         });
                         
                         $("#left").html('<p class="title">Odpowiedź została zapisana</p>');
                     });
                 });
+                
+                function setRefresh(){
+                    autoRefresh = setInterval(function(){refresh()},5000);
+                }
                 
                 function refresh(){
                     loadStep();

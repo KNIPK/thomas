@@ -59,6 +59,9 @@ a:hover{
     padding: 0;
 }
 
+#slider ul{
+}
+
 #slider li{
     margin: 0;
 }
@@ -68,6 +71,9 @@ a:hover{
     -webkit-border-radius:10px; /* przeglądarki z webkitem (Safari, Chrome itp.) */
     -khtml-border-radius:10px; /* przeglądarki typu K-meleon (typowo Linuxowe) */
     border-radius:10px; /* pozostałe przeglądarki */
+    border: 1px #ccc solid;
+    width: 998px;
+
 }
 
 .block{

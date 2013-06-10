@@ -75,4 +75,10 @@ class SecuredController extends Controller
     {
         return array('name' => $name);
     }
+    
+//    public function passRemind($mail){
+//        
+//        
+//    }
+    
 }

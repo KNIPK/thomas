@@ -440,3 +440,12 @@ td.workshop_description {
     text-align: justify;    
     max-width: 400px;
 }
+
+div.searching_form {
+    margin-left: 40px;
+}
+
+div.with_left_margin{
+    margin-left: 40px;
+    margin-bottom: 40px;
+}

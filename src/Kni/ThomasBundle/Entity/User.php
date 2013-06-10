@@ -5,11 +5,14 @@ namespace Kni\ThomasBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * User
  *
  * @ORM\Table(name="users")
  * @ORM\Entity
+ * @UniqueEntity(fields={"username"}, message="Login już istnieje")
+ * @UniqueEntity(fields={"email"}, message="E-mail już istnieje")
  */
 class User implements UserInterface, \Serializable
 {
@@ -78,7 +81,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100)
+     * @ORM\Column(name="email", type="string", length=100, unique=true)
      * @Assert\Email(
      *     message = "Wprowadzony e-mail '{{ value }}' nie jest prawidłowym adresem e-mail."
      * )

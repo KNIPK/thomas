@@ -454,3 +454,7 @@ div.with_left_margin{
 p#addAnswer{
     cursor: pointer;
 }
+
+ul#usersAnswers{
+    list-style: none;
+}

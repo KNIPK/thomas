@@ -31,6 +31,9 @@
                             url: nextStepUrl
                         }).done(function(data){
                             loadStep();
+                            
+                            $("#usersList ul li").removeClass("green");
+                            
                             setRefresh();
                         });
                         

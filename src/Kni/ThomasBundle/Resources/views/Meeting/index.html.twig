@@ -91,7 +91,7 @@
                 
                 function updateUsersListStyle(){
                     $("#usersList ul li").each(function(){
-                        if($(this).attr("progress")>=workshopPosition){
+                        if(parseInt($(this).attr("progress")) >= parseInt(workshopPosition)){
                             $(this).addClass("green");
                         }
                     });

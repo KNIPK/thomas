@@ -36,6 +36,10 @@
                         
                     });
                     
+                    $("#left ul#answers").delegate("input", "click", function(){
+                        window.clearTimeout(autoRefresh);
+                    });
+                    
                     $("#left").delegate("button#saveAnswer", "click", function(){
                         window.clearTimeout(autoRefresh);
                     

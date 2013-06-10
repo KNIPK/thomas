@@ -11,9 +11,9 @@
     {% for userAnswer in usersAnswers %}
         <li>{{ userAnswer.name }}
             {% if userAnswer.correct %}
-                - odpowiedź poprawna
+                - <img src="{{ asset('bundles/kni/images/ok.png')}}" alt="odpowiedź poprawna" />
             {% else %}
-                - odpowiedź niepoprawna
+                - - <img src="{{ asset('bundles/kni/images/wrong.png')}}" alt="odpowiedź niepoprawna" />
             {% endif %}
         </li>
     {% endfor %}

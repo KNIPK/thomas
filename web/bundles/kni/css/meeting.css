@@ -96,3 +96,7 @@ p.right{
 #right ul li.green{
     background-color: #aacd4e;
 }
+
+ul#usersAnswers{
+    list-style: none;
+}

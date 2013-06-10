@@ -15,12 +15,21 @@
 
 
         {{workshop.name}}
-            <form action="" method="POST" >
-                <label for="inv_form_mails">Lista maili</label>>
-                <input type="hidden" name="id" value="{{workshop.id}}" >
-                <input type="text" name="mails" id="inv_form_mails">
-                <input type="text" name="inviatiation text" value="blabla">
-            </form>
+    <form action="" method="POST" >
+        <div>
+            <label for="inv_form_mails">Lista maili</label>
+            <input type="text" name="mails" id="inv_form_mails"> <br>
+        </div>
+        <div>
+            <label for="inv_form_text">Lista maili</label>
+            <input type="text" name="inviatiation text" value="blabla" id="inv_from_text"><br>
+        </div>
+        <div>
+            <button type="submit" >Zaproś</button>
+        </div>
+            <input type="hidden" name="id" value="{{workshop.id}}" >
+
+    </form>
 
 {% endblock %}
 

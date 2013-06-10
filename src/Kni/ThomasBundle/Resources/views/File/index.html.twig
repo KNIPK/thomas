@@ -3,11 +3,13 @@
 {% block content -%}
     <div class="block">
         
-        <h1>Utwórz warsztaty - krok 2</h1>
+        
         
         {% if isEditWorkshop %}
+            <h1>Warsztaty - edycja zasobów</h1>
             {% include 'KniThomasBundle:Workshop:editMenu.html.twig' with {'active': 'files', 'workshopId': workshopId} %}
         {% else %}
+            <h1>Utwórz warsztaty - krok 2</h1>
             <ul class="steps">
                 <li class="active">Podstawowe informacje</li>
                 <li class="active last">Dodawanie zasobów</li>
